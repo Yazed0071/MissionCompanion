@@ -18,9 +18,15 @@
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include "ExternalLua.h"
 
 namespace MissionCompanion {
 
@@ -232,77 +233,87 @@ namespace MissionCompanion {
 		}
 
 		#pragma endregion
-		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
-			Boolean canProcced = true;
-			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
+		private: 
+			bool ValidateFPKFileName()
 			{
-				this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
-				canProcced = false;
-			}
-			else if (this->textBoxFPKFileName->Text->Contains(" "))
-			{
-				this->labelErrorFPKFileName->Text = L"FPK name cannot contain spaces";
-				canProcced = false;
-			}
-			else if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
-			{
-				this->labelErrorFPKFileName->Text = L"FPK name cannot exceed 16 characters";
-				this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
-				this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
-				canProcced = false;
-			}
-			else if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
-			{
-				this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
-				canProcced = false;
-			}
-			else
-			{
-				// Clear the error message if the input is valid
-				this->labelErrorFPKFileName->Text = L"";
-			}
-			if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
-			{
-				this->labelErrorMissionCode->Text =
-					System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
-					? L"MissionCode cannot be empty"
-					: L"Only numericals are allowed";
-				canProcced = false;
+				if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
+				{
+					this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
+					return false;
+				}
+				if (this->textBoxFPKFileName->Text->Contains(" "))
+				{
+					this->labelErrorFPKFileName->Text = L"FPK name cannot contain spaces";
+					return false;
+				}
+				if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
+				{
+					this->labelErrorFPKFileName->Text = L"FPK name cannot exceed 16 characters";
+					this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
+					this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
+					return false;
+				}
+				if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
+				{
+					this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
+					return false;
+				}
 
+				this->labelErrorFPKFileName->Text = L"";
+				return true;
 			}
-			else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
+			bool ValidatetextBoxMissionCode()
 			{
-				this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
-				canProcced = false;
-			}
-			else if (this->textBoxMissionCode->Text->Contains(" "))
-			{
-				this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
-				canProcced = false;
-			}
-			else
-			{
+				if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
+				{
+					this->labelErrorMissionCode->Text =
+						System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
+						? L"MissionCode cannot be empty"
+						: L"Only numericals are allowed";
+					return false;
+				}
+				if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
+				{
+					this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
+					return false;
+				}
+				if (this->textBoxMissionCode->Text->Contains(" "))
+				{
+					this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
+					return false;
+				}
 				this->labelErrorMissionCode->Text = L"";
+				return true;
 			}
-			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
+			bool ValidatecomboBoxLocation()
 			{
-				this->labelErrorMapLocation->Text = L"This field cannot be empty";
-				canProcced = false;
-			}
-			else
-			{
+				if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
+				{
+					this->labelErrorMapLocation->Text = L"This field cannot be empty";
+					return false;
+				}
 				this->labelErrorMapLocation->Text = L"";
+				return true;
 			}
-			
-			if (canProcced)
+			System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) 
 			{
-				this->labelErrorFPKFileName->Text = L"All inputs are valid!";
+				this->labelErrorFPKFileName->Text = L"";
+				this->labelErrorMissionCode->Text = L"";
+				this->labelErrorMapLocation->Text = L"";
+
+				bool isFPKValid = ValidateFPKFileName();
+				bool isMissionCode = ValidatetextBoxMissionCode();
+				bool isMapLocation = ValidatecomboBoxLocation();
+
+				if (isFPKValid && isMissionCode && isMapLocation)
+				{
+					createFilePath(this->textBoxFPKFileName->Text);
+				}
+				else
+				{
+					System::Windows::Forms::MessageBox::Show(L"Please address all errors!", L"Error");
+				}
 			}
-			else
-			{
-				System::Windows::Forms::MessageBox::Show(L"Please address all highlighted errors before proceeding.", L"Validation Error");
-			}
-		}
 		//when the form is loaded
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 			
