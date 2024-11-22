@@ -54,7 +54,9 @@ namespace MissionCompanion {
 
 
 	private: System::Windows::Forms::ComboBox^ comboBoxLocation;
-	private: System::Windows::Forms::Label^ labelDebug;
+	private: System::Windows::Forms::Label^ HideMissionbool;
+	private: System::Windows::Forms::CheckedListBox^ checkedListBox1;
+
 
 
 
@@ -88,7 +90,8 @@ namespace MissionCompanion {
 			this->labelMapLocation = (gcnew System::Windows::Forms::Label());
 			this->labelErrorMapLocation = (gcnew System::Windows::Forms::Label());
 			this->comboBoxLocation = (gcnew System::Windows::Forms::ComboBox());
-			this->labelDebug = (gcnew System::Windows::Forms::Label());
+			this->HideMissionbool = (gcnew System::Windows::Forms::Label());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->SuspendLayout();
 			// 
 			// labelFPKFileName
@@ -210,24 +213,36 @@ namespace MissionCompanion {
 			this->comboBoxLocation->TabIndex = 8;
 			this->comboBoxLocation->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBoxLocation_SelectedIndexChanged);
 			// 
-			// labelDebug
+			// HideMissionbool
 			// 
-			this->labelDebug->AutoSize = true;
-			this->labelDebug->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->HideMissionbool->AutoSize = true;
+			this->HideMissionbool->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->labelDebug->ForeColor = System::Drawing::Color::Black;
-			this->labelDebug->Location = System::Drawing::Point(483, 20);
-			this->labelDebug->Name = L"labelDebug";
-			this->labelDebug->Size = System::Drawing::Size(51, 20);
-			this->labelDebug->TabIndex = 10;
-			this->labelDebug->Text = L"label1";
+			this->HideMissionbool->ForeColor = System::Drawing::Color::Black;
+			this->HideMissionbool->Location = System::Drawing::Point(25, 143);
+			this->HideMissionbool->Name = L"HideMissionbool";
+			this->HideMissionbool->Size = System::Drawing::Size(98, 18);
+			this->HideMissionbool->TabIndex = 11;
+			this->HideMissionbool->Text = L"Hide Mission:";
+			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Hide Mission", L"Enable Mission Boarders" });
+			this->checkedListBox1->Location = System::Drawing::Point(129, 143);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(176, 52);
+			this->checkedListBox1->TabIndex = 12;
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1143, 641);
-			this->Controls->Add(this->labelDebug);
+			this->Controls->Add(this->checkedListBox1);
+			this->Controls->Add(this->HideMissionbool);
 			this->Controls->Add(this->labelErrorMapLocation);
 			this->Controls->Add(this->comboBoxLocation);
 			this->Controls->Add(this->labelMapLocation);
@@ -322,7 +337,7 @@ namespace MissionCompanion {
 
 				if (isFPKValid && isMissionCode && isMapLocation)
 				{
-					createFilePath(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text);
+					generateMission(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text, this->comboBoxLocation->Text);
 				}
 				else
 				{
