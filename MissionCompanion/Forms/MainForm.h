@@ -1,7 +1,9 @@
 #pragma once
+
 #include <iostream>
 #include <cctype>
 #include <string>
+
 namespace MissionCompanion {
 
 	using namespace System;
@@ -10,6 +12,7 @@ namespace MissionCompanion {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -45,9 +48,10 @@ namespace MissionCompanion {
 	private: System::Windows::Forms::Label^ labelErrorFPKFileName;
 	private: System::Windows::Forms::Label^ labelErrorMissionCode;
 	private: System::Windows::Forms::Label^ labelMapLocation;
+	private: System::Windows::Forms::Label^ labelErrorMapLocation;
 
 
-	private: System::Windows::Forms::Label^ labelDebug;
+
 	private: System::Windows::Forms::ComboBox^ comboBoxLocation;
 
 
@@ -80,7 +84,7 @@ namespace MissionCompanion {
 			this->labelErrorFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelErrorMissionCode = (gcnew System::Windows::Forms::Label());
 			this->labelMapLocation = (gcnew System::Windows::Forms::Label());
-			this->labelDebug = (gcnew System::Windows::Forms::Label());
+			this->labelErrorMapLocation = (gcnew System::Windows::Forms::Label());
 			this->comboBoxLocation = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
@@ -118,15 +122,19 @@ namespace MissionCompanion {
 			this->textBoxFPKFileName->Size = System::Drawing::Size(175, 24);
 			this->textBoxFPKFileName->TabIndex = 2;
 			this->textBoxFPKFileName->Text = L"FPK_Name_Example";
+			this->textBoxFPKFileName->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxFPKFileName_TextChanged);
 			// 
 			// textBoxMissionCode
 			// 
 			this->textBoxMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Gray;
 			this->textBoxMissionCode->Location = System::Drawing::Point(130, 56);
 			this->textBoxMissionCode->Name = L"textBoxMissionCode";
 			this->textBoxMissionCode->Size = System::Drawing::Size(92, 24);
 			this->textBoxMissionCode->TabIndex = 3;
+			this->textBoxMissionCode->Text = L"13000";
+			this->textBoxMissionCode->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxMissionCode_TextChanged);
 			// 
 			// buttonNextTo
 			// 
@@ -146,7 +154,7 @@ namespace MissionCompanion {
 			this->labelErrorFPKFileName->AutoSize = true;
 			this->labelErrorFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->labelErrorFPKFileName->Location = System::Drawing::Point(127, 33);
+			this->labelErrorFPKFileName->Location = System::Drawing::Point(311, 13);
 			this->labelErrorFPKFileName->Name = L"labelErrorFPKFileName";
 			this->labelErrorFPKFileName->Size = System::Drawing::Size(0, 18);
 			this->labelErrorFPKFileName->TabIndex = 5;
@@ -157,7 +165,7 @@ namespace MissionCompanion {
 			this->labelErrorMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelErrorMissionCode->ForeColor = System::Drawing::Color::Red;
-			this->labelErrorMissionCode->Location = System::Drawing::Point(127, 79);
+			this->labelErrorMissionCode->Location = System::Drawing::Point(228, 59);
 			this->labelErrorMissionCode->Name = L"labelErrorMissionCode";
 			this->labelErrorMissionCode->Size = System::Drawing::Size(0, 18);
 			this->labelErrorMissionCode->TabIndex = 6;
@@ -175,16 +183,16 @@ namespace MissionCompanion {
 			this->labelMapLocation->Text = L"Location:";
 			this->labelMapLocation->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
-			// labelDebug
+			// labelErrorMapLocation
 			// 
-			this->labelDebug->AutoSize = true;
-			this->labelDebug->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->labelDebug->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelDebug->Location = System::Drawing::Point(354, 13);
-			this->labelDebug->Name = L"labelDebug";
-			this->labelDebug->Size = System::Drawing::Size(0, 25);
-			this->labelDebug->TabIndex = 9;
+			this->labelErrorMapLocation->AutoSize = true;
+			this->labelErrorMapLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->labelErrorMapLocation->ForeColor = System::Drawing::Color::Red;
+			this->labelErrorMapLocation->Location = System::Drawing::Point(257, 103);
+			this->labelErrorMapLocation->Name = L"labelErrorMapLocation";
+			this->labelErrorMapLocation->Size = System::Drawing::Size(0, 18);
+			this->labelErrorMapLocation->TabIndex = 9;
 			// 
 			// comboBoxLocation
 			// 
@@ -197,13 +205,14 @@ namespace MissionCompanion {
 			this->comboBoxLocation->Name = L"comboBoxLocation";
 			this->comboBoxLocation->Size = System::Drawing::Size(121, 26);
 			this->comboBoxLocation->TabIndex = 8;
+			this->comboBoxLocation->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBoxLocation_SelectedIndexChanged);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1143, 641);
-			this->Controls->Add(this->labelDebug);
+			this->Controls->Add(this->labelErrorMapLocation);
 			this->Controls->Add(this->comboBoxLocation);
 			this->Controls->Add(this->labelMapLocation);
 			this->Controls->Add(this->labelErrorMissionCode);
@@ -221,9 +230,90 @@ namespace MissionCompanion {
 			this->PerformLayout();
 
 		}
+
 		#pragma endregion
 		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
+			Boolean canProcced = true;
+			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
+			{
+				this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
+				canProcced = false;
+			}
+			else if (this->textBoxFPKFileName->Text->Contains(" "))
+			{
+				this->labelErrorFPKFileName->Text = L"FPK name cannot contain spaces";
+				canProcced = false;
+			}
+			else if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
+			{
+				this->labelErrorFPKFileName->Text = L"FPK name cannot exceed 16 characters";
+				this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
+				this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
+				canProcced = false;
+			}
+			else if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
+			{
+				this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
+				canProcced = false;
+			}
+			else
+			{
+				// Clear the error message if the input is valid
+				this->labelErrorFPKFileName->Text = L"";
+			}
+			if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
+			{
+				this->labelErrorMissionCode->Text =
+					System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
+					? L"MissionCode cannot be empty"
+					: L"Only numericals are allowed";
+				canProcced = false;
 
+			}
+			else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
+			{
+				this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
+				canProcced = false;
+			}
+			else if (this->textBoxMissionCode->Text->Contains(" "))
+			{
+				this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
+				canProcced = false;
+			}
+			else
+			{
+				this->labelErrorMissionCode->Text = L"";
+			}
+			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
+			{
+				this->labelErrorMapLocation->Text = L"This field cannot be empty";
+				canProcced = false;
+			}
+			else
+			{
+				this->labelErrorMapLocation->Text = L"";
+			}
+			
+			if (canProcced)
+			{
+				this->labelErrorFPKFileName->Text = L"All inputs are valid!";
+			}
+			else
+			{
+				System::Windows::Forms::MessageBox::Show(L"Please address all highlighted errors before proceeding.", L"Validation Error");
+			}
+		}
+		//when the form is loaded
+		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+			
+		}
+
+		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
+		private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {}
+
+		private: System::Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+		{
+			this->textBoxFPKFileName->ForeColor = System::Drawing::Color::Black;
 			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
 			{
 				this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
@@ -247,39 +337,41 @@ namespace MissionCompanion {
 				// Clear the error message if the input is valid
 				this->labelErrorFPKFileName->Text = L"";
 			}
+		}
+		private: System::Void textBoxMissionCode_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+		{
+				this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
+				if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
+				{
+					this->labelErrorMissionCode->Text =
+						System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
+						? L"MissionCode cannot be empty"
+						: L"Only numericals are allowed";
 
-
-			if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
+				}
+				else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
+				{
+					this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
+				}
+				else if (this->textBoxMissionCode->Text->Contains(" "))
+				{
+					this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
+				}
+				else
+				{
+					this->labelErrorMissionCode->Text = L"";
+				}
+		}
+		private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) 
+		{
+			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
 			{
-				this->labelErrorMissionCode->Text =
-					System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
-					? L"MissionCode cannot be empty"
-					: L"Only numericals are allowed";
-
-			}
-			else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
-			{
-				this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
+				this->labelErrorMapLocation->Text = L"This field cannot be empty";
 			}
 			else
 			{
-
-				this->labelErrorMissionCode->Text = L"";
+				this->labelErrorMapLocation->Text = L"";
 			}
-
-			#ifdef _DEBUG
-				this->labelDebug->Text = this->comboBoxLocation->Text;
-			#endif
-
-		}
-		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-			#ifdef _DEBUG
-				this->textBoxMissionCode->Text = L"13000";
-			#endif
-		}
-		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-		}
-		private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {
 		}
 	};
 }
