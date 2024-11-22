@@ -54,6 +54,7 @@ namespace MissionCompanion {
 
 
 	private: System::Windows::Forms::ComboBox^ comboBoxLocation;
+	private: System::Windows::Forms::Label^ labelDebug;
 
 
 
@@ -87,6 +88,7 @@ namespace MissionCompanion {
 			this->labelMapLocation = (gcnew System::Windows::Forms::Label());
 			this->labelErrorMapLocation = (gcnew System::Windows::Forms::Label());
 			this->comboBoxLocation = (gcnew System::Windows::Forms::ComboBox());
+			this->labelDebug = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// labelFPKFileName
@@ -208,11 +210,24 @@ namespace MissionCompanion {
 			this->comboBoxLocation->TabIndex = 8;
 			this->comboBoxLocation->SelectedIndexChanged += gcnew System::EventHandler(this, &MainForm::comboBoxLocation_SelectedIndexChanged);
 			// 
+			// labelDebug
+			// 
+			this->labelDebug->AutoSize = true;
+			this->labelDebug->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelDebug->ForeColor = System::Drawing::Color::Black;
+			this->labelDebug->Location = System::Drawing::Point(483, 20);
+			this->labelDebug->Name = L"labelDebug";
+			this->labelDebug->Size = System::Drawing::Size(51, 20);
+			this->labelDebug->TabIndex = 10;
+			this->labelDebug->Text = L"label1";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1143, 641);
+			this->Controls->Add(this->labelDebug);
 			this->Controls->Add(this->labelErrorMapLocation);
 			this->Controls->Add(this->comboBoxLocation);
 			this->Controls->Add(this->labelMapLocation);
@@ -307,7 +322,7 @@ namespace MissionCompanion {
 
 				if (isFPKValid && isMissionCode && isMapLocation)
 				{
-					createFilePath(this->textBoxFPKFileName->Text);
+					createFilePath(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text);
 				}
 				else
 				{

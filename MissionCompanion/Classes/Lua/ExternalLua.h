@@ -3,7 +3,8 @@
 
 #include <string>
 
-void createFilePath(System::String^ FPKFileName);
+
+void createFilePath(System::String^ FPKFileName, System::String^ MissionCode);
 void DefineLocalThis();
 #endif // EXTERNAL_LUA_H
 
