@@ -260,7 +260,11 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "return this\n";
 
     luaFile.close();
-    Log("Lua file generated successfully: " + luaFilePath.string());
+    #ifdef _DEBUG
+        Log("Lua file generated successfully: " + luaFilePath.string());
+    #endif // _DEBUG
+
+    System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }
 
 // Main function to generate mission
