@@ -5,8 +5,7 @@
 
 
 
-
-
+void MissionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissionPreparetionCheck, bool NoBuddyMenuFromMissionPreparetionCheck, bool NoVehicleMenuFromMissionPreparetionCheck, bool DisableSelectSortieTimeFromMissionPreparetionCheck);
 
 void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation);
 
