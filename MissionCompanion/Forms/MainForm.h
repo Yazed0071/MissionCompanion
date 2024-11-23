@@ -57,6 +57,19 @@ namespace MissionCompanion {
 	private: System::Windows::Forms::Label^ labelMissionOptions;
 
 	private: System::Windows::Forms::CheckedListBox^ MissionOptionList;
+	private: System::Windows::Forms::TextBox^ textBoxTrig_innerZone;
+	private: System::Windows::Forms::Label^ labelTrig_innerZone;
+	private: System::Windows::Forms::Label^ labelTrig_outerZone;
+	private: System::Windows::Forms::TextBox^ textBoxTrig_outerZone;
+
+
+	private: System::Windows::Forms::Label^ labelTrig_hotZone;
+	private: System::Windows::Forms::TextBox^ textBoxTrig_hotZone;
+
+
+
+
+
 
 
 
@@ -98,6 +111,12 @@ namespace MissionCompanion {
 			this->comboBoxLocation = (gcnew System::Windows::Forms::ComboBox());
 			this->labelMissionOptions = (gcnew System::Windows::Forms::Label());
 			this->MissionOptionList = (gcnew System::Windows::Forms::CheckedListBox());
+			this->textBoxTrig_innerZone = (gcnew System::Windows::Forms::TextBox());
+			this->labelTrig_innerZone = (gcnew System::Windows::Forms::Label());
+			this->labelTrig_outerZone = (gcnew System::Windows::Forms::Label());
+			this->textBoxTrig_outerZone = (gcnew System::Windows::Forms::TextBox());
+			this->labelTrig_hotZone = (gcnew System::Windows::Forms::Label());
+			this->textBoxTrig_hotZone = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// labelFPKFileName
@@ -237,23 +256,85 @@ namespace MissionCompanion {
 				static_cast<System::Byte>(0)));
 			this->MissionOptionList->FormattingEnabled = true;
 			this->MissionOptionList->Items->AddRange(gcnew cli::array< System::Object^  >(6) {
-				L"Hide Mission",
-				L"out of bounds system (innerZone, outerZone, hotZone)",
-				L"No sortie prep",
-				L"No buddy select in the sortie",
-				L"No vehicle select in the sortie",
-				L"Only ASAP as deployment time option"
+				L"Hide Mission", L"out of bounds system (innerZone, outerZone, hotZone)",
+					L"No sortie prep", L"No buddy select in the sortie", L"No vehicle select in the sortie", L"Only ASAP as deployment time option"
 			});
 			this->MissionOptionList->Location = System::Drawing::Point(130, 143);
 			this->MissionOptionList->Name = L"MissionOptionList";
 			this->MissionOptionList->Size = System::Drawing::Size(338, 100);
 			this->MissionOptionList->TabIndex = 12;
 			// 
+			// textBoxTrig_innerZone
+			// 
+			this->textBoxTrig_innerZone->Location = System::Drawing::Point(773, 37);
+			this->textBoxTrig_innerZone->Multiline = true;
+			this->textBoxTrig_innerZone->Name = L"textBoxTrig_innerZone";
+			this->textBoxTrig_innerZone->Size = System::Drawing::Size(338, 124);
+			this->textBoxTrig_innerZone->TabIndex = 13;
+			// 
+			// labelTrig_innerZone
+			// 
+			this->labelTrig_innerZone->AutoSize = true;
+			this->labelTrig_innerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->labelTrig_innerZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->labelTrig_innerZone->Location = System::Drawing::Point(770, 13);
+			this->labelTrig_innerZone->Name = L"labelTrig_innerZone";
+			this->labelTrig_innerZone->Size = System::Drawing::Size(350, 17);
+			this->labelTrig_innerZone->TabIndex = 14;
+			this->labelTrig_innerZone->Text = L"Trig_innerZone: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+			// 
+			// labelTrig_outerZone
+			// 
+			this->labelTrig_outerZone->AutoSize = true;
+			this->labelTrig_outerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+			this->labelTrig_outerZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->labelTrig_outerZone->Location = System::Drawing::Point(770, 170);
+			this->labelTrig_outerZone->Name = L"labelTrig_outerZone";
+			this->labelTrig_outerZone->Size = System::Drawing::Size(351, 17);
+			this->labelTrig_outerZone->TabIndex = 16;
+			this->labelTrig_outerZone->Text = L"Trig_outerZone: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+			// 
+			// textBoxTrig_outerZone
+			// 
+			this->textBoxTrig_outerZone->Location = System::Drawing::Point(773, 194);
+			this->textBoxTrig_outerZone->Multiline = true;
+			this->textBoxTrig_outerZone->Name = L"textBoxTrig_outerZone";
+			this->textBoxTrig_outerZone->Size = System::Drawing::Size(338, 124);
+			this->textBoxTrig_outerZone->TabIndex = 15;
+			// 
+			// labelTrig_hotZone
+			// 
+			this->labelTrig_hotZone->AutoSize = true;
+			this->labelTrig_hotZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->labelTrig_hotZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->labelTrig_hotZone->Location = System::Drawing::Point(770, 327);
+			this->labelTrig_hotZone->Name = L"labelTrig_hotZone";
+			this->labelTrig_hotZone->Size = System::Drawing::Size(338, 17);
+			this->labelTrig_hotZone->TabIndex = 18;
+			this->labelTrig_hotZone->Text = L"Trig_hotZone: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+			// 
+			// textBoxTrig_hotZone
+			// 
+			this->textBoxTrig_hotZone->Location = System::Drawing::Point(773, 351);
+			this->textBoxTrig_hotZone->Multiline = true;
+			this->textBoxTrig_hotZone->Name = L"textBoxTrig_hotZone";
+			this->textBoxTrig_hotZone->Size = System::Drawing::Size(338, 124);
+			this->textBoxTrig_hotZone->TabIndex = 17;
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1143, 641);
+			this->Controls->Add(this->labelTrig_hotZone);
+			this->Controls->Add(this->textBoxTrig_hotZone);
+			this->Controls->Add(this->labelTrig_outerZone);
+			this->Controls->Add(this->textBoxTrig_outerZone);
+			this->Controls->Add(this->labelTrig_innerZone);
+			this->Controls->Add(this->textBoxTrig_innerZone);
 			this->Controls->Add(this->MissionOptionList);
 			this->Controls->Add(this->labelMissionOptions);
 			this->Controls->Add(this->labelErrorMapLocation);
@@ -392,7 +473,8 @@ namespace MissionCompanion {
 
 				if (isFPKValid && isMissionCode && isMapLocation)
 				{
-					MissionOptionsFlags(IsMissionHidden(), IsEnableOOB(), SkipMissionPreparetion(), NoBuddyMenuFromMissionPreparetion(), NoVehicleMenuFromMissionPreparetion(), DisableSelectSortieTimeFromMissionPreparetion());
+					missionOptionsFlags(IsMissionHidden(), IsEnableOOB(), SkipMissionPreparetion(), NoBuddyMenuFromMissionPreparetion(), NoVehicleMenuFromMissionPreparetion(), DisableSelectSortieTimeFromMissionPreparetion());
+					missionMapParams(this->textBoxTrig_innerZone->Text, this->textBoxTrig_outerZone->Text, this->textBoxTrig_hotZone->Text);
 					generateMission(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text, this->comboBoxLocation->Text);
 				}
 				else
