@@ -3,7 +3,7 @@
 
 #include <string>
 
-void deploymentLocation(System::String^ missionStartPointget, System::String^ heliLandPointget);
+void deploymentLocation(System::String^ missionStartPointget);
 
 void missionMapParams(System::String^ trig_innerZone, System::String^ trig_outerZone, System::String^ trig_hotZone);
 

@@ -25,9 +25,7 @@ std::string outputOuterZone;
 std::string outputHotZone;
 
 std::string missionStartPoint;
-std::string heliLandPoint;
 std::string outPutmissionStartPoint;
-std::string outPutheliLandPoint;
 
 std::string SkipMissionPreparation = "false";
 std::string NoBuddyMenuFromMissionPreparation = "false";
@@ -67,11 +65,10 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
     }
 }
 
-void deploymentLocation(System::String^ missionStartPointget, System::String^ heliLandPointget)
+void deploymentLocation(System::String^ missionStartPointget)
 {
 
     outPutmissionStartPoint = "";
-    outPutheliLandPoint = "";
     // Regular expression to extract `pos={...}` values
     std::regex regex(R"(\{pos=\{([^}]+)\})");
     std::smatch match;
@@ -84,22 +81,10 @@ void deploymentLocation(System::String^ missionStartPointget, System::String^ he
             transformed = match.suffix().str(); // Process remaining string
         }
     };
-    auto HeliLandPoint = [&regex, &match](const std::string& zoneStr, std::string& output) {
-        std::string transformed = zoneStr;
-        while (std::regex_search(transformed, match, regex)) {
-            output += "            point = Vector3(" + match[1].str() + "),\n"
-                +     "            startPoint = Vector3(" + match[1].str() + "),";
-            transformed = match.suffix().str(); // Process remaining string
-        }
-    };
 
-    // Process each zone string
     StartPoint(toStdString(missionStartPointget), outPutmissionStartPoint);
-    HeliLandPoint(toStdString(heliLandPointget), outPutheliLandPoint);
 
-    // Log results
     Log("missionStartPoint:\n" + outPutmissionStartPoint);
-    Log("heliLandPoint:\n" + outPutheliLandPoint);
 }
 
 // Handle mission map zones
@@ -246,7 +231,7 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "" << outPutmissionStartPoint << "\n"; // vertices;
     luaFile << "		},\n";
     luaFile << "        heliLandPoint = {-- Sortie/mission prep screen feature flags\n";
-    luaFile << "" << outPutheliLandPoint << "\n"; // vertices;
+    luaFile << "" << "nil" << "\n"; // vertices;
     luaFile << "		},\n";
     luaFile << "        heliSpaceFlags = {\n";
     luaFile << "    		SkipMissionPreparetion = " << SkipMissionPreparation << ",   --No sortie prep, like vanilla Mother Base.\n";

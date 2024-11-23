@@ -36,4 +36,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="MissionCompanion\res\img\AfghMap.PNG">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="MissionCompanion\res\img\MafrMap.PNG">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
