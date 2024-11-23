@@ -3,6 +3,8 @@
 
 #include <string>
 
+void deploymentLocation(System::String^ missionStartPointget, System::String^ heliLandPointget);
+
 void missionMapParams(System::String^ trig_innerZone, System::String^ trig_outerZone, System::String^ trig_hotZone);
 
 void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissionPreparationCheck, bool NoBuddyMenuCheck, bool NoVehicleMenuCheck, bool DisableSortieTimeCheck);

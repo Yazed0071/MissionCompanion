@@ -23,11 +23,18 @@ std::string trig_hotZone = "nil";
 std::string outputInnerZone;
 std::string outputOuterZone;
 std::string outputHotZone;
-std::string HOLDER = "nil";
+
+std::string missionStartPoint;
+std::string heliLandPoint;
+std::string outPutmissionStartPoint;
+std::string outPutheliLandPoint;
+
 std::string SkipMissionPreparation = "false";
 std::string NoBuddyMenuFromMissionPreparation = "false";
 std::string NoVehicleMenuFromMissionPreparation = "false";
 std::string DisableSelectSortieTimeFromMissionPreparation = "false";
+
+
 bool IsEnableOOBVector = false;
 
 // Create necessary folders
@@ -58,6 +65,41 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
     else {
         Log("Assets folders already exist or failed to create.");
     }
+}
+
+void deploymentLocation(System::String^ missionStartPointget, System::String^ heliLandPointget)
+{
+
+    outPutmissionStartPoint = "";
+    outPutheliLandPoint = "";
+    // Regular expression to extract `pos={...}` values
+    std::regex regex(R"(\{pos=\{([^}]+)\})");
+    std::smatch match;
+
+    // Lambda to transform each zone
+    auto StartPoint = [&regex, &match](const std::string& zoneStr, std::string& output) {
+        std::string transformed = zoneStr;
+        while (std::regex_search(transformed, match, regex)) {
+            output += "            point = Vector3(" + match[1].str() + "),";
+            transformed = match.suffix().str(); // Process remaining string
+        }
+    };
+    auto HeliLandPoint = [&regex, &match](const std::string& zoneStr, std::string& output) {
+        std::string transformed = zoneStr;
+        while (std::regex_search(transformed, match, regex)) {
+            output += "            point = Vector3(" + match[1].str() + "),\n"
+                +     "            startPoint = Vector3(" + match[1].str() + "),";
+            transformed = match.suffix().str(); // Process remaining string
+        }
+    };
+
+    // Process each zone string
+    StartPoint(toStdString(missionStartPointget), outPutmissionStartPoint);
+    HeliLandPoint(toStdString(heliLandPointget), outPutheliLandPoint);
+
+    // Log results
+    Log("missionStartPoint:\n" + outPutmissionStartPoint);
+    Log("heliLandPoint:\n" + outPutheliLandPoint);
 }
 
 // Handle mission map zones
@@ -201,10 +243,10 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "			},\n";
     luaFile << "		},\n";
     luaFile << "        missionStartPoint = {\n";
-    luaFile << "	        " << HOLDER << "\n"; // vertices;
+    luaFile << "" << outPutmissionStartPoint << "\n"; // vertices;
     luaFile << "		},\n";
     luaFile << "        heliLandPoint = {-- Sortie/mission prep screen feature flags\n";
-    luaFile << "	        " << HOLDER << "\n"; // vertices;
+    luaFile << "" << outPutheliLandPoint << "\n"; // vertices;
     luaFile << "		},\n";
     luaFile << "        heliSpaceFlags = {\n";
     luaFile << "    		SkipMissionPreparetion = " << SkipMissionPreparation << ",   --No sortie prep, like vanilla Mother Base.\n";
