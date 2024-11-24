@@ -3,7 +3,18 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+
+
+
+
 #include "ExternalLua.h"
+
+
+
+#define Log(Message) Console::WriteLine(Message);
+
+
+
 
 namespace MissionCompanion {
 
@@ -70,6 +81,11 @@ namespace MissionCompanion {
 	private: System::Windows::Forms::Label^ labelMissionStartPoint;
 	private: System::Windows::Forms::TextBox^ textBoxMissionStartPoint;
 	private: System::Windows::Forms::PictureBox^ pictureBoxMap;
+	private: System::Windows::Forms::CheckBox^ lz_drp_citadelSouth_S0000;
+
+	private: System::Windows::Forms::CheckBox^ Lz_SovietBase_E;
+	private: System::Windows::Forms::CheckBox^ Lz_SovietBase_I;
+
 
 
 
@@ -109,7 +125,6 @@ namespace MissionCompanion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->labelFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelMissionCode = (gcnew System::Windows::Forms::Label());
 			this->textBoxFPKFileName = (gcnew System::Windows::Forms::TextBox());
@@ -131,17 +146,21 @@ namespace MissionCompanion {
 			this->labelMissionStartPoint = (gcnew System::Windows::Forms::Label());
 			this->textBoxMissionStartPoint = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBoxMap = (gcnew System::Windows::Forms::PictureBox());
+			this->lz_drp_citadelSouth_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->Lz_SovietBase_E = (gcnew System::Windows::Forms::CheckBox());
+			this->Lz_SovietBase_I = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxMap))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// labelFPKFileName
 			// 
-			this->labelFPKFileName->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelFPKFileName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelFPKFileName->AutoSize = true;
 			this->labelFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->labelFPKFileName->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelFPKFileName->Location = System::Drawing::Point(27, 49);
+			this->labelFPKFileName->Location = System::Drawing::Point(6, 8);
 			this->labelFPKFileName->Name = L"labelFPKFileName";
 			this->labelFPKFileName->Size = System::Drawing::Size(143, 24);
 			this->labelFPKFileName->TabIndex = 0;
@@ -149,12 +168,13 @@ namespace MissionCompanion {
 			// 
 			// labelMissionCode
 			// 
-			this->labelMissionCode->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelMissionCode->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelMissionCode->AutoSize = true;
 			this->labelMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelMissionCode->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelMissionCode->Location = System::Drawing::Point(45, 86);
+			this->labelMissionCode->Location = System::Drawing::Point(24, 45);
 			this->labelMissionCode->Name = L"labelMissionCode";
 			this->labelMissionCode->Size = System::Drawing::Size(125, 24);
 			this->labelMissionCode->TabIndex = 1;
@@ -162,11 +182,12 @@ namespace MissionCompanion {
 			// 
 			// textBoxFPKFileName
 			// 
-			this->textBoxFPKFileName->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxFPKFileName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->textBoxFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBoxFPKFileName->ForeColor = System::Drawing::Color::Gray;
-			this->textBoxFPKFileName->Location = System::Drawing::Point(176, 50);
+			this->textBoxFPKFileName->Location = System::Drawing::Point(155, 9);
 			this->textBoxFPKFileName->Name = L"textBoxFPKFileName";
 			this->textBoxFPKFileName->Size = System::Drawing::Size(173, 26);
 			this->textBoxFPKFileName->TabIndex = 2;
@@ -175,11 +196,12 @@ namespace MissionCompanion {
 			// 
 			// textBoxMissionCode
 			// 
-			this->textBoxMissionCode->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxMissionCode->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->textBoxMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Gray;
-			this->textBoxMissionCode->Location = System::Drawing::Point(176, 86);
+			this->textBoxMissionCode->Location = System::Drawing::Point(155, 45);
 			this->textBoxMissionCode->Name = L"textBoxMissionCode";
 			this->textBoxMissionCode->Size = System::Drawing::Size(66, 26);
 			this->textBoxMissionCode->TabIndex = 3;
@@ -188,7 +210,7 @@ namespace MissionCompanion {
 			// 
 			// buttonNextTo
 			// 
-			this->buttonNextTo->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->buttonNextTo->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 			this->buttonNextTo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonNextTo->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
@@ -202,35 +224,38 @@ namespace MissionCompanion {
 			// 
 			// labelErrorFPKFileName
 			// 
-			this->labelErrorFPKFileName->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelErrorFPKFileName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorFPKFileName->AutoSize = true;
 			this->labelErrorFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->labelErrorFPKFileName->Location = System::Drawing::Point(355, 52);
+			this->labelErrorFPKFileName->Location = System::Drawing::Point(334, 11);
 			this->labelErrorFPKFileName->Name = L"labelErrorFPKFileName";
 			this->labelErrorFPKFileName->Size = System::Drawing::Size(0, 24);
 			this->labelErrorFPKFileName->TabIndex = 5;
 			// 
 			// labelErrorMissionCode
 			// 
-			this->labelErrorMissionCode->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelErrorMissionCode->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorMissionCode->AutoSize = true;
 			this->labelErrorMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelErrorMissionCode->ForeColor = System::Drawing::Color::Red;
-			this->labelErrorMissionCode->Location = System::Drawing::Point(248, 86);
+			this->labelErrorMissionCode->Location = System::Drawing::Point(227, 45);
 			this->labelErrorMissionCode->Name = L"labelErrorMissionCode";
 			this->labelErrorMissionCode->Size = System::Drawing::Size(0, 24);
 			this->labelErrorMissionCode->TabIndex = 6;
 			// 
 			// labelMapLocation
 			// 
-			this->labelMapLocation->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelMapLocation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelMapLocation->AutoSize = true;
 			this->labelMapLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelMapLocation->ForeColor = System::Drawing::Color::Black;
-			this->labelMapLocation->Location = System::Drawing::Point(84, 128);
+			this->labelMapLocation->Location = System::Drawing::Point(63, 87);
 			this->labelMapLocation->Name = L"labelMapLocation";
 			this->labelMapLocation->Size = System::Drawing::Size(86, 24);
 			this->labelMapLocation->TabIndex = 7;
@@ -239,25 +264,27 @@ namespace MissionCompanion {
 			// 
 			// labelErrorMapLocation
 			// 
-			this->labelErrorMapLocation->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelErrorMapLocation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorMapLocation->AutoSize = true;
 			this->labelErrorMapLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelErrorMapLocation->ForeColor = System::Drawing::Color::Red;
-			this->labelErrorMapLocation->Location = System::Drawing::Point(303, 128);
+			this->labelErrorMapLocation->Location = System::Drawing::Point(282, 87);
 			this->labelErrorMapLocation->Name = L"labelErrorMapLocation";
 			this->labelErrorMapLocation->Size = System::Drawing::Size(0, 24);
 			this->labelErrorMapLocation->TabIndex = 9;
 			// 
 			// comboBoxLocation
 			// 
-			this->comboBoxLocation->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->comboBoxLocation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->comboBoxLocation->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->comboBoxLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->comboBoxLocation->FormattingEnabled = true;
 			this->comboBoxLocation->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Afghanistan", L"Africa" });
-			this->comboBoxLocation->Location = System::Drawing::Point(176, 129);
+			this->comboBoxLocation->Location = System::Drawing::Point(155, 88);
 			this->comboBoxLocation->Name = L"comboBoxLocation";
 			this->comboBoxLocation->Size = System::Drawing::Size(121, 26);
 			this->comboBoxLocation->TabIndex = 8;
@@ -265,12 +292,13 @@ namespace MissionCompanion {
 			// 
 			// labelMissionOptions
 			// 
-			this->labelMissionOptions->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelMissionOptions->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelMissionOptions->AutoSize = true;
 			this->labelMissionOptions->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelMissionOptions->ForeColor = System::Drawing::Color::Black;
-			this->labelMissionOptions->Location = System::Drawing::Point(28, 159);
+			this->labelMissionOptions->Location = System::Drawing::Point(7, 118);
 			this->labelMissionOptions->Name = L"labelMissionOptions";
 			this->labelMissionOptions->Size = System::Drawing::Size(145, 24);
 			this->labelMissionOptions->TabIndex = 11;
@@ -278,7 +306,9 @@ namespace MissionCompanion {
 			// 
 			// MissionOptionList
 			// 
-			this->MissionOptionList->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->MissionOptionList->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->MissionOptionList->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->MissionOptionList->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->MissionOptionList->FormattingEnabled = true;
@@ -286,17 +316,24 @@ namespace MissionCompanion {
 				L"Hide Mission", L"out of bounds system (innerZone, outerZone, hotZone)",
 					L"No sortie prep", L"No buddy select in the sortie", L"No vehicle select in the sortie", L"Only ASAP as deployment time option"
 			});
-			this->MissionOptionList->Location = System::Drawing::Point(176, 163);
+			this->MissionOptionList->Location = System::Drawing::Point(155, 122);
+			this->MissionOptionList->MaximumSize = System::Drawing::Size(410, 97);
+			this->MissionOptionList->MinimumSize = System::Drawing::Size(410, 97);
 			this->MissionOptionList->Name = L"MissionOptionList";
-			this->MissionOptionList->Size = System::Drawing::Size(410, 118);
+			this->MissionOptionList->Size = System::Drawing::Size(410, 97);
 			this->MissionOptionList->TabIndex = 12;
 			// 
 			// textBoxTrig_innerZone
 			// 
-			this->textBoxTrig_innerZone->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxTrig_innerZone->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->textBoxTrig_innerZone->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxTrig_innerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->textBoxTrig_innerZone->Location = System::Drawing::Point(34, 376);
+			this->textBoxTrig_innerZone->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->textBoxTrig_innerZone->Location = System::Drawing::Point(10, 344);
+			this->textBoxTrig_innerZone->MaximumSize = System::Drawing::Size(540, 150);
+			this->textBoxTrig_innerZone->MinimumSize = System::Drawing::Size(540, 150);
 			this->textBoxTrig_innerZone->Multiline = true;
 			this->textBoxTrig_innerZone->Name = L"textBoxTrig_innerZone";
 			this->textBoxTrig_innerZone->Size = System::Drawing::Size(540, 150);
@@ -304,12 +341,11 @@ namespace MissionCompanion {
 			// 
 			// labelTrig_innerZone
 			// 
-			this->labelTrig_innerZone->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelTrig_innerZone->AutoSize = true;
 			this->labelTrig_innerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelTrig_innerZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelTrig_innerZone->Location = System::Drawing::Point(30, 349);
+			this->labelTrig_innerZone->Location = System::Drawing::Point(6, 317);
 			this->labelTrig_innerZone->Name = L"labelTrig_innerZone";
 			this->labelTrig_innerZone->Size = System::Drawing::Size(461, 24);
 			this->labelTrig_innerZone->TabIndex = 14;
@@ -317,12 +353,11 @@ namespace MissionCompanion {
 			// 
 			// labelTrig_outerZone
 			// 
-			this->labelTrig_outerZone->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelTrig_outerZone->AutoSize = true;
 			this->labelTrig_outerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelTrig_outerZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelTrig_outerZone->Location = System::Drawing::Point(30, 529);
+			this->labelTrig_outerZone->Location = System::Drawing::Point(6, 497);
 			this->labelTrig_outerZone->Name = L"labelTrig_outerZone";
 			this->labelTrig_outerZone->Size = System::Drawing::Size(461, 24);
 			this->labelTrig_outerZone->TabIndex = 16;
@@ -330,10 +365,14 @@ namespace MissionCompanion {
 			// 
 			// textBoxTrig_outerZone
 			// 
-			this->textBoxTrig_outerZone->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxTrig_outerZone->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->textBoxTrig_outerZone->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxTrig_outerZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->textBoxTrig_outerZone->Location = System::Drawing::Point(31, 556);
+			this->textBoxTrig_outerZone->Location = System::Drawing::Point(7, 524);
+			this->textBoxTrig_outerZone->MaximumSize = System::Drawing::Size(540, 150);
+			this->textBoxTrig_outerZone->MinimumSize = System::Drawing::Size(540, 150);
 			this->textBoxTrig_outerZone->Multiline = true;
 			this->textBoxTrig_outerZone->Name = L"textBoxTrig_outerZone";
 			this->textBoxTrig_outerZone->Size = System::Drawing::Size(540, 150);
@@ -341,12 +380,11 @@ namespace MissionCompanion {
 			// 
 			// labelTrig_hotZone
 			// 
-			this->labelTrig_hotZone->Anchor = System::Windows::Forms::AnchorStyles::None;
 			this->labelTrig_hotZone->AutoSize = true;
 			this->labelTrig_hotZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelTrig_hotZone->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelTrig_hotZone->Location = System::Drawing::Point(30, 709);
+			this->labelTrig_hotZone->Location = System::Drawing::Point(6, 677);
 			this->labelTrig_hotZone->Name = L"labelTrig_hotZone";
 			this->labelTrig_hotZone->Size = System::Drawing::Size(444, 24);
 			this->labelTrig_hotZone->TabIndex = 18;
@@ -354,10 +392,14 @@ namespace MissionCompanion {
 			// 
 			// textBoxTrig_hotZone
 			// 
-			this->textBoxTrig_hotZone->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxTrig_hotZone->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->textBoxTrig_hotZone->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxTrig_hotZone->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->textBoxTrig_hotZone->Location = System::Drawing::Point(31, 736);
+			this->textBoxTrig_hotZone->Location = System::Drawing::Point(7, 704);
+			this->textBoxTrig_hotZone->MaximumSize = System::Drawing::Size(540, 150);
+			this->textBoxTrig_hotZone->MinimumSize = System::Drawing::Size(540, 150);
 			this->textBoxTrig_hotZone->Multiline = true;
 			this->textBoxTrig_hotZone->Name = L"textBoxTrig_hotZone";
 			this->textBoxTrig_hotZone->Size = System::Drawing::Size(540, 150);
@@ -365,12 +407,13 @@ namespace MissionCompanion {
 			// 
 			// labelMissionStartPoint
 			// 
-			this->labelMissionStartPoint->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->labelMissionStartPoint->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelMissionStartPoint->AutoSize = true;
 			this->labelMissionStartPoint->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelMissionStartPoint->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->labelMissionStartPoint->Location = System::Drawing::Point(27, 284);
+			this->labelMissionStartPoint->Location = System::Drawing::Point(3, 252);
 			this->labelMissionStartPoint->Name = L"labelMissionStartPoint";
 			this->labelMissionStartPoint->Size = System::Drawing::Size(472, 24);
 			this->labelMissionStartPoint->TabIndex = 22;
@@ -378,28 +421,67 @@ namespace MissionCompanion {
 			// 
 			// textBoxMissionStartPoint
 			// 
-			this->textBoxMissionStartPoint->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->textBoxMissionStartPoint->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left));
+			this->textBoxMissionStartPoint->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBoxMissionStartPoint->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->textBoxMissionStartPoint->Location = System::Drawing::Point(34, 311);
+			this->textBoxMissionStartPoint->Location = System::Drawing::Point(10, 279);
 			this->textBoxMissionStartPoint->Name = L"textBoxMissionStartPoint";
 			this->textBoxMissionStartPoint->Size = System::Drawing::Size(454, 26);
 			this->textBoxMissionStartPoint->TabIndex = 21;
 			// 
 			// pictureBoxMap
 			// 
-			this->pictureBoxMap->Location = System::Drawing::Point(592, 9);
+			this->pictureBoxMap->Location = System::Drawing::Point(571, 9);
 			this->pictureBoxMap->Name = L"pictureBoxMap";
-			this->pictureBoxMap->Size = System::Drawing::Size(745, 668);
+			this->pictureBoxMap->Size = System::Drawing::Size(766, 805);
 			this->pictureBoxMap->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBoxMap->TabIndex = 23;
 			this->pictureBoxMap->TabStop = false;
 			// 
+			// lz_drp_citadelSouth_S0000
+			// 
+			this->lz_drp_citadelSouth_S0000->AutoSize = true;
+			this->lz_drp_citadelSouth_S0000->ForeColor = System::Drawing::Color::Black;
+			this->lz_drp_citadelSouth_S0000->Location = System::Drawing::Point(901, 97);
+			this->lz_drp_citadelSouth_S0000->Name = L"lz_drp_citadelSouth_S0000";
+			this->lz_drp_citadelSouth_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_citadelSouth_S0000->TabIndex = 24;
+			this->lz_drp_citadelSouth_S0000->UseVisualStyleBackColor = true;
+			this->lz_drp_citadelSouth_S0000->Visible = false;
+			// 
+			// Lz_SovietBase_E
+			// 
+			this->Lz_SovietBase_E->AutoSize = true;
+			this->Lz_SovietBase_E->ForeColor = System::Drawing::Color::Black;
+			this->Lz_SovietBase_E->Location = System::Drawing::Point(856, 118);
+			this->Lz_SovietBase_E->Name = L"Lz_SovietBase_E";
+			this->Lz_SovietBase_E->Size = System::Drawing::Size(15, 14);
+			this->Lz_SovietBase_E->TabIndex = 25;
+			this->Lz_SovietBase_E->UseVisualStyleBackColor = true;
+			this->Lz_SovietBase_E->Visible = false;
+			// 
+			// Lz_SovietBase_I
+			// 
+			this->Lz_SovietBase_I->AutoSize = true;
+			this->Lz_SovietBase_I->ForeColor = System::Drawing::Color::Black;
+			this->Lz_SovietBase_I->Location = System::Drawing::Point(780, 88);
+			this->Lz_SovietBase_I->Name = L"Lz_SovietBase_I";
+			this->Lz_SovietBase_I->Size = System::Drawing::Size(15, 14);
+			this->Lz_SovietBase_I->TabIndex = 26;
+			this->Lz_SovietBase_I->UseVisualStyleBackColor = true;
+			this->Lz_SovietBase_I->Visible = false;
+			// 
 			// MainForm
 			// 
+			this->AcceptButton = this->buttonNextTo;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1349, 898);
+			this->Controls->Add(this->Lz_SovietBase_I);
+			this->Controls->Add(this->Lz_SovietBase_E);
+			this->Controls->Add(this->lz_drp_citadelSouth_S0000);
 			this->Controls->Add(this->pictureBoxMap);
 			this->Controls->Add(this->labelMissionStartPoint);
 			this->Controls->Add(this->textBoxMissionStartPoint);
@@ -422,6 +504,9 @@ namespace MissionCompanion {
 			this->Controls->Add(this->labelMissionCode);
 			this->Controls->Add(this->labelFPKFileName);
 			this->ForeColor = System::Drawing::Color::Red;
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(1365, 937);
+			this->MinimumSize = System::Drawing::Size(16, 930);
 			this->Name = L"MainForm";
 			this->Text = L"Mission Companion";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
@@ -561,6 +646,9 @@ namespace MissionCompanion {
 		//when the form is loaded
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
 			this->MissionOptionList->SetItemChecked(1, true); // enables the out of bound system by default
+			/*this->lz_okb_test->Visible = false;
+			this->Lz_SovietBase_E->Visible = false;
+			this->Lz_SovietBase_I->Visible = false;*/
 		}
 
 		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
@@ -617,15 +705,35 @@ namespace MissionCompanion {
 					this->labelErrorMissionCode->Text = L"";
 				}
 		}
+		private:
+			void HideAllLandingZoneCheckBox()
+			{
+				this->lz_drp_citadelSouth_S0000->Visible = false;
+				this->Lz_SovietBase_E->Visible = false;
+				this->Lz_SovietBase_I->Visible = false;
+			}
 		private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) 
-		{
-			this->pictureBoxMap->Image =
-				this->comboBoxLocation->Text == "Afghanistan"
-					? System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG")
-						: this->comboBoxLocation->Text == "Africa"
-							? System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\MafrMap.PNG")
-								: nullptr;
-			
+		{	
+
+			if (this->comboBoxLocation->Text == "Afghanistan")
+			{
+				Log("Afghanistan!");
+				HideAllLandingZoneCheckBox();
+
+				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG");
+				this->lz_drp_citadelSouth_S0000->Visible = true;
+				this->Lz_SovietBase_E->Visible = true;
+				this->Lz_SovietBase_I->Visible = true;
+			}
+			else if (this->comboBoxLocation->Text == "Africa")
+			{
+				Log("Africa!");
+				HideAllLandingZoneCheckBox();
+				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\MafrMap.PNG");
+				
+			}
+
+
 			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
 			{
 				this->labelErrorMapLocation->Text = L"This field cannot be empty";
@@ -635,7 +743,5 @@ namespace MissionCompanion {
 				this->labelErrorMapLocation->Text = L"";
 			}
 		}
-
-
 };
 }
