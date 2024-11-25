@@ -2,6 +2,15 @@
 #define EXTERNAL_LUA_H
 
 #include <string>
+#include <Windows.h>
+#include <msclr/marshal_cppstd.h>
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+#include <regex>
+
+#include <MainForm.h>
+#include <LandingZones.h>
 
 void deploymentLocation(System::String^ missionStartPointget);
 
@@ -9,11 +18,11 @@ void missionMapParams(System::String^ trig_innerZone, System::String^ trig_outer
 
 void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissionPreparationCheck, bool NoBuddyMenuCheck, bool NoVehicleMenuCheck, bool DisableSortieTimeCheck);
 
-void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation);
+void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation, System::String^ landingZones);
 
 void generateFolder(const std::string& FPKFileName, const std::string& MissionCode);
 
-void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation);
+void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation, System::String^ landingZones);
 #endif // EXTERNAL_LUA_H
 
 

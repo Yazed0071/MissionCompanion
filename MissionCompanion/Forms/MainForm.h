@@ -3,15 +3,20 @@
 #include <iostream>
 #include <cctype>
 #include <string>
-
-
+#include <cliext/vector>
+#include <regex>
+#include <msclr/marshal_cppstd.h>
 
 
 #include "ExternalLua.h"
+#include "LandingZones.h"
 
 
 
+#ifndef LOG_MACRO
+#define LOG_MACRO
 #define Log(Message) Console::WriteLine(Message);
+#endif
 
 
 
@@ -21,10 +26,12 @@ namespace MissionCompanion {
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
+	using namespace System::Collections::Generic;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace std;
+	using namespace System::Text;
 
 	/// <summary>
 	/// Summary for MainForm
@@ -35,15 +42,9 @@ namespace MissionCompanion {
 		MainForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
 		~MainForm()
 		{
 			if (components)
@@ -82,9 +83,28 @@ namespace MissionCompanion {
 	private: System::Windows::Forms::TextBox^ textBoxMissionStartPoint;
 	private: System::Windows::Forms::PictureBox^ pictureBoxMap;
 	private: System::Windows::Forms::CheckBox^ lz_drp_citadelSouth_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_sovietBase_N0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_sovietBase_E0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_sovietBase_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_sovietSouth_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_powerPlant_E0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_powerPlant_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_waterway_I0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_tent_N0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_tent_I0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_tent_E0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_remnantsNorth_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_remnantsNorth_N0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_remnants_I0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_field_W0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_remnants_S0000;
+	private: System::Windows::Forms::CheckBox^ lz_drp_fieldWest_S0000;
 
-	private: System::Windows::Forms::CheckBox^ Lz_SovietBase_E;
-	private: System::Windows::Forms::CheckBox^ Lz_SovietBase_I;
+
+
+
+
+
 
 
 
@@ -125,6 +145,7 @@ namespace MissionCompanion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->labelFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelMissionCode = (gcnew System::Windows::Forms::Label());
 			this->textBoxFPKFileName = (gcnew System::Windows::Forms::TextBox());
@@ -147,8 +168,22 @@ namespace MissionCompanion {
 			this->textBoxMissionStartPoint = (gcnew System::Windows::Forms::TextBox());
 			this->pictureBoxMap = (gcnew System::Windows::Forms::PictureBox());
 			this->lz_drp_citadelSouth_S0000 = (gcnew System::Windows::Forms::CheckBox());
-			this->Lz_SovietBase_E = (gcnew System::Windows::Forms::CheckBox());
-			this->Lz_SovietBase_I = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_sovietBase_N0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_sovietBase_E0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_sovietBase_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_sovietSouth_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_powerPlant_E0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_powerPlant_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_waterway_I0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_tent_N0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_tent_I0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_tent_E0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_remnantsNorth_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_remnantsNorth_N0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_remnants_I0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_field_W0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_remnants_S0000 = (gcnew System::Windows::Forms::CheckBox());
+			this->lz_drp_fieldWest_S0000 = (gcnew System::Windows::Forms::CheckBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBoxMap))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -444,43 +479,182 @@ namespace MissionCompanion {
 			// 
 			this->lz_drp_citadelSouth_S0000->AutoSize = true;
 			this->lz_drp_citadelSouth_S0000->ForeColor = System::Drawing::Color::Black;
-			this->lz_drp_citadelSouth_S0000->Location = System::Drawing::Point(901, 97);
+			this->lz_drp_citadelSouth_S0000->Location = System::Drawing::Point(910, 95);
 			this->lz_drp_citadelSouth_S0000->Name = L"lz_drp_citadelSouth_S0000";
 			this->lz_drp_citadelSouth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_citadelSouth_S0000->TabIndex = 24;
 			this->lz_drp_citadelSouth_S0000->UseVisualStyleBackColor = true;
 			this->lz_drp_citadelSouth_S0000->Visible = false;
 			// 
-			// Lz_SovietBase_E
+			// lz_drp_sovietBase_N0000
 			// 
-			this->Lz_SovietBase_E->AutoSize = true;
-			this->Lz_SovietBase_E->ForeColor = System::Drawing::Color::Black;
-			this->Lz_SovietBase_E->Location = System::Drawing::Point(856, 118);
-			this->Lz_SovietBase_E->Name = L"Lz_SovietBase_E";
-			this->Lz_SovietBase_E->Size = System::Drawing::Size(15, 14);
-			this->Lz_SovietBase_E->TabIndex = 25;
-			this->Lz_SovietBase_E->UseVisualStyleBackColor = true;
-			this->Lz_SovietBase_E->Visible = false;
+			this->lz_drp_sovietBase_N0000->AutoSize = true;
+			this->lz_drp_sovietBase_N0000->ForeColor = System::Drawing::Color::Black;
+			this->lz_drp_sovietBase_N0000->Location = System::Drawing::Point(865, 128);
+			this->lz_drp_sovietBase_N0000->Name = L"lz_drp_sovietBase_N0000";
+			this->lz_drp_sovietBase_N0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_sovietBase_N0000->TabIndex = 25;
+			this->lz_drp_sovietBase_N0000->UseVisualStyleBackColor = true;
+			this->lz_drp_sovietBase_N0000->Visible = false;
 			// 
-			// Lz_SovietBase_I
+			// lz_drp_sovietBase_E0000
 			// 
-			this->Lz_SovietBase_I->AutoSize = true;
-			this->Lz_SovietBase_I->ForeColor = System::Drawing::Color::Black;
-			this->Lz_SovietBase_I->Location = System::Drawing::Point(780, 88);
-			this->Lz_SovietBase_I->Name = L"Lz_SovietBase_I";
-			this->Lz_SovietBase_I->Size = System::Drawing::Size(15, 14);
-			this->Lz_SovietBase_I->TabIndex = 26;
-			this->Lz_SovietBase_I->UseVisualStyleBackColor = true;
-			this->Lz_SovietBase_I->Visible = false;
+			this->lz_drp_sovietBase_E0000->AutoSize = true;
+			this->lz_drp_sovietBase_E0000->ForeColor = System::Drawing::Color::Black;
+			this->lz_drp_sovietBase_E0000->Location = System::Drawing::Point(781, 95);
+			this->lz_drp_sovietBase_E0000->Name = L"lz_drp_sovietBase_E0000";
+			this->lz_drp_sovietBase_E0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_sovietBase_E0000->TabIndex = 26;
+			this->lz_drp_sovietBase_E0000->UseVisualStyleBackColor = true;
+			this->lz_drp_sovietBase_E0000->Visible = false;
+			// 
+			// lz_drp_sovietBase_S0000
+			// 
+			this->lz_drp_sovietBase_S0000->AutoSize = true;
+			this->lz_drp_sovietBase_S0000->Location = System::Drawing::Point(792, 162);
+			this->lz_drp_sovietBase_S0000->Name = L"lz_drp_sovietBase_S0000";
+			this->lz_drp_sovietBase_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_sovietBase_S0000->TabIndex = 27;
+			this->lz_drp_sovietBase_S0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_sovietSouth_S0000
+			// 
+			this->lz_drp_sovietSouth_S0000->AutoSize = true;
+			this->lz_drp_sovietSouth_S0000->Location = System::Drawing::Point(832, 260);
+			this->lz_drp_sovietSouth_S0000->Name = L"lz_drp_sovietSouth_S0000";
+			this->lz_drp_sovietSouth_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_sovietSouth_S0000->TabIndex = 28;
+			this->lz_drp_sovietSouth_S0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_powerPlant_E0000
+			// 
+			this->lz_drp_powerPlant_E0000->AutoSize = true;
+			this->lz_drp_powerPlant_E0000->Location = System::Drawing::Point(933, 243);
+			this->lz_drp_powerPlant_E0000->Name = L"lz_drp_powerPlant_E0000";
+			this->lz_drp_powerPlant_E0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_powerPlant_E0000->TabIndex = 29;
+			this->lz_drp_powerPlant_E0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_powerPlant_S0000
+			// 
+			this->lz_drp_powerPlant_S0000->AutoSize = true;
+			this->lz_drp_powerPlant_S0000->Location = System::Drawing::Point(887, 308);
+			this->lz_drp_powerPlant_S0000->Name = L"lz_drp_powerPlant_S0000";
+			this->lz_drp_powerPlant_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_powerPlant_S0000->TabIndex = 30;
+			this->lz_drp_powerPlant_S0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_waterway_I0000
+			// 
+			this->lz_drp_waterway_I0000->AutoSize = true;
+			this->lz_drp_waterway_I0000->Location = System::Drawing::Point(731, 262);
+			this->lz_drp_waterway_I0000->Name = L"lz_drp_waterway_I0000";
+			this->lz_drp_waterway_I0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_waterway_I0000->TabIndex = 31;
+			this->lz_drp_waterway_I0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_tent_N0000
+			// 
+			this->lz_drp_tent_N0000->AutoSize = true;
+			this->lz_drp_tent_N0000->Location = System::Drawing::Point(631, 344);
+			this->lz_drp_tent_N0000->Name = L"lz_drp_tent_N0000";
+			this->lz_drp_tent_N0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_tent_N0000->TabIndex = 32;
+			this->lz_drp_tent_N0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_tent_I0000
+			// 
+			this->lz_drp_tent_I0000->AutoSize = true;
+			this->lz_drp_tent_I0000->Location = System::Drawing::Point(631, 378);
+			this->lz_drp_tent_I0000->Name = L"lz_drp_tent_I0000";
+			this->lz_drp_tent_I0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_tent_I0000->TabIndex = 33;
+			this->lz_drp_tent_I0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_tent_E0000
+			// 
+			this->lz_drp_tent_E0000->AutoSize = true;
+			this->lz_drp_tent_E0000->Location = System::Drawing::Point(657, 414);
+			this->lz_drp_tent_E0000->Name = L"lz_drp_tent_E0000";
+			this->lz_drp_tent_E0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_tent_E0000->TabIndex = 34;
+			this->lz_drp_tent_E0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_remnantsNorth_S0000
+			// 
+			this->lz_drp_remnantsNorth_S0000->AutoSize = true;
+			this->lz_drp_remnantsNorth_S0000->Location = System::Drawing::Point(631, 460);
+			this->lz_drp_remnantsNorth_S0000->Name = L"lz_drp_remnantsNorth_S0000";
+			this->lz_drp_remnantsNorth_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_remnantsNorth_S0000->TabIndex = 35;
+			this->lz_drp_remnantsNorth_S0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_remnantsNorth_N0000
+			// 
+			this->lz_drp_remnantsNorth_N0000->AutoSize = true;
+			this->lz_drp_remnantsNorth_N0000->Location = System::Drawing::Point(648, 524);
+			this->lz_drp_remnantsNorth_N0000->Name = L"lz_drp_remnantsNorth_N0000";
+			this->lz_drp_remnantsNorth_N0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_remnantsNorth_N0000->TabIndex = 36;
+			this->lz_drp_remnantsNorth_N0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_remnants_I0000
+			// 
+			this->lz_drp_remnants_I0000->AutoSize = true;
+			this->lz_drp_remnants_I0000->Location = System::Drawing::Point(631, 556);
+			this->lz_drp_remnants_I0000->Name = L"lz_drp_remnants_I0000";
+			this->lz_drp_remnants_I0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_remnants_I0000->TabIndex = 37;
+			this->lz_drp_remnants_I0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_field_W0000
+			// 
+			this->lz_drp_field_W0000->AutoSize = true;
+			this->lz_drp_field_W0000->Location = System::Drawing::Point(678, 582);
+			this->lz_drp_field_W0000->Name = L"lz_drp_field_W0000";
+			this->lz_drp_field_W0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_field_W0000->TabIndex = 38;
+			this->lz_drp_field_W0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_remnants_S0000
+			// 
+			this->lz_drp_remnants_S0000->AutoSize = true;
+			this->lz_drp_remnants_S0000->Location = System::Drawing::Point(648, 604);
+			this->lz_drp_remnants_S0000->Name = L"lz_drp_remnants_S0000";
+			this->lz_drp_remnants_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_remnants_S0000->TabIndex = 39;
+			this->lz_drp_remnants_S0000->UseVisualStyleBackColor = true;
+			// 
+			// lz_drp_fieldWest_S0000
+			// 
+			this->lz_drp_fieldWest_S0000->AutoSize = true;
+			this->lz_drp_fieldWest_S0000->Location = System::Drawing::Point(657, 704);
+			this->lz_drp_fieldWest_S0000->Name = L"lz_drp_fieldWest_S0000";
+			this->lz_drp_fieldWest_S0000->Size = System::Drawing::Size(15, 14);
+			this->lz_drp_fieldWest_S0000->TabIndex = 40;
+			this->lz_drp_fieldWest_S0000->UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
-			this->AcceptButton = this->buttonNextTo;
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1349, 898);
-			this->Controls->Add(this->Lz_SovietBase_I);
-			this->Controls->Add(this->Lz_SovietBase_E);
+			this->Controls->Add(this->lz_drp_fieldWest_S0000);
+			this->Controls->Add(this->lz_drp_remnants_S0000);
+			this->Controls->Add(this->lz_drp_field_W0000);
+			this->Controls->Add(this->lz_drp_remnants_I0000);
+			this->Controls->Add(this->lz_drp_remnantsNorth_N0000);
+			this->Controls->Add(this->lz_drp_remnantsNorth_S0000);
+			this->Controls->Add(this->lz_drp_tent_E0000);
+			this->Controls->Add(this->lz_drp_tent_I0000);
+			this->Controls->Add(this->lz_drp_tent_N0000);
+			this->Controls->Add(this->lz_drp_waterway_I0000);
+			this->Controls->Add(this->lz_drp_powerPlant_S0000);
+			this->Controls->Add(this->lz_drp_powerPlant_E0000);
+			this->Controls->Add(this->lz_drp_sovietSouth_S0000);
+			this->Controls->Add(this->lz_drp_sovietBase_S0000);
+			this->Controls->Add(this->lz_drp_sovietBase_E0000);
+			this->Controls->Add(this->lz_drp_sovietBase_N0000);
 			this->Controls->Add(this->lz_drp_citadelSouth_S0000);
 			this->Controls->Add(this->pictureBoxMap);
 			this->Controls->Add(this->labelMissionStartPoint);
@@ -517,6 +691,57 @@ namespace MissionCompanion {
 		}
 
 		#pragma endregion
+		List<CheckBox^>^ landingZoneCheckBoxes;
+
+		void InitializeLandingZones() {
+			landingZoneCheckBoxes = gcnew List<CheckBox^>();
+
+			// Add each CheckBox to the list
+			landingZoneCheckBoxes->Add(this->lz_drp_citadelSouth_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_sovietBase_N0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_sovietBase_E0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_sovietBase_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_sovietSouth_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_powerPlant_E0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_powerPlant_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_waterway_I0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_tent_N0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_tent_I0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_tent_E0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_remnantsNorth_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_remnantsNorth_N0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_remnants_I0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_field_W0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_remnants_S0000);
+			landingZoneCheckBoxes->Add(this->lz_drp_fieldWest_S0000);
+		}
+
+		//Add checked Landing Zones to a list
+		
+		private :List<String^>^ GetCheckedLandingZones()
+		{
+			List<String^>^ checkedLZs = gcnew List<String^> ();
+
+			for each (CheckBox^ lz in landingZoneCheckBoxes)
+			{
+				if (lz->Checked)
+				{
+					checkedLZs->Add(lz->Name);
+				}
+			}
+
+			return checkedLZs;
+		}
+		
+		//Hide all landing zones checkboxes 
+		void HideAllLandingZoneCheckBox()
+		{
+			for each (CheckBox ^ lz in landingZoneCheckBoxes)
+			{
+				lz->Visible = false;
+			}
+		}
+
 		public :bool IsMissionHidden()
 		{
 			if (this->MissionOptionList->GetItemChecked(0)) {
@@ -621,6 +846,7 @@ namespace MissionCompanion {
 				this->labelErrorMapLocation->Text = L"";
 				return true;
 			}
+			
 			System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) 
 			{
 				this->labelErrorFPKFileName->Text = L"";
@@ -630,25 +856,56 @@ namespace MissionCompanion {
 				bool isFPKValid = ValidateFPKFileName();
 				bool isMissionCode = ValidatetextBoxMissionCode();
 				bool isMapLocation = ValidatecomboBoxLocation();
-
+				void deploymentLocation(System::String ^ missionStartPointget);
+				void missionMapParams(System::String ^ trig_innerZone, System::String ^ trig_outerZone, System::String ^ trig_hotZone);
+				void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissionPreparationCheck, bool NoBuddyMenuCheck, bool NoVehicleMenuCheck, bool DisableSortieTimeCheck);
+				void generateMission(System::String ^ FPKFileName, System::String ^ MissionCode, System::String ^ MissionMapLocation, System::String ^ landingZones);
 				if (isFPKValid && isMissionCode && isMapLocation)
 				{
+					
+
 					deploymentLocation(this->textBoxMissionStartPoint->Text);
 					missionOptionsFlags(IsMissionHidden(), IsEnableOOB(), SkipMissionPreparetion(), NoBuddyMenuFromMissionPreparetion(), NoVehicleMenuFromMissionPreparetion(), DisableSelectSortieTimeFromMissionPreparetion());
 					missionMapParams(this->textBoxTrig_innerZone->Text, this->textBoxTrig_outerZone->Text, this->textBoxTrig_hotZone->Text);
-					generateMission(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text, this->comboBoxLocation->Text);
+					generateMission(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text, this->comboBoxLocation->Text, gcnew System::String(TurnLandingZonesToString().c_str()));
+
 				}
 				else
 				{
 					System::Windows::Forms::MessageBox::Show(L"Please address all errors!", L"Error");
 				}
 			}
+			std::string TurnLandingZonesToString()
+			{
+				List<String^>^ checkedLZs = GetCheckedLandingZones();
+				#ifdef _DEBUG
+				for each (String ^ lz in checkedLZs) {
+					Log("Checked LZ: " + lz);
+				}
+				#endif
+				StringBuilder^ sb = gcnew StringBuilder();
+
+				for each (String ^ lz in checkedLZs)
+				{
+					sb->Append(lz)->Append("\n");
+				}
+
+				if (sb->Length > 0)
+				{
+					//sb->Remove(sb->Length - 2, 2);
+				}
+
+				System::String^ managedString = sb->ToString();
+				std::string landingZonesStr = msclr::interop::marshal_as<std::string>(managedString);
+				std::string formattedLandingZones = landingZonesStr;
+
+				return formattedLandingZones;
+			}
 		//when the form is loaded
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+			InitializeLandingZones();
 			this->MissionOptionList->SetItemChecked(1, true); // enables the out of bound system by default
-			/*this->lz_okb_test->Visible = false;
-			this->Lz_SovietBase_E->Visible = false;
-			this->Lz_SovietBase_I->Visible = false;*/
+			HideAllLandingZoneCheckBox();
 		}
 
 		private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
@@ -705,13 +962,6 @@ namespace MissionCompanion {
 					this->labelErrorMissionCode->Text = L"";
 				}
 		}
-		private:
-			void HideAllLandingZoneCheckBox()
-			{
-				this->lz_drp_citadelSouth_S0000->Visible = false;
-				this->Lz_SovietBase_E->Visible = false;
-				this->Lz_SovietBase_I->Visible = false;
-			}
 		private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) 
 		{	
 
@@ -722,8 +972,22 @@ namespace MissionCompanion {
 
 				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG");
 				this->lz_drp_citadelSouth_S0000->Visible = true;
-				this->Lz_SovietBase_E->Visible = true;
-				this->Lz_SovietBase_I->Visible = true;
+				this->lz_drp_sovietBase_E0000->Visible = true;
+				this->lz_drp_sovietBase_N0000->Visible = true;
+				this->lz_drp_sovietBase_S0000->Visible = true;
+				this->lz_drp_sovietSouth_S0000->Visible = true;
+				this->lz_drp_powerPlant_E0000->Visible = true;
+				this->lz_drp_powerPlant_S0000->Visible = true;
+				this->lz_drp_waterway_I0000->Visible = true;
+				this->lz_drp_tent_N0000->Visible = true;
+				this->lz_drp_tent_I0000->Visible = true;
+				this->lz_drp_tent_E0000->Visible = true;
+				this->lz_drp_remnantsNorth_S0000->Visible = true;
+				this->lz_drp_remnantsNorth_N0000->Visible = true;
+				this->lz_drp_remnants_I0000->Visible = true;
+				this->lz_drp_field_W0000->Visible = true;
+				this->lz_drp_remnants_S0000->Visible = true;
+				this->lz_drp_fieldWest_S0000->Visible = true;
 			}
 			else if (this->comboBoxLocation->Text == "Africa")
 			{
@@ -742,6 +1006,8 @@ namespace MissionCompanion {
 			{
 				this->labelErrorMapLocation->Text = L"";
 			}
+
+			List<String^>^ stringList = gcnew List<String^>();
 		}
 };
 }

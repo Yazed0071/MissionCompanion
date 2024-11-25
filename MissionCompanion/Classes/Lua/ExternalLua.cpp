@@ -1,12 +1,7 @@
 #include "ExternalLua.h"
-#include <Windows.h>
-#include <msclr/marshal_cppstd.h>
-#include <filesystem>
-#include <iostream>
-#include <fstream>
-#include <regex>
 
-#define Log(Message) std::cout << Message << std::endl;
+
+#define Logstd(Message) std::cout << Message << std::endl;
 
 // Utility to convert System::String^ to std::string
 std::string toStdString(System::String^ managedString) {
@@ -39,7 +34,7 @@ bool IsEnableOOBVector = false;
 void generateFolder(const std::string& FPKFileName, const std::string& MissionCode) {
     char exePath[MAX_PATH];
     if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
-        Log("Failed to get executable path.");
+        Logstd("Failed to get executable path.");
         return;
     }
 
@@ -51,17 +46,17 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
     std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd");
 
     if (std::filesystem::create_directories(gameDirPath)) {
-        Log("GameDir folder created successfully.");
+        Logstd("GameDir folder created successfully.");
     }
     else {
-        Log("GameDir folder already exists or failed to create.");
+        Logstd("GameDir folder already exists or failed to create.");
     }
 
     if (std::filesystem::create_directories(assetsFPKPath) && std::filesystem::create_directories(assetsFPKDPath)) {
-        Log("Assets folders created successfully.");
+        Logstd("Assets folders created successfully.");
     }
     else {
-        Log("Assets folders already exist or failed to create.");
+        Logstd("Assets folders already exist or failed to create.");
     }
 }
 
@@ -84,7 +79,7 @@ void deploymentLocation(System::String^ missionStartPointget)
 
     StartPoint(toStdString(missionStartPointget), outPutmissionStartPoint);
 
-    Log("missionStartPoint:\n" + outPutmissionStartPoint);
+    Logstd("missionStartPoint:\n" + outPutmissionStartPoint);
 }
 
 // Handle mission map zones
@@ -117,10 +112,10 @@ void missionMapParams(System::String^ trigInnerZone, System::String^ trigOuterZo
     transformZone(toStdString(trigOuterZone), outputOuterZone);
     transformZone(toStdString(trigHotZone), outputHotZone);
 
-    // Log results
-    Log("Inner Zone:\n" + outputInnerZone);
-    Log("Outer Zone:\n" + outputOuterZone);
-    Log("Hot Zone:\n" + outputHotZone);
+    // Logstd results
+    Logstd("Inner Zone:\n" + outputInnerZone);
+    Logstd("Outer Zone:\n" + outputOuterZone);
+    Logstd("Hot Zone:\n" + outputHotZone);
 }
 
 // Set mission options based on user input
@@ -136,16 +131,16 @@ void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissio
 }
 
 // Generate the Lua file
-void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation) {
-    MapLocation = (MissionMapLocation == "Afghanistan") ? "AFGH" : (MissionMapLocation == "Africa") ? "MAFR" : "";
+void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation, System::String^ landingZones) {
+    MapLocation = (MissionMapLocation == "Afghanistan") ? "AFGH"  : (MissionMapLocation == "Africa")  ? "MAFR"  : "";
     if (MapLocation.empty()) {
-        Log("Invalid MissionMapLocation.");
+        Logstd("Invalid MissionMapLocation.");
         return;
     }
 
     char exePath[MAX_PATH];
     if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
-        Log("Failed to get executable path.");
+        Logstd("Failed to get executable path.");
         return;
     }
 
@@ -155,19 +150,23 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
 
     if (std::filesystem::exists(luaFilePath)) {
         if (std::filesystem::remove(luaFilePath)) {
-            Log("Existing Lua file deleted.");
+            Logstd("Existing Lua file deleted.");
         }
         else {
-            Log("Failed to delete existing Lua file.");
+            Logstd("Failed to delete existing Lua file.");
             return;
         }
     }
 
     std::ofstream luaFile(luaFilePath.string());
     if (!luaFile.is_open()) {
-        Log("Failed to create Lua file.");
+        Logstd("Failed to create Lua file.");
         return;
     }
+    
+    
+
+    std::string LandingZonesStr = toStdString(landingZones);
     std::string addMissionPackPath = "/Assets/tpp/pack/mission2/custom_story/" + ("s" + MissionCode) + "/" + (FPKFileName + ".fpk");
     // Write Lua content
     luaFile << "local this = {}\n";
@@ -180,7 +179,6 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "\n";
     luaFile << "    this.packs = function(missionCode)\n";
     luaFile << "        TppPackList.AddLocationCommonScriptPack(missionCode)\n";
-    luaFile << "        TppPackList.AddLocationCommonMissionAreaPack(missionCode)\n";
     luaFile << "        TppPackList.AddLocationCommonMissionAreaPack(missionCode)\n";
     luaFile << "        TppPackList.AddMissionPack\"" << addMissionPackPath << "\"\n";
     luaFile << "    end\n";
@@ -230,9 +228,10 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "        missionStartPoint = {\n";
     luaFile << "" << outPutmissionStartPoint << "\n"; // vertices;
     luaFile << "		},\n";
-    luaFile << "        heliLandPoint = {-- Sortie/mission prep screen feature flags\n";
-    luaFile << "" << "nil" << "\n"; // vertices;
+    luaFile << "        heliLandPoint = {\n";
+    luaFile << "    		" << GetListLandingZone(LandingZonesStr) << "\n"; // vertices;
     luaFile << "		},\n";
+    luaFile << "        -- Sortie/mission prep screen feature flags\n";
     luaFile << "        heliSpaceFlags = {\n";
     luaFile << "    		SkipMissionPreparetion = " << SkipMissionPreparation << ",   --No sortie prep, like vanilla Mother Base.\n";
     luaFile << "    		NoBuddyMenuFromMissionPreparetion = " << NoBuddyMenuFromMissionPreparation << ",    -- No buddy select in the sortie\n";
@@ -246,18 +245,18 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
 
     luaFile.close();
     #ifdef _DEBUG
-        Log("Lua file generated successfully: " + luaFilePath.string());
+        Logstd("Lua file generated successfully: " + luaFilePath.string());
     #endif // _DEBUG
 
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }
 
 // Main function to generate mission
-void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation) {
+void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation, System::String^ landingZones) {
     std::string FPKFileNameStr = toStdString(FPKFileName);
     std::string MissionCodeStr = toStdString(MissionCode);
     std::string MissionMapLocationStr = toStdString(MissionMapLocation);
-
+    
     generateFolder(FPKFileNameStr, MissionCodeStr);
-    generateExternalLua(FPKFileNameStr, MissionCodeStr, MissionMapLocationStr);
+    generateExternalLua(FPKFileNameStr, MissionCodeStr, MissionMapLocationStr, landingZones);
 }
