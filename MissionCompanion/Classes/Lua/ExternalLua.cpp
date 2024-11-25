@@ -43,7 +43,7 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
 
     std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "missions";
     std::filesystem::path assetsFPKPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpk");
-    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd");
+    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd") / "Assets" / "tpp" / "level" / "mission2" / "story" / ("s" + MissionCode);
 
     if (std::filesystem::create_directories(gameDirPath)) {
         Logstd("GameDir folder created successfully.");
