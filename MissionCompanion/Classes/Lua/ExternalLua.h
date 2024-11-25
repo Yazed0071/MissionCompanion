@@ -11,6 +11,14 @@
 
 #include <MainForm.h>
 #include <LandingZones.h>
+#include <mission_main.h>
+
+
+
+std::string getExePath();
+std::string getFPKFileName();
+std::string getMissionCode();
+std::string getMapLocation();
 
 void deploymentLocation(System::String^ missionStartPointget);
 
@@ -20,9 +28,7 @@ void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissio
 
 void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation, System::String^ landingZones);
 
-void generateFolder(const std::string& FPKFileName, const std::string& MissionCode);
+void generateFolder();
 
-void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation, System::String^ landingZones);
+void generateExternalLua(System::String^ landingZones);
 #endif // EXTERNAL_LUA_H
-
-

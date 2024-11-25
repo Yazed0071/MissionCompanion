@@ -222,6 +222,7 @@ namespace MissionCompanion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->labelFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelMissionCode = (gcnew System::Windows::Forms::Label());
 			this->textBoxFPKFileName = (gcnew System::Windows::Forms::TextBox());
@@ -1813,6 +1814,7 @@ namespace MissionCompanion {
 			this->lz_drp_bananaSouth_N0000->Visible = true;
 			this->lz_drp_savannah_I0000->Visible = true;
 			this->lz_drp_savannahEast_N0000->Visible = true;
+			this->lz_drp_pfCamp_S0000->Visible = true;
 		}
 
 

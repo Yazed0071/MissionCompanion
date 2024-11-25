@@ -1,6 +1,7 @@
 #include "ExternalLua.h"
 
 
+
 #define Logstd(Message) std::cout << Message << std::endl;
 
 // Utility to convert System::String^ to std::string
@@ -9,6 +10,12 @@ std::string toStdString(System::String^ managedString) {
 }
 
 // Globals for Mission Options and Zones
+
+
+
+std::string FPKFileNameStr;
+std::string MissionCodeStr;
+std::string MissionMapLocationStr;
 std::string MapLocation;
 std::string isMissionHidden = "this.hideMission = false";
 std::string isEnableOOB = "this.enableOOB = false --Enable out of bounds system (innerZone, outerZone, hotZone)";
@@ -27,11 +34,37 @@ std::string NoBuddyMenuFromMissionPreparation = "false";
 std::string NoVehicleMenuFromMissionPreparation = "false";
 std::string DisableSelectSortieTimeFromMissionPreparation = "false";
 
+std::string getExePath()
+{
+    char exePath[MAX_PATH];
+    if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
+        Logstd("Failed to get executable path.");
+    }
+
+    std::string exeDir = exePath;
+    exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
+    return exeDir;
+}
+
+std::string getFPKFileName()
+{
+    return FPKFileNameStr;
+}
+
+std::string getMissionCode()
+{
+    return MissionCodeStr;
+}
+
+std::string getMapLocation()
+{
+    return MissionMapLocationStr;
+}
 
 bool IsEnableOOBVector = false;
 
 // Create necessary folders
-void generateFolder(const std::string& FPKFileName, const std::string& MissionCode) {
+void generateFolder() {
     char exePath[MAX_PATH];
     if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
         Logstd("Failed to get executable path.");
@@ -41,9 +74,9 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
     std::string exeDir = exePath;
     exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
 
-    std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "mod" /  "missions";
-    std::filesystem::path assetsFPKPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpk");
-    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd");
+    std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "GameDir" / "mod" /  "missions";
+    std::filesystem::path assetsFPKPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpk");
+    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpkd");
 
     if (std::filesystem::create_directories(gameDirPath)) {
         Logstd("GameDir folder created successfully.");
@@ -59,6 +92,8 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
         Logstd("Assets folders already exist or failed to create.");
     }
 }
+
+
 
 void deploymentLocation(System::String^ missionStartPointget)
 {
@@ -131,22 +166,16 @@ void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissio
 }
 
 // Generate the Lua file
-void generateExternalLua(const std::string& FPKFileName, const std::string& MissionCode, const std::string& MissionMapLocation, System::String^ landingZones) {
-    MapLocation = (MissionMapLocation == "Afghanistan") ? "AFGH"  : (MissionMapLocation == "Africa")  ? "MAFR"  : "";
+void generateExternalLua(System::String^ landingZones) {
+    MapLocation = (getMapLocation() == "Afghanistan") ? "AFGH" : (getMapLocation() == "Africa")  ? "MAFR"  : "";
     if (MapLocation.empty()) {
         Logstd("Invalid MissionMapLocation.");
         return;
     }
 
-    char exePath[MAX_PATH];
-    if (GetModuleFileNameA(NULL, exePath, MAX_PATH) == 0) {
-        Logstd("Failed to get executable path.");
-        return;
-    }
+    
 
-    std::string exeDir = exePath;
-    exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
-    std::filesystem::path luaFilePath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "mod" / "missions" / (MissionCode + "_" + MapLocation + ".lua");
+    std::filesystem::path luaFilePath = std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "GameDir" / "mod" / "missions" / (getMissionCode() + "_" + MapLocation + ".lua");
 
     if (std::filesystem::exists(luaFilePath)) {
         if (std::filesystem::remove(luaFilePath)) {
@@ -167,13 +196,13 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     
 
     std::string LandingZonesStr = toStdString(landingZones);
-    std::string addMissionPackPath = "/Assets/tpp/pack/mission2/custom_story/" + ("s" + MissionCode) + "/" + (FPKFileName + ".fpk");
+    std::string addMissionPackPath = "/Assets/tpp/pack/mission2/custom_story/" + ("s" + getMissionCode()) + "/" + (getFPKFileName() + ".fpk");
     // Write Lua content
     luaFile << "local this = {}\n";
     luaFile << "--generated by Mission Companion!\n";
     luaFile << "--Thank you for using it!\n";
     luaFile << "--Created by Yazed0071 and inspired by Side op companion https://www.nexusmods.com/metalgearsolidvtpp/mods/571 \n";
-    luaFile << "    this.missionCode = " << MissionCode << "\n"; // No quotes for an integer
+    luaFile << "    this.missionCode = " << getMissionCode() << "\n"; // No quotes for an integer
     luaFile << "    this.location = \"" << MapLocation << "\"\n";
     luaFile << "    " << isMissionHidden << "\n";
     luaFile << "\n";
@@ -249,19 +278,22 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "return this\n";
 
     luaFile.close();
-    #ifdef _DEBUG
-        Logstd("Lua file generated successfully: " + luaFilePath.string());
-    #endif // _DEBUG
+    WriteMission_MainScrip();
 
+
+    #ifdef _DEBUG
+    Logstd("Lua file generated successfully: " + luaFilePath.string());
+    #endif // _DEBUG
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }
 
-// Main function to generate mission
+
+// called in main function to generate mission
 void generateMission(System::String^ FPKFileName, System::String^ MissionCode, System::String^ MissionMapLocation, System::String^ landingZones) {
-    std::string FPKFileNameStr = toStdString(FPKFileName);
-    std::string MissionCodeStr = toStdString(MissionCode);
-    std::string MissionMapLocationStr = toStdString(MissionMapLocation);
+    FPKFileNameStr = toStdString(FPKFileName);
+    MissionCodeStr = toStdString(MissionCode);
+    MissionMapLocationStr = toStdString(MissionMapLocation);
     
-    generateFolder(FPKFileNameStr, MissionCodeStr);
-    generateExternalLua(FPKFileNameStr, MissionCodeStr, MissionMapLocationStr, landingZones);
+    generateFolder();
+    generateExternalLua(landingZones);
 }
