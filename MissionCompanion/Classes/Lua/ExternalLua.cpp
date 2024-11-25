@@ -41,9 +41,9 @@ void generateFolder(const std::string& FPKFileName, const std::string& MissionCo
     std::string exeDir = exePath;
     exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
 
-    std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "missions";
+    std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "mod" /  "missions";
     std::filesystem::path assetsFPKPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpk");
-    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd") / "Assets" / "tpp" / "level" / "mission2" / "story" / ("s" + MissionCode);
+    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + MissionCode) / (FPKFileName + "_fpkd");
 
     if (std::filesystem::create_directories(gameDirPath)) {
         Logstd("GameDir folder created successfully.");
@@ -146,7 +146,7 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
 
     std::string exeDir = exePath;
     exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
-    std::filesystem::path luaFilePath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "missions" / (MissionCode + "_" + MapLocation + ".lua");
+    std::filesystem::path luaFilePath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / FPKFileName / "GameDir" / "mod" / "missions" / (MissionCode + "_" + MapLocation + ".lua");
 
     if (std::filesystem::exists(luaFilePath)) {
         if (std::filesystem::remove(luaFilePath)) {
@@ -178,9 +178,14 @@ void generateExternalLua(const std::string& FPKFileName, const std::string& Miss
     luaFile << "    " << isMissionHidden << "\n";
     luaFile << "\n";
     luaFile << "    this.packs = function(missionCode)\n";
+    luaFile << "        --Common packs:\n";
     luaFile << "        TppPackList.AddLocationCommonScriptPack(missionCode)\n";
     luaFile << "        TppPackList.AddLocationCommonMissionAreaPack(missionCode)\n";
-    luaFile << "        TppPackList.AddMissionPack\"" << addMissionPackPath << "\"\n";
+    luaFile << "\n";
+    luaFile << "\n";
+    luaFile << "\n";
+    luaFile << "        --Mission pack (has to be last):\n";
+    luaFile << "        TppPackList.AddMissionPack\"" << addMissionPackPath << "\"--The mission's core \"area\" pack\n";
     luaFile << "    end\n";
     luaFile << "\n";
     luaFile << "\n";

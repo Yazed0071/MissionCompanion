@@ -222,7 +222,6 @@ namespace MissionCompanion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->labelFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelMissionCode = (gcnew System::Windows::Forms::Label());
 			this->textBoxFPKFileName = (gcnew System::Windows::Forms::TextBox());
@@ -396,11 +395,11 @@ namespace MissionCompanion {
 			this->labelErrorFPKFileName->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorFPKFileName->AutoSize = true;
-			this->labelErrorFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
+			this->labelErrorFPKFileName->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->labelErrorFPKFileName->Location = System::Drawing::Point(334, 11);
+			this->labelErrorFPKFileName->Location = System::Drawing::Point(334, 15);
 			this->labelErrorFPKFileName->Name = L"labelErrorFPKFileName";
-			this->labelErrorFPKFileName->Size = System::Drawing::Size(0, 24);
+			this->labelErrorFPKFileName->Size = System::Drawing::Size(0, 17);
 			this->labelErrorFPKFileName->TabIndex = 5;
 			// 
 			// labelErrorMissionCode
@@ -408,12 +407,12 @@ namespace MissionCompanion {
 			this->labelErrorMissionCode->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorMissionCode->AutoSize = true;
-			this->labelErrorMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
+			this->labelErrorMissionCode->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelErrorMissionCode->ForeColor = System::Drawing::Color::Red;
-			this->labelErrorMissionCode->Location = System::Drawing::Point(227, 45);
+			this->labelErrorMissionCode->Location = System::Drawing::Point(227, 51);
 			this->labelErrorMissionCode->Name = L"labelErrorMissionCode";
-			this->labelErrorMissionCode->Size = System::Drawing::Size(0, 24);
+			this->labelErrorMissionCode->Size = System::Drawing::Size(0, 17);
 			this->labelErrorMissionCode->TabIndex = 6;
 			// 
 			// labelMapLocation
@@ -436,12 +435,12 @@ namespace MissionCompanion {
 			this->labelErrorMapLocation->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->labelErrorMapLocation->AutoSize = true;
-			this->labelErrorMapLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular,
+			this->labelErrorMapLocation->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
 			this->labelErrorMapLocation->ForeColor = System::Drawing::Color::Red;
-			this->labelErrorMapLocation->Location = System::Drawing::Point(282, 87);
+			this->labelErrorMapLocation->Location = System::Drawing::Point(282, 94);
 			this->labelErrorMapLocation->Name = L"labelErrorMapLocation";
-			this->labelErrorMapLocation->Size = System::Drawing::Size(0, 24);
+			this->labelErrorMapLocation->Size = System::Drawing::Size(0, 17);
 			this->labelErrorMapLocation->TabIndex = 9;
 			// 
 			// comboBoxLocation
