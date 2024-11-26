@@ -77,7 +77,7 @@ void WriteMission_MainScrip()
     writeMissionMainLuaFile << "end\n";
     writeMissionMainLuaFile << "\n";
     writeMissionMainLuaFile << "\n";
-    writeMissionMainLuaFile << "return this\n";
+    writeMissionMainLuaFile << "return this";
 
     writeMissionMainLuaFile.close();
 

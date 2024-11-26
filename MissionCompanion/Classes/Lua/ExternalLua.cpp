@@ -275,7 +275,7 @@ void generateExternalLua(System::String^ landingZones) {
     luaFile << "    }\n";
     luaFile << "\n";
     luaFile << "\n";
-    luaFile << "return this\n";
+    luaFile << "return this";
 
     luaFile.close();
     WriteMission_MainScrip();

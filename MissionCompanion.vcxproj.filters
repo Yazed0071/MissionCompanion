@@ -30,6 +30,12 @@
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\ToolsAssets\Tools\Fox2Builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionCompanion\ToolsAssets\FilePacker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
@@ -45,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\ToolsAssets\Tools\Fox2Builder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\ToolsAssets\FilePacker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
