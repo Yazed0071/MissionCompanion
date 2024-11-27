@@ -89,20 +89,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MissionCompanion\ToolsAssets\Tools\Fox2Builder.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
-    <ClCompile Include="MissionCompanion\ToolsAssets\FilePacker.cpp" />
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MissionCompanion\ToolsAssets\Tools\Fox2Builder.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h" />
-    <ClInclude Include="MissionCompanion\ToolsAssets\FilePacker.h" />
     <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h" />
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <FileType>CppForm</FileType>
