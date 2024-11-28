@@ -297,7 +297,9 @@ void generateExternalLua(System::String^ landingZones) {
     std::string ToolPath =          getExePath() + "\\MissionCompanion\\res\\ToolsAssets";
     std::string XmlFilesPath =      getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\";
 
-    ConvertXmlTo(XmlFilesPath + "phase_bgm.sdf.xml", ToolPath + "\\FoxTool\\FoxTool.exe");
+    ConvertXmlTo(XmlFilesPath + "mtbs_ly000_cl00_item.fox2.xml", ToolPath + "\\FoxTool\\FoxTool.exe");
+    ConvertXmlTo(XmlFilesPath + "s13105_area_fox2_geotrap_win.trap.xml", ToolPath + "\\TrapTool\\TrapTool.exe");
+    ConvertXmlTo(XmlFilesPath + "f30010.frt.xml", ToolPath + "\\RouteSetTool\\RouteSetTool.exe");
 
    
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");

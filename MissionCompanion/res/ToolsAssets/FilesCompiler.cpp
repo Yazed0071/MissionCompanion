@@ -5,29 +5,7 @@
 #include <thread>
 #include <chrono>
 
-
-//TODO: doesn't work well with .frt files
-
-
-// Function to get the newest file in the directory (excluding the XML file itself)
-std::filesystem::path GetNewestFile(const std::filesystem::path& directory, const std::filesystem::path& excludeFile) {
-    std::filesystem::path newestFile;
-    std::filesystem::file_time_type newestTime;
-
-    for (const auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (entry.is_regular_file() && entry.path() != excludeFile) {
-            auto currentFileTime = std::filesystem::last_write_time(entry);
-            if (newestFile.empty() || currentFileTime > newestTime) {
-                newestFile = entry.path();
-                newestTime = currentFileTime;
-            }
-        }
-    }
-
-    return newestFile;
-}
-
-void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath) {
+void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath, int timeoutSeconds) {
     std::filesystem::path xmlFile(xmlFilePath);
     std::filesystem::path outputDirectory = xmlFile.parent_path();
 
@@ -51,6 +29,9 @@ void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath) {
     STARTUPINFO si = { sizeof(STARTUPINFO) };
     PROCESS_INFORMATION pi = { 0 };
 
+    // Set the working directory for the process
+    std::wstring workingDirectory = outputDirectory.wstring();
+
     // Create the process
     if (!CreateProcess(
         NULL,                   // No module name (use command line)
@@ -60,7 +41,7 @@ void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath) {
         FALSE,                  // Set handle inheritance to FALSE
         CREATE_NO_WINDOW,       // Do not create a window
         NULL,                   // Use parent's environment block
-        NULL,                   // Use parent's starting directory
+        workingDirectory.c_str(), // Set the working directory
         &si,                    // Pointer to STARTUPINFO structure
         &pi                     // Pointer to PROCESS_INFORMATION structure
     )) {
@@ -75,45 +56,53 @@ void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath) {
     DWORD exitCode;
     GetExitCodeProcess(pi.hProcess, &exitCode);
 
-    if (exitCode == 0) {
-        std::cout << "Conversion process completed successfully!" << std::endl;
-
-        // Wait for the new file to be created (polling with a timeout)
-        const int maxRetries = 100; // Adjust the retry limit as needed
-        const int retryDelayMs = 100; // Delay between retries (milliseconds)
-        int retries = 0;
-
-        std::filesystem::path newestFile;
-
-        while (retries < maxRetries) {
-            newestFile = GetNewestFile(outputDirectory, xmlFile);
-            if (!newestFile.empty() && newestFile.extension() != ".xml") {
-                std::cout << "Generated file: " << newestFile << std::endl;
-
-                // Delete the .xml file
-                try {
-                    std::filesystem::remove(xmlFile);
-                    std::cout << "Deleted XML file: " << xmlFilePath << std::endl;
-                }
-                catch (const std::filesystem::filesystem_error& e) {
-                    std::cerr << "Failed to delete XML file: " << e.what() << std::endl;
-                }
-
-                break;
-            }
-
-            // Wait before retrying
-            std::this_thread::sleep_for(std::chrono::milliseconds(retryDelayMs));
-            retries++;
-        }
-
-        if (retries == maxRetries) {
-            std::cerr << "Timeout: Generated file was not detected within the expected time frame." << std::endl;
-        }
-
-    }
-    else {
+    if (exitCode != 0) {
         std::cerr << "Error during conversion process. Exit code: " << exitCode << std::endl;
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        return;
+    }
+
+    std::cout << "Conversion process completed successfully!" << std::endl;
+
+    // Poll for a new file in the directory
+    auto startTime = std::chrono::steady_clock::now();
+    std::filesystem::path newestFile;
+
+    while (true) {
+        // Look for the newest file that is not the original XML file
+        for (const auto& entry : std::filesystem::directory_iterator(outputDirectory)) {
+            if (entry.is_regular_file() && entry.path() != xmlFile) {
+                auto currentFileTime = std::filesystem::last_write_time(entry);
+                if (newestFile.empty() || currentFileTime > std::filesystem::last_write_time(newestFile)) {
+                    newestFile = entry.path();
+                }
+            }
+        }
+
+        if (!newestFile.empty()) {
+            std::cout << "Generated file: " << newestFile << std::endl;
+
+            // Delete the original XML file
+            try {
+                std::filesystem::remove(xmlFile);
+                std::cout << "Deleted XML file: " << xmlFilePath << std::endl;
+            }
+            catch (const std::filesystem::filesystem_error& e) {
+                std::cerr << "Failed to delete XML file: " << e.what() << std::endl;
+            }
+            break;
+        }
+
+        // Check for timeout
+        if (std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::steady_clock::now() - startTime).count() >= timeoutSeconds) {
+            std::cerr << "Timeout: Generated file was not detected within the expected time frame." << std::endl;
+            break;
+        }
+
+        // Wait before retrying
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     // Close process and thread handles

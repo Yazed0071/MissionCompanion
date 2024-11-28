@@ -4,7 +4,6 @@
 #include <string>
 #include <filesystem>
 
-std::filesystem::path GetNewestFile(const std::filesystem::path& directory, const std::filesystem::path& excludeFile);
-void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath);
+void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath, int timeoutSeconds = 3);
 
 #endif // FILEPROCESSOR_H
