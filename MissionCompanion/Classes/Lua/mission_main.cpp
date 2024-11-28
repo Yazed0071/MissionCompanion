@@ -14,7 +14,7 @@ void WriteMission_MainScrip()
     }
 
 
-    std::filesystem::path missionMainLuaFile = std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpkd") / "Assets" / "tpp" / "script" / "mission" / "mission_main.lua";
+    std::filesystem::path missionMainLuaFile = getFPKDFilePath() / "Assets" / "tpp" / "script" / "mission" / "mission_main.lua";
 
     if (std::filesystem::exists(missionMainLuaFile)) {
         if (std::filesystem::remove(missionMainLuaFile)) {

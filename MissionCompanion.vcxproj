@@ -59,7 +59,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -73,7 +73,7 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -94,6 +94,7 @@
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
+    <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
@@ -103,6 +104,7 @@
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MissionCompanion\res\ToolsAssets\FilesCompiler.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MissionCompanion\Forms\MainForm.resx">

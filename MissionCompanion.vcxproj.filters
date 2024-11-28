@@ -30,6 +30,9 @@
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\res\ToolsAssets\FilesCompiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

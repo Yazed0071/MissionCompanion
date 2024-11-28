@@ -17,6 +17,8 @@
 
 std::string getExePath();
 std::string getFPKFileName();
+std::filesystem::path getFPKFilePath();
+std::filesystem::path getFPKDFilePath();
 std::string getMissionCode();
 std::string getMapLocation();
 

@@ -1,4 +1,5 @@
 #include "ExternalLua.h"
+#include "FilesCompiler.h"
 
 
 
@@ -14,6 +15,7 @@ std::string toStdString(System::String^ managedString) {
 
 
 std::string FPKFileNameStr;
+
 std::string MissionCodeStr;
 std::string MissionMapLocationStr;
 std::string MapLocation;
@@ -51,6 +53,17 @@ std::string getFPKFileName()
     return FPKFileNameStr;
 }
 
+std::filesystem::path getFPKFilePath()
+{
+    return std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpk");
+    
+    
+}
+std::filesystem::path getFPKDFilePath()
+{
+    return std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpkd");
+}
+
 std::string getMissionCode()
 {
     return MissionCodeStr;
@@ -75,8 +88,6 @@ void generateFolder() {
     exeDir = exeDir.substr(0, exeDir.find_last_of("\\/"));
 
     std::filesystem::path gameDirPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "GameDir" / "mod" /  "missions";
-    std::filesystem::path assetsFPKPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpk");
-    std::filesystem::path assetsFPKDPath = std::filesystem::path(exeDir) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpkd");
 
     if (std::filesystem::create_directories(gameDirPath)) {
         Logstd("GameDir folder created successfully.");
@@ -85,7 +96,7 @@ void generateFolder() {
         Logstd("GameDir folder already exists or failed to create.");
     }
 
-    if (std::filesystem::create_directories(assetsFPKPath) && std::filesystem::create_directories(assetsFPKDPath)) {
+    if (std::filesystem::create_directories(getFPKFilePath()) && std::filesystem::create_directories(getFPKDFilePath())) {
         Logstd("Assets folders created successfully.");
     }
     else {
@@ -278,12 +289,17 @@ void generateExternalLua(System::String^ landingZones) {
     luaFile << "return this";
 
     luaFile.close();
-    WriteMission_MainScrip();
-
-
     #ifdef _DEBUG
     Logstd("Lua file generated successfully: " + luaFilePath.string());
     #endif // _DEBUG
+    WriteMission_MainScrip();
+
+    std::string ToolPath =          getExePath() + "\\MissionCompanion\\res\\ToolsAssets";
+    std::string XmlFilesPath =      getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\";
+
+    ConvertXmlTo(XmlFilesPath + "phase_bgm.sdf.xml", ToolPath + "\\FoxTool\\FoxTool.exe");
+
+   
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }
 
