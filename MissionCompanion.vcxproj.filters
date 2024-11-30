@@ -33,6 +33,9 @@
     <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\Classes\Fox2\Fox2Info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\res\ToolsAssets\FilesCompiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\Classes\Fox2\Fox2Info.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

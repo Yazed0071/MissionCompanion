@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MissionCompanion\Classes\Fox2\Fox2Info.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MissionCompanion\Classes\Fox2\Fox2Info.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h" />
