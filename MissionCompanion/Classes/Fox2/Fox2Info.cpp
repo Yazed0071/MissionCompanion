@@ -1,5 +1,5 @@
 #include "Fox2Info.h"
-#include "ExternalLua.h"
+
 
 #define Logstd(Message) std::cout << Message << std::endl
 
