@@ -1,7 +1,7 @@
 #include "ExternalLua.h"
 #include "FilesCompiler.h"
-
-
+#include "Fox2Info.h"   
+#include "Trap.h"
 
 #define Logstd(Message) std::cout << Message << std::endl;
 
@@ -24,6 +24,9 @@ std::string isEnableOOB = "this.enableOOB = false --Enable out of bounds system 
 std::string trig_innerZone = "nil";
 std::string trig_outerZone = "nil";
 std::string trig_hotZone = "nil";
+std::string rawTrig_innerZone = "nil";
+std::string rawTrig_outerZone = "nil";
+std::string rawTrig_hotZone = "nil"; 
 std::string outputInnerZone;
 std::string outputOuterZone;
 std::string outputHotZone;
@@ -133,6 +136,9 @@ void missionMapParams(System::String^ trigInnerZone, System::String^ trigOuterZo
     outputInnerZone = "";
     outputOuterZone = "";
     outputHotZone = "";
+    rawTrig_innerZone = toStdString(trigInnerZone);
+    rawTrig_outerZone = toStdString(trigOuterZone);
+    rawTrig_hotZone = toStdString(trigHotZone);
     if (!IsEnableOOBVector) {
         outputInnerZone = "                    nil";
         outputOuterZone = "                    nil";
@@ -294,12 +300,18 @@ void generateExternalLua(System::String^ landingZones) {
     #endif // _DEBUG
     WriteMission_MainScrip();
 
-    std::string ToolPath =          getExePath() + "\\MissionCompanion\\res\\ToolsAssets";
-    std::string XmlFilesPath =      getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\";
+    std::string ToolPath =          getExePath() + "\\MissionCompanion\\res\\ToolsAssets\\";
+    std::string XmlFPKDFilesPath =  getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\" + (getFPKFileName() + "_fpkd") + "\\";
+    std::string XmlFPKFilesPath =  getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\" + (getFPKFileName() + "_fpk") + "\\";
 
-    ConvertXmlTo(XmlFilesPath + "mtbs_ly000_cl00_item.fox2.xml", ToolPath + "\\FoxTool\\FoxTool.exe");
-    ConvertXmlTo(XmlFilesPath + "s13105_area_fox2_geotrap_win.trap.xml", ToolPath + "\\TrapTool\\TrapTool.exe");
-    ConvertXmlTo(XmlFilesPath + "f30010.frt.xml", ToolPath + "\\RouteSetTool\\RouteSetTool.exe");
+
+    GenerateFox2Xml(getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\" + (getFPKFileName() + "_fpkd") + "\\Assets\\tpp\\level\\mission2\\story\\" + ("s" + getMissionCode()) + ".fox2.xml", std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpkd") / "Assets" / "tpp" / "level" / "mission2" / "story");
+    GenerateTrapXml(rawTrig_innerZone, rawTrig_outerZone, rawTrig_hotZone ,getExePath() + "\\MissionCompanion_Build\\" + getFPKFileName() + "\\Assets\\tpp\\pack\\mission2\\custom_story\\" + ("s" + getMissionCode()) + "\\" + (getFPKFileName() + "_fpk") + "\\Assets\\tpp\\level\\mission2\\trap\\" + ("s" + getMissionCode()) + "_fox2_geotrap_win" + ".trap.xml", std::filesystem::path(getExePath()) / "MissionCompanion_Build" / getFPKFileName() / "Assets" / "tpp" / "pack" / "mission2" / "custom_story" / ("s" + getMissionCode()) / (getFPKFileName() + "_fpk") / "Assets" / "tpp" / "level" / "mission2" / "trap");
+    ConvertXmlTo(XmlFPKDFilesPath + "Assets\\tpp\\level\\mission2\\story\\" +("s" + getMissionCode()) + ".fox2.xml", ToolPath + "FoxTool\\FoxTool.exe");
+    ConvertXmlTo(XmlFPKFilesPath + "Assets\\tpp\\level\\mission2\\trap\\" + ("s" + getMissionCode()) + "_fox2_geotrap_win" + ".trap.xml", ToolPath + "TrapTool\\TrapTool.exe");
+    
+
+    std::cout << "XML generation process completed." << std::endl;
 
    
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");

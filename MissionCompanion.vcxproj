@@ -59,7 +59,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Trap;C:\dev\Personal Projects\MissionCompanion\lib;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -73,7 +73,7 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Trap;C:\dev\Personal Projects\MissionCompanion\lib;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\res\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\ToolsAssets;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Fox2;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Classes\Lua;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms\Pages;C:\dev\Personal Projects\MissionCompanion\MissionCompanion\Forms;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -89,19 +89,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lib\tinyxml2.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Fox2\Fox2Info.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
+    <ClCompile Include="MissionCompanion\Classes\Trap\Trap.cpp" />
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
     <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="lib\tinyxml2.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
     <ClInclude Include="MissionCompanion\Classes\Fox2\Fox2Info.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h" />
+    <ClInclude Include="MissionCompanion\Classes\Trap\Trap.h" />
     <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h" />
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <FileType>CppForm</FileType>
