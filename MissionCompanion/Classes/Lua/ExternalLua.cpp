@@ -2,6 +2,7 @@
 #include "..\InitFiles.h"
 #include <Trap.h>
 #include <FilesCompiler.h>
+#include <SequenceLua.h>
 
 #define Logstd(Message) std::cout << Message << std::endl;
 
@@ -321,7 +322,7 @@ void generateExternalLua(System::String^ landingZones) {
         ConvertXmlTo(XmlFPKFilesPath + "\\Assets\\tpp\\level\\mission2\\trap\\" + ("s" + getMissionCode()) + "_fox2_geotrap_win" + ".trap.xml", ToolPath + "TrapTool\\TrapTool.exe");
         std::cout << "XML generation process completed." << std::endl;
     }
-
+    WriteMission_SequenceLua();
    
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }

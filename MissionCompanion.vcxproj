@@ -95,6 +95,7 @@
     <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
+    <ClCompile Include="MissionCompanion\Classes\Lua\SequenceLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Trap\Trap.cpp" />
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
@@ -109,6 +110,7 @@
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h" />
+    <ClInclude Include="MissionCompanion\Classes\Lua\SequenceLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Trap\Trap.h" />
     <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h" />
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
