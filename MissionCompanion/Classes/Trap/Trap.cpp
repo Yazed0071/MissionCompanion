@@ -47,7 +47,7 @@ void GenerateTrapXml(const std::string& trig_innerZone, const std::string& trig_
 
     auto addPoints = [&trapDoc](XMLElement* parent, const std::vector<std::tuple<float, float, float>>& points) {
         XMLElement* shape = trapDoc.NewElement("shape");
-        shape->SetAttribute("yMinimum", "174.7202");
+        shape->SetAttribute("yMinimum", "-174.7202");
         shape->SetAttribute("yMaximum", "1174.72");
         parent->InsertEndChild(shape);
 

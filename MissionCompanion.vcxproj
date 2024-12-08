@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="lib\tinyxml2.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Fox2\Fox2Info.cpp" />
+    <ClCompile Include="MissionCompanion\Classes\InitFiles.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp" />
     <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp" />
@@ -104,6 +105,7 @@
       <DeploymentContent>false</DeploymentContent>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Classes\Fox2\Fox2Info.h" />
+    <ClInclude Include="MissionCompanion\Classes\InitFiles.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h" />
     <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h" />

@@ -4,6 +4,6 @@
 #include <string>
 #include <filesystem>
 
-void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath, int timeoutSeconds = 3);
+void ConvertXmlTo(const std::string& xmlFilePath, const std::string& exePath, int timeoutSeconds = 5);
 
 #endif // FILEPROCESSOR_H

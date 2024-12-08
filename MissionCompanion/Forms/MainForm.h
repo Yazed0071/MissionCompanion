@@ -1629,6 +1629,7 @@ namespace MissionCompanion {
 			{
 
 
+
 				deploymentLocation(this->textBoxMissionStartPoint->Text);
 				missionOptionsFlags(IsMissionHidden(), IsEnableOOB(), SkipMissionPreparetion(), NoBuddyMenuFromMissionPreparetion(), NoVehicleMenuFromMissionPreparetion(), DisableSelectSortieTimeFromMissionPreparetion());
 				missionMapParams(this->textBoxTrig_innerZone->Text, this->textBoxTrig_outerZone->Text, this->textBoxTrig_hotZone->Text);
