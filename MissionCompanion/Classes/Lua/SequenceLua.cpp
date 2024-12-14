@@ -1,5 +1,6 @@
 #include "SequenceLua.h"
 #include <ExternalLua.h>
+#include "LandingZones.h"
 
 #define Logstd(Message) std::cout << Message << std::endl;
 
@@ -87,6 +88,18 @@ void WriteMission_SequenceLua()
     writeSequenceLuaFile << "}\n";
     writeSequenceLuaFile << "\n";
     writeSequenceLuaFile << "\n";
+    writeSequenceLuaFile << "\n";
+    writeSequenceLuaFile << "this.missionStartPosition = {\n";
+    writeSequenceLuaFile << "   orderBoxList = {\n";
+    writeSequenceLuaFile << "       --Order box names, i.e. \"box_s12000_00\",\n";
+    writeSequenceLuaFile << "        \n";
+    writeSequenceLuaFile << "   },\n";
+    writeSequenceLuaFile << "   helicopterRouteList = {\n";
+    writeSequenceLuaFile << "       --Drop point route names, need to be here when order boxes are\n";    
+    writeSequenceLuaFile << "       \n" + getUsedHeliRoutes();
+    writeSequenceLuaFile << "   },\n";
+    writeSequenceLuaFile << " }\n";
+    writeSequenceLuaFile << "\n";
     writeSequenceLuaFile << "--No caller, so it must be global.\n";
     writeSequenceLuaFile << "function this.OnLoad()\n";
     writeSequenceLuaFile << "	local sequenceNames = {}\n";
@@ -113,3 +126,4 @@ void WriteMission_SequenceLua()
     Logstd("Sequence Lua file generated successfully: " + sequenceLuaFolderPath.string());
     #endif // _DEBUG
 }
+

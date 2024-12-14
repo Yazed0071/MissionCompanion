@@ -1,5 +1,5 @@
 #include "LandingZones.h"
-
+#define Logstd(Message) std::cout << Message << std::endl;
 const std::vector<std::string> landingZones = {
           R"({point=Vector3(-289.80,346.69,269.68),startPoint=Vector3(-289.80,346.69,269.68),routeId="lz_drp_enemyBase_N0000|rt_drp_enemyBase_N_0000"})",
           R"({point=Vector3(802.56,345.37,1637.75),startPoint=Vector3(802.56,345.37,1637.75),routeId="lz_drp_field_N0000|rt_drp_field_N_0000"})",
@@ -90,12 +90,14 @@ std::vector<std::string> SplitString(const std::string& str, char delimiter) {
 
     return tokens;
 }
-
+std::vector<std::string> checkedLZsVector;
+std::vector<std::string> allRouteId;
 // Function to filter and format landing zones
 std::string GetListLandingZone(const std::string& checkedLZs) {
+    
     std::ostringstream result;
-    std::vector<std::string> checkedLZsVector = SplitString(checkedLZs, '\n'); // Split by newlines
-
+    checkedLZsVector = SplitString(checkedLZs, '\n'); // Split by newlines
+    allRouteId = checkedLZsVector;
     // Loop through the list of all landing zones
     for (const auto& lz : landingZones) {
         for (const auto& checkedLZ : checkedLZsVector) {
@@ -108,6 +110,19 @@ std::string GetListLandingZone(const std::string& checkedLZs) {
         }
     }
     std::cout << result.str() << std::endl;
-
+    getUsedHeliRoutes();
     return result.str();
+}
+
+std::string getUsedHeliRoutes() {
+    std::string s;
+
+    for (const auto& route : allRouteId) {
+        s += "		\"" + route + "|" + route + "\",\n";
+    }
+#ifdef _DEBUG
+    Logstd("Routes: " + s);
+#endif // _DEBUG
+
+    return s;
 }

@@ -12,3 +12,5 @@ std::vector<std::string> SplitString(const std::string& str, char delimiter);
 
 // Function to filter and format landing zones
 std::string GetListLandingZone(const std::string& checkedLZs);
+
+std::string getUsedHeliRoutes();
