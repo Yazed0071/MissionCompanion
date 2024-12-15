@@ -3,6 +3,7 @@
 #include <Trap.h>
 #include <FilesCompiler.h>
 #include <SequenceLua.h>
+#include "../Route/RouteInfo.h"
 
 #define Logstd(Message) std::cout << Message << std::endl;
 
@@ -323,6 +324,8 @@ void generateExternalLua(System::String^ landingZones) {
         std::cout << "XML generation process completed." << std::endl;
     }
     WriteMission_SequenceLua();
+
+    FilterRoutes();
    
     System::Windows::Forms::MessageBox::Show(L"Build completed!", L"Message");
 }

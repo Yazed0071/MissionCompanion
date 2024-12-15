@@ -48,6 +48,9 @@
     <ClCompile Include="MissionCompanion\Classes\Lua\SequenceLua.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\Classes\Route\RouteInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Classes\Lua\SequenceLua.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\Classes\Route\RouteInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

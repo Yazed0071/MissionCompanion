@@ -14,3 +14,5 @@ std::vector<std::string> SplitString(const std::string& str, char delimiter);
 std::string GetListLandingZone(const std::string& checkedLZs);
 
 std::string getUsedHeliRoutes();
+
+std::vector<std::string> getCheckedLZsVector();

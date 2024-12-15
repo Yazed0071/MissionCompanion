@@ -126,3 +126,8 @@ std::string getUsedHeliRoutes() {
 
     return s;
 }
+
+std::vector<std::string> getCheckedLZsVector()
+{
+    return checkedLZsVector;
+}
