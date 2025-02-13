@@ -222,7 +222,6 @@ namespace MissionCompanion {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->labelFPKFileName = (gcnew System::Windows::Forms::Label());
 			this->labelMissionCode = (gcnew System::Windows::Forms::Label());
 			this->textBoxFPKFileName = (gcnew System::Windows::Forms::TextBox());
@@ -383,9 +382,9 @@ namespace MissionCompanion {
 			this->buttonNextTo->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 13, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->buttonNextTo->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->buttonNextTo->Location = System::Drawing::Point(1183, 820);
+			this->buttonNextTo->Location = System::Drawing::Point(1183, 833);
 			this->buttonNextTo->Name = L"buttonNextTo";
-			this->buttonNextTo->Size = System::Drawing::Size(154, 66);
+			this->buttonNextTo->Size = System::Drawing::Size(154, 53);
 			this->buttonNextTo->TabIndex = 4;
 			this->buttonNextTo->Text = L"Next";
 			this->buttonNextTo->UseVisualStyleBackColor = true;
@@ -604,7 +603,7 @@ namespace MissionCompanion {
 			// 
 			this->pictureBoxMap->Location = System::Drawing::Point(571, 9);
 			this->pictureBoxMap->Name = L"pictureBoxMap";
-			this->pictureBoxMap->Size = System::Drawing::Size(766, 805);
+			this->pictureBoxMap->Size = System::Drawing::Size(766, 818);
 			this->pictureBoxMap->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBoxMap->TabIndex = 23;
 			this->pictureBoxMap->TabStop = false;
@@ -613,7 +612,7 @@ namespace MissionCompanion {
 			// 
 			this->lz_drp_citadelSouth_S0000->AutoSize = true;
 			this->lz_drp_citadelSouth_S0000->ForeColor = System::Drawing::Color::Black;
-			this->lz_drp_citadelSouth_S0000->Location = System::Drawing::Point(910, 95);
+			this->lz_drp_citadelSouth_S0000->Location = System::Drawing::Point(985, 109);
 			this->lz_drp_citadelSouth_S0000->Name = L"lz_drp_citadelSouth_S0000";
 			this->lz_drp_citadelSouth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_citadelSouth_S0000->TabIndex = 24;
@@ -624,7 +623,7 @@ namespace MissionCompanion {
 			// 
 			this->lz_drp_sovietBase_N0000->AutoSize = true;
 			this->lz_drp_sovietBase_N0000->ForeColor = System::Drawing::Color::Black;
-			this->lz_drp_sovietBase_N0000->Location = System::Drawing::Point(865, 128);
+			this->lz_drp_sovietBase_N0000->Location = System::Drawing::Point(942, 137);
 			this->lz_drp_sovietBase_N0000->Name = L"lz_drp_sovietBase_N0000";
 			this->lz_drp_sovietBase_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_sovietBase_N0000->TabIndex = 25;
@@ -635,7 +634,7 @@ namespace MissionCompanion {
 			// 
 			this->lz_drp_sovietBase_E0000->AutoSize = true;
 			this->lz_drp_sovietBase_E0000->ForeColor = System::Drawing::Color::Black;
-			this->lz_drp_sovietBase_E0000->Location = System::Drawing::Point(781, 95);
+			this->lz_drp_sovietBase_E0000->Location = System::Drawing::Point(878, 109);
 			this->lz_drp_sovietBase_E0000->Name = L"lz_drp_sovietBase_E0000";
 			this->lz_drp_sovietBase_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_sovietBase_E0000->TabIndex = 26;
@@ -645,7 +644,7 @@ namespace MissionCompanion {
 			// lz_drp_sovietBase_S0000
 			// 
 			this->lz_drp_sovietBase_S0000->AutoSize = true;
-			this->lz_drp_sovietBase_S0000->Location = System::Drawing::Point(792, 162);
+			this->lz_drp_sovietBase_S0000->Location = System::Drawing::Point(887, 165);
 			this->lz_drp_sovietBase_S0000->Name = L"lz_drp_sovietBase_S0000";
 			this->lz_drp_sovietBase_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_sovietBase_S0000->TabIndex = 27;
@@ -654,7 +653,7 @@ namespace MissionCompanion {
 			// lz_drp_sovietSouth_S0000
 			// 
 			this->lz_drp_sovietSouth_S0000->AutoSize = true;
-			this->lz_drp_sovietSouth_S0000->Location = System::Drawing::Point(832, 260);
+			this->lz_drp_sovietSouth_S0000->Location = System::Drawing::Point(921, 242);
 			this->lz_drp_sovietSouth_S0000->Name = L"lz_drp_sovietSouth_S0000";
 			this->lz_drp_sovietSouth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_sovietSouth_S0000->TabIndex = 28;
@@ -663,7 +662,7 @@ namespace MissionCompanion {
 			// lz_drp_powerPlant_E0000
 			// 
 			this->lz_drp_powerPlant_E0000->AutoSize = true;
-			this->lz_drp_powerPlant_E0000->Location = System::Drawing::Point(933, 243);
+			this->lz_drp_powerPlant_E0000->Location = System::Drawing::Point(1004, 233);
 			this->lz_drp_powerPlant_E0000->Name = L"lz_drp_powerPlant_E0000";
 			this->lz_drp_powerPlant_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_powerPlant_E0000->TabIndex = 29;
@@ -672,7 +671,7 @@ namespace MissionCompanion {
 			// lz_drp_powerPlant_S0000
 			// 
 			this->lz_drp_powerPlant_S0000->AutoSize = true;
-			this->lz_drp_powerPlant_S0000->Location = System::Drawing::Point(887, 308);
+			this->lz_drp_powerPlant_S0000->Location = System::Drawing::Point(967, 286);
 			this->lz_drp_powerPlant_S0000->Name = L"lz_drp_powerPlant_S0000";
 			this->lz_drp_powerPlant_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_powerPlant_S0000->TabIndex = 30;
@@ -681,7 +680,7 @@ namespace MissionCompanion {
 			// lz_drp_waterway_I0000
 			// 
 			this->lz_drp_waterway_I0000->AutoSize = true;
-			this->lz_drp_waterway_I0000->Location = System::Drawing::Point(731, 262);
+			this->lz_drp_waterway_I0000->Location = System::Drawing::Point(841, 252);
 			this->lz_drp_waterway_I0000->Name = L"lz_drp_waterway_I0000";
 			this->lz_drp_waterway_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_waterway_I0000->TabIndex = 31;
@@ -690,7 +689,7 @@ namespace MissionCompanion {
 			// lz_drp_tent_N0000
 			// 
 			this->lz_drp_tent_N0000->AutoSize = true;
-			this->lz_drp_tent_N0000->Location = System::Drawing::Point(631, 344);
+			this->lz_drp_tent_N0000->Location = System::Drawing::Point(771, 303);
 			this->lz_drp_tent_N0000->Name = L"lz_drp_tent_N0000";
 			this->lz_drp_tent_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_tent_N0000->TabIndex = 32;
@@ -699,7 +698,7 @@ namespace MissionCompanion {
 			// lz_drp_tent_I0000
 			// 
 			this->lz_drp_tent_I0000->AutoSize = true;
-			this->lz_drp_tent_I0000->Location = System::Drawing::Point(631, 378);
+			this->lz_drp_tent_I0000->Location = System::Drawing::Point(755, 327);
 			this->lz_drp_tent_I0000->Name = L"lz_drp_tent_I0000";
 			this->lz_drp_tent_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_tent_I0000->TabIndex = 33;
@@ -708,7 +707,7 @@ namespace MissionCompanion {
 			// lz_drp_tent_E0000
 			// 
 			this->lz_drp_tent_E0000->AutoSize = true;
-			this->lz_drp_tent_E0000->Location = System::Drawing::Point(657, 414);
+			this->lz_drp_tent_E0000->Location = System::Drawing::Point(781, 368);
 			this->lz_drp_tent_E0000->Name = L"lz_drp_tent_E0000";
 			this->lz_drp_tent_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_tent_E0000->TabIndex = 34;
@@ -717,7 +716,7 @@ namespace MissionCompanion {
 			// lz_drp_remnantsNorth_S0000
 			// 
 			this->lz_drp_remnantsNorth_S0000->AutoSize = true;
-			this->lz_drp_remnantsNorth_S0000->Location = System::Drawing::Point(631, 460);
+			this->lz_drp_remnantsNorth_S0000->Location = System::Drawing::Point(755, 414);
 			this->lz_drp_remnantsNorth_S0000->Name = L"lz_drp_remnantsNorth_S0000";
 			this->lz_drp_remnantsNorth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_remnantsNorth_S0000->TabIndex = 35;
@@ -726,7 +725,7 @@ namespace MissionCompanion {
 			// lz_drp_remnantsNorth_N0000
 			// 
 			this->lz_drp_remnantsNorth_N0000->AutoSize = true;
-			this->lz_drp_remnantsNorth_N0000->Location = System::Drawing::Point(648, 524);
+			this->lz_drp_remnantsNorth_N0000->Location = System::Drawing::Point(771, 460);
 			this->lz_drp_remnantsNorth_N0000->Name = L"lz_drp_remnantsNorth_N0000";
 			this->lz_drp_remnantsNorth_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_remnantsNorth_N0000->TabIndex = 36;
@@ -735,7 +734,7 @@ namespace MissionCompanion {
 			// lz_drp_remnants_I0000
 			// 
 			this->lz_drp_remnants_I0000->AutoSize = true;
-			this->lz_drp_remnants_I0000->Location = System::Drawing::Point(631, 556);
+			this->lz_drp_remnants_I0000->Location = System::Drawing::Point(755, 485);
 			this->lz_drp_remnants_I0000->Name = L"lz_drp_remnants_I0000";
 			this->lz_drp_remnants_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_remnants_I0000->TabIndex = 37;
@@ -744,7 +743,7 @@ namespace MissionCompanion {
 			// lz_drp_field_W0000
 			// 
 			this->lz_drp_field_W0000->AutoSize = true;
-			this->lz_drp_field_W0000->Location = System::Drawing::Point(678, 582);
+			this->lz_drp_field_W0000->Location = System::Drawing::Point(795, 507);
 			this->lz_drp_field_W0000->Name = L"lz_drp_field_W0000";
 			this->lz_drp_field_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_field_W0000->TabIndex = 38;
@@ -753,7 +752,7 @@ namespace MissionCompanion {
 			// lz_drp_remnants_S0000
 			// 
 			this->lz_drp_remnants_S0000->AutoSize = true;
-			this->lz_drp_remnants_S0000->Location = System::Drawing::Point(648, 604);
+			this->lz_drp_remnants_S0000->Location = System::Drawing::Point(771, 531);
 			this->lz_drp_remnants_S0000->Name = L"lz_drp_remnants_S0000";
 			this->lz_drp_remnants_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_remnants_S0000->TabIndex = 39;
@@ -762,7 +761,7 @@ namespace MissionCompanion {
 			// lz_drp_fieldWest_S0000
 			// 
 			this->lz_drp_fieldWest_S0000->AutoSize = true;
-			this->lz_drp_fieldWest_S0000->Location = System::Drawing::Point(657, 704);
+			this->lz_drp_fieldWest_S0000->Location = System::Drawing::Point(781, 604);
 			this->lz_drp_fieldWest_S0000->Name = L"lz_drp_fieldWest_S0000";
 			this->lz_drp_fieldWest_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_fieldWest_S0000->TabIndex = 40;
@@ -771,7 +770,7 @@ namespace MissionCompanion {
 			// lz_drp_field_I0000
 			// 
 			this->lz_drp_field_I0000->AutoSize = true;
-			this->lz_drp_field_I0000->Location = System::Drawing::Point(701, 704);
+			this->lz_drp_field_I0000->Location = System::Drawing::Point(814, 614);
 			this->lz_drp_field_I0000->Name = L"lz_drp_field_I0000";
 			this->lz_drp_field_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_field_I0000->TabIndex = 41;
@@ -780,7 +779,7 @@ namespace MissionCompanion {
 			// lz_drp_ruins_S0000
 			// 
 			this->lz_drp_ruins_S0000->AutoSize = true;
-			this->lz_drp_ruins_S0000->Location = System::Drawing::Point(814, 757);
+			this->lz_drp_ruins_S0000->Location = System::Drawing::Point(906, 649);
 			this->lz_drp_ruins_S0000->Name = L"lz_drp_ruins_S0000";
 			this->lz_drp_ruins_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_ruins_S0000->TabIndex = 42;
@@ -789,7 +788,7 @@ namespace MissionCompanion {
 			// lz_drp_field_N0000
 			// 
 			this->lz_drp_field_N0000->AutoSize = true;
-			this->lz_drp_field_N0000->Location = System::Drawing::Point(792, 687);
+			this->lz_drp_field_N0000->Location = System::Drawing::Point(887, 594);
 			this->lz_drp_field_N0000->Name = L"lz_drp_field_N0000";
 			this->lz_drp_field_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_field_N0000->TabIndex = 43;
@@ -798,7 +797,7 @@ namespace MissionCompanion {
 			// lz_drp_ruinsNorth_S0000
 			// 
 			this->lz_drp_ruinsNorth_S0000->AutoSize = true;
-			this->lz_drp_ruinsNorth_S0000->Location = System::Drawing::Point(856, 704);
+			this->lz_drp_ruinsNorth_S0000->Location = System::Drawing::Point(942, 614);
 			this->lz_drp_ruinsNorth_S0000->Name = L"lz_drp_ruinsNorth_S0000";
 			this->lz_drp_ruinsNorth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_ruinsNorth_S0000->TabIndex = 44;
@@ -807,7 +806,7 @@ namespace MissionCompanion {
 			// lz_drp_commFacility_S0000
 			// 
 			this->lz_drp_commFacility_S0000->AutoSize = true;
-			this->lz_drp_commFacility_S0000->Location = System::Drawing::Point(967, 677);
+			this->lz_drp_commFacility_S0000->Location = System::Drawing::Point(1026, 582);
 			this->lz_drp_commFacility_S0000->Name = L"lz_drp_commFacility_S0000";
 			this->lz_drp_commFacility_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_commFacility_S0000->TabIndex = 45;
@@ -816,7 +815,7 @@ namespace MissionCompanion {
 			// lz_drp_commFacility_I0000
 			// 
 			this->lz_drp_commFacility_I0000->AutoSize = true;
-			this->lz_drp_commFacility_I0000->Location = System::Drawing::Point(955, 621);
+			this->lz_drp_commFacility_I0000->Location = System::Drawing::Point(1026, 543);
 			this->lz_drp_commFacility_I0000->Name = L"lz_drp_commFacility_I0000";
 			this->lz_drp_commFacility_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_commFacility_I0000->TabIndex = 46;
@@ -825,7 +824,7 @@ namespace MissionCompanion {
 			// lz_drp_commFacility_W0000
 			// 
 			this->lz_drp_commFacility_W0000->AutoSize = true;
-			this->lz_drp_commFacility_W0000->Location = System::Drawing::Point(910, 604);
+			this->lz_drp_commFacility_W0000->Location = System::Drawing::Point(985, 524);
 			this->lz_drp_commFacility_W0000->Name = L"lz_drp_commFacility_W0000";
 			this->lz_drp_commFacility_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_commFacility_W0000->TabIndex = 47;
@@ -834,7 +833,7 @@ namespace MissionCompanion {
 			// lz_drp_village_N0000
 			// 
 			this->lz_drp_village_N0000->AutoSize = true;
-			this->lz_drp_village_N0000->Location = System::Drawing::Point(832, 604);
+			this->lz_drp_village_N0000->Location = System::Drawing::Point(930, 524);
 			this->lz_drp_village_N0000->Name = L"lz_drp_village_N0000";
 			this->lz_drp_village_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_village_N0000->TabIndex = 59;
@@ -843,7 +842,7 @@ namespace MissionCompanion {
 			// lz_drp_slopedTown_E0000
 			// 
 			this->lz_drp_slopedTown_E0000->AutoSize = true;
-			this->lz_drp_slopedTown_E0000->Location = System::Drawing::Point(910, 556);
+			this->lz_drp_slopedTown_E0000->Location = System::Drawing::Point(985, 497);
 			this->lz_drp_slopedTown_E0000->Name = L"lz_drp_slopedTown_E0000";
 			this->lz_drp_slopedTown_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_slopedTown_E0000->TabIndex = 49;
@@ -852,7 +851,7 @@ namespace MissionCompanion {
 			// lz_drp_slopedTown_I0000
 			// 
 			this->lz_drp_slopedTown_I0000->AutoSize = true;
-			this->lz_drp_slopedTown_I0000->Location = System::Drawing::Point(897, 524);
+			this->lz_drp_slopedTown_I0000->Location = System::Drawing::Point(976, 460);
 			this->lz_drp_slopedTown_I0000->Name = L"lz_drp_slopedTown_I0000";
 			this->lz_drp_slopedTown_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_slopedTown_I0000->TabIndex = 50;
@@ -861,7 +860,7 @@ namespace MissionCompanion {
 			// lz_drp_slopedTown_W0000
 			// 
 			this->lz_drp_slopedTown_W0000->AutoSize = true;
-			this->lz_drp_slopedTown_W0000->Location = System::Drawing::Point(856, 480);
+			this->lz_drp_slopedTown_W0000->Location = System::Drawing::Point(942, 431);
 			this->lz_drp_slopedTown_W0000->Name = L"lz_drp_slopedTown_W0000";
 			this->lz_drp_slopedTown_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_slopedTown_W0000->TabIndex = 51;
@@ -870,7 +869,7 @@ namespace MissionCompanion {
 			// lz_drp_enemyBase_N0000
 			// 
 			this->lz_drp_enemyBase_N0000->AutoSize = true;
-			this->lz_drp_enemyBase_N0000->Location = System::Drawing::Point(814, 451);
+			this->lz_drp_enemyBase_N0000->Location = System::Drawing::Point(906, 403);
 			this->lz_drp_enemyBase_N0000->Name = L"lz_drp_enemyBase_N0000";
 			this->lz_drp_enemyBase_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_enemyBase_N0000->TabIndex = 52;
@@ -879,7 +878,7 @@ namespace MissionCompanion {
 			// lz_drp_enemyBase_I0000
 			// 
 			this->lz_drp_enemyBase_I0000->AutoSize = true;
-			this->lz_drp_enemyBase_I0000->Location = System::Drawing::Point(771, 442);
+			this->lz_drp_enemyBase_I0000->Location = System::Drawing::Point(868, 403);
 			this->lz_drp_enemyBase_I0000->Name = L"lz_drp_enemyBase_I0000";
 			this->lz_drp_enemyBase_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_enemyBase_I0000->TabIndex = 53;
@@ -888,7 +887,7 @@ namespace MissionCompanion {
 			// lz_drp_enemyBase_S0000
 			// 
 			this->lz_drp_enemyBase_S0000->AutoSize = true;
-			this->lz_drp_enemyBase_S0000->Location = System::Drawing::Point(755, 480);
+			this->lz_drp_enemyBase_S0000->Location = System::Drawing::Point(868, 442);
 			this->lz_drp_enemyBase_S0000->Name = L"lz_drp_enemyBase_S0000";
 			this->lz_drp_enemyBase_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_enemyBase_S0000->TabIndex = 54;
@@ -897,7 +896,7 @@ namespace MissionCompanion {
 			// lz_drp_village_W0000
 			// 
 			this->lz_drp_village_W0000->AutoSize = true;
-			this->lz_drp_village_W0000->Location = System::Drawing::Point(781, 543);
+			this->lz_drp_village_W0000->Location = System::Drawing::Point(878, 480);
 			this->lz_drp_village_W0000->Name = L"lz_drp_village_W0000";
 			this->lz_drp_village_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_village_W0000->TabIndex = 55;
@@ -906,7 +905,7 @@ namespace MissionCompanion {
 			// lz_drp_slopedTownEast_E0000
 			// 
 			this->lz_drp_slopedTownEast_E0000->AutoSize = true;
-			this->lz_drp_slopedTownEast_E0000->Location = System::Drawing::Point(967, 571);
+			this->lz_drp_slopedTownEast_E0000->Location = System::Drawing::Point(1035, 497);
 			this->lz_drp_slopedTownEast_E0000->Name = L"lz_drp_slopedTownEast_E0000";
 			this->lz_drp_slopedTownEast_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_slopedTownEast_E0000->TabIndex = 56;
@@ -915,7 +914,7 @@ namespace MissionCompanion {
 			// lz_drp_bridge_S0000
 			// 
 			this->lz_drp_bridge_S0000->AutoSize = true;
-			this->lz_drp_bridge_S0000->Location = System::Drawing::Point(1026, 643);
+			this->lz_drp_bridge_S0000->Location = System::Drawing::Point(1083, 556);
 			this->lz_drp_bridge_S0000->Name = L"lz_drp_bridge_S0000";
 			this->lz_drp_bridge_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_bridge_S0000->TabIndex = 57;
@@ -924,7 +923,7 @@ namespace MissionCompanion {
 			// lz_drp_fort_E0000
 			// 
 			this->lz_drp_fort_E0000->AutoSize = true;
-			this->lz_drp_fort_E0000->Location = System::Drawing::Point(1157, 591);
+			this->lz_drp_fort_E0000->Location = System::Drawing::Point(1183, 507);
 			this->lz_drp_fort_E0000->Name = L"lz_drp_fort_E0000";
 			this->lz_drp_fort_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_fort_E0000->TabIndex = 58;
@@ -933,7 +932,7 @@ namespace MissionCompanion {
 			// lz_drp_fort_I0000
 			// 
 			this->lz_drp_fort_I0000->AutoSize = true;
-			this->lz_drp_fort_I0000->Location = System::Drawing::Point(1211, 505);
+			this->lz_drp_fort_I0000->Location = System::Drawing::Point(1223, 442);
 			this->lz_drp_fort_I0000->Name = L"lz_drp_fort_I0000";
 			this->lz_drp_fort_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_fort_I0000->TabIndex = 59;
@@ -942,7 +941,7 @@ namespace MissionCompanion {
 			// lz_drp_fort_W0000
 			// 
 			this->lz_drp_fort_W0000->AutoSize = true;
-			this->lz_drp_fort_W0000->Location = System::Drawing::Point(1137, 480);
+			this->lz_drp_fort_W0000->Location = System::Drawing::Point(1167, 431);
 			this->lz_drp_fort_W0000->Name = L"lz_drp_fort_W0000";
 			this->lz_drp_fort_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_fort_W0000->TabIndex = 60;
@@ -951,7 +950,7 @@ namespace MissionCompanion {
 			// lz_drp_cliffTown_N0000
 			// 
 			this->lz_drp_cliffTown_N0000->AutoSize = true;
-			this->lz_drp_cliffTown_N0000->Location = System::Drawing::Point(1060, 401);
+			this->lz_drp_cliffTown_N0000->Location = System::Drawing::Point(1114, 351);
 			this->lz_drp_cliffTown_N0000->Name = L"lz_drp_cliffTown_N0000";
 			this->lz_drp_cliffTown_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_cliffTown_N0000->TabIndex = 61;
@@ -960,7 +959,7 @@ namespace MissionCompanion {
 			// lz_drp_cliffTown_I0000
 			// 
 			this->lz_drp_cliffTown_I0000->AutoSize = true;
-			this->lz_drp_cliffTown_I0000->Location = System::Drawing::Point(1035, 431);
+			this->lz_drp_cliffTown_I0000->Location = System::Drawing::Point(1083, 378);
 			this->lz_drp_cliffTown_I0000->Name = L"lz_drp_cliffTown_I0000";
 			this->lz_drp_cliffTown_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_cliffTown_I0000->TabIndex = 62;
@@ -969,7 +968,7 @@ namespace MissionCompanion {
 			// lz_drp_cliffTown_S0000
 			// 
 			this->lz_drp_cliffTown_S0000->AutoSize = true;
-			this->lz_drp_cliffTown_S0000->Location = System::Drawing::Point(967, 431);
+			this->lz_drp_cliffTown_S0000->Location = System::Drawing::Point(1035, 391);
 			this->lz_drp_cliffTown_S0000->Name = L"lz_drp_cliffTown_S0000";
 			this->lz_drp_cliffTown_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_cliffTown_S0000->TabIndex = 63;
@@ -978,7 +977,7 @@ namespace MissionCompanion {
 			// lz_drp_cliffTownWest_S0000
 			// 
 			this->lz_drp_cliffTownWest_S0000->AutoSize = true;
-			this->lz_drp_cliffTownWest_S0000->Location = System::Drawing::Point(942, 378);
+			this->lz_drp_cliffTownWest_S0000->Location = System::Drawing::Point(1015, 344);
 			this->lz_drp_cliffTownWest_S0000->Name = L"lz_drp_cliffTownWest_S0000";
 			this->lz_drp_cliffTownWest_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_cliffTownWest_S0000->TabIndex = 64;
@@ -987,7 +986,7 @@ namespace MissionCompanion {
 			// lz_drp_flowStation_I0000
 			// 
 			this->lz_drp_flowStation_I0000->AutoSize = true;
-			this->lz_drp_flowStation_I0000->Location = System::Drawing::Point(693, 150);
+			this->lz_drp_flowStation_I0000->Location = System::Drawing::Point(785, 205);
 			this->lz_drp_flowStation_I0000->Name = L"lz_drp_flowStation_I0000";
 			this->lz_drp_flowStation_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_flowStation_I0000->TabIndex = 49;
@@ -996,7 +995,7 @@ namespace MissionCompanion {
 			// lz_drp_flowStation_E0000
 			// 
 			this->lz_drp_flowStation_E0000->AutoSize = true;
-			this->lz_drp_flowStation_E0000->Location = System::Drawing::Point(752, 179);
+			this->lz_drp_flowStation_E0000->Location = System::Drawing::Point(843, 232);
 			this->lz_drp_flowStation_E0000->Name = L"lz_drp_flowStation_E0000";
 			this->lz_drp_flowStation_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_flowStation_E0000->TabIndex = 50;
@@ -1005,7 +1004,7 @@ namespace MissionCompanion {
 			// lz_drp_swamp_W0000
 			// 
 			this->lz_drp_swamp_W0000->AutoSize = true;
-			this->lz_drp_swamp_W0000->Location = System::Drawing::Point(683, 243);
+			this->lz_drp_swamp_W0000->Location = System::Drawing::Point(785, 279);
 			this->lz_drp_swamp_W0000->Name = L"lz_drp_swamp_W0000";
 			this->lz_drp_swamp_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_swamp_W0000->TabIndex = 51;
@@ -1014,7 +1013,7 @@ namespace MissionCompanion {
 			// lz_drp_outland_S0000
 			// 
 			this->lz_drp_outland_S0000->AutoSize = true;
-			this->lz_drp_outland_S0000->Location = System::Drawing::Point(597, 390);
+			this->lz_drp_outland_S0000->Location = System::Drawing::Point(708, 390);
 			this->lz_drp_outland_S0000->Name = L"lz_drp_outland_S0000";
 			this->lz_drp_outland_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_outland_S0000->TabIndex = 52;
@@ -1023,7 +1022,7 @@ namespace MissionCompanion {
 			// lz_drp_swamp_N0000
 			// 
 			this->lz_drp_swamp_N0000->AutoSize = true;
-			this->lz_drp_swamp_N0000->Location = System::Drawing::Point(798, 232);
+			this->lz_drp_swamp_N0000->Location = System::Drawing::Point(875, 279);
 			this->lz_drp_swamp_N0000->Name = L"lz_drp_swamp_N0000";
 			this->lz_drp_swamp_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_swamp_N0000->TabIndex = 53;
@@ -1032,7 +1031,7 @@ namespace MissionCompanion {
 			// lz_drp_swampEast_N0000
 			// 
 			this->lz_drp_swampEast_N0000->AutoSize = true;
-			this->lz_drp_swampEast_N0000->Location = System::Drawing::Point(822, 286);
+			this->lz_drp_swampEast_N0000->Location = System::Drawing::Point(891, 317);
 			this->lz_drp_swampEast_N0000->Name = L"lz_drp_swampEast_N0000";
 			this->lz_drp_swampEast_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_swampEast_N0000->TabIndex = 54;
@@ -1041,7 +1040,7 @@ namespace MissionCompanion {
 			// lz_drp_swamp_I0000
 			// 
 			this->lz_drp_swamp_I0000->AutoSize = true;
-			this->lz_drp_swamp_I0000->Location = System::Drawing::Point(752, 300);
+			this->lz_drp_swamp_I0000->Location = System::Drawing::Point(843, 317);
 			this->lz_drp_swamp_I0000->Name = L"lz_drp_swamp_I0000";
 			this->lz_drp_swamp_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_swamp_I0000->TabIndex = 55;
@@ -1050,7 +1049,7 @@ namespace MissionCompanion {
 			// lz_drp_swamp_S0000
 			// 
 			this->lz_drp_swamp_S0000->AutoSize = true;
-			this->lz_drp_swamp_S0000->Location = System::Drawing::Point(717, 300);
+			this->lz_drp_swamp_S0000->Location = System::Drawing::Point(813, 327);
 			this->lz_drp_swamp_S0000->Name = L"lz_drp_swamp_S0000";
 			this->lz_drp_swamp_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_swamp_S0000->TabIndex = 56;
@@ -1059,7 +1058,7 @@ namespace MissionCompanion {
 			// lz_drp_pfCampNorth_S0000
 			// 
 			this->lz_drp_pfCampNorth_S0000->AutoSize = true;
-			this->lz_drp_pfCampNorth_S0000->Location = System::Drawing::Point(798, 400);
+			this->lz_drp_pfCampNorth_S0000->Location = System::Drawing::Point(875, 400);
 			this->lz_drp_pfCampNorth_S0000->Name = L"lz_drp_pfCampNorth_S0000";
 			this->lz_drp_pfCampNorth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_pfCampNorth_S0000->TabIndex = 57;
@@ -1068,7 +1067,7 @@ namespace MissionCompanion {
 			// lz_drp_savannahEast_S0000
 			// 
 			this->lz_drp_savannahEast_S0000->AutoSize = true;
-			this->lz_drp_savannahEast_S0000->Location = System::Drawing::Point(855, 441);
+			this->lz_drp_savannahEast_S0000->Location = System::Drawing::Point(920, 444);
 			this->lz_drp_savannahEast_S0000->Name = L"lz_drp_savannahEast_S0000";
 			this->lz_drp_savannahEast_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_savannahEast_S0000->TabIndex = 58;
@@ -1077,7 +1076,7 @@ namespace MissionCompanion {
 			// lz_drp_pfCamp_N0000
 			// 
 			this->lz_drp_pfCamp_N0000->AutoSize = true;
-			this->lz_drp_pfCamp_N0000->Location = System::Drawing::Point(813, 480);
+			this->lz_drp_pfCamp_N0000->Location = System::Drawing::Point(875, 471);
 			this->lz_drp_pfCamp_N0000->Name = L"lz_drp_pfCamp_N0000";
 			this->lz_drp_pfCamp_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_pfCamp_N0000->TabIndex = 60;
@@ -1086,7 +1085,7 @@ namespace MissionCompanion {
 			// lz_drp_pfCamp_I0000
 			// 
 			this->lz_drp_pfCamp_I0000->AutoSize = true;
-			this->lz_drp_pfCamp_I0000->Location = System::Drawing::Point(739, 497);
+			this->lz_drp_pfCamp_I0000->Location = System::Drawing::Point(832, 480);
 			this->lz_drp_pfCamp_I0000->Name = L"lz_drp_pfCamp_I0000";
 			this->lz_drp_pfCamp_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_pfCamp_I0000->TabIndex = 61;
@@ -1095,7 +1094,7 @@ namespace MissionCompanion {
 			// lz_drp_pfCamp_S0000
 			// 
 			this->lz_drp_pfCamp_S0000->AutoSize = true;
-			this->lz_drp_pfCamp_S0000->Location = System::Drawing::Point(717, 568);
+			this->lz_drp_pfCamp_S0000->Location = System::Drawing::Point(813, 541);
 			this->lz_drp_pfCamp_S0000->Name = L"lz_drp_pfCamp_S0000";
 			this->lz_drp_pfCamp_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_pfCamp_S0000->TabIndex = 62;
@@ -1104,7 +1103,7 @@ namespace MissionCompanion {
 			// lz_drp_hillSouth_W0000
 			// 
 			this->lz_drp_hillSouth_W0000->AutoSize = true;
-			this->lz_drp_hillSouth_W0000->Location = System::Drawing::Point(785, 627);
+			this->lz_drp_hillSouth_W0000->Location = System::Drawing::Point(866, 593);
 			this->lz_drp_hillSouth_W0000->Name = L"lz_drp_hillSouth_W0000";
 			this->lz_drp_hillSouth_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_hillSouth_W0000->TabIndex = 63;
@@ -1113,7 +1112,7 @@ namespace MissionCompanion {
 			// lz_drp_hillWest_S0000
 			// 
 			this->lz_drp_hillWest_S0000->AutoSize = true;
-			this->lz_drp_hillWest_S0000->Location = System::Drawing::Point(901, 541);
+			this->lz_drp_hillWest_S0000->Location = System::Drawing::Point(951, 507);
 			this->lz_drp_hillWest_S0000->Name = L"lz_drp_hillWest_S0000";
 			this->lz_drp_hillWest_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_hillWest_S0000->TabIndex = 64;
@@ -1122,7 +1121,7 @@ namespace MissionCompanion {
 			// lz_drp_hill_I0000
 			// 
 			this->lz_drp_hill_I0000->AutoSize = true;
-			this->lz_drp_hill_I0000->Location = System::Drawing::Point(952, 568);
+			this->lz_drp_hill_I0000->Location = System::Drawing::Point(1003, 531);
 			this->lz_drp_hill_I0000->Name = L"lz_drp_hill_I0000";
 			this->lz_drp_hill_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_hill_I0000->TabIndex = 65;
@@ -1131,7 +1130,7 @@ namespace MissionCompanion {
 			// lz_drp_hill_E0000
 			// 
 			this->lz_drp_hill_E0000->AutoSize = true;
-			this->lz_drp_hill_E0000->Location = System::Drawing::Point(994, 577);
+			this->lz_drp_hill_E0000->Location = System::Drawing::Point(1031, 550);
 			this->lz_drp_hill_E0000->Name = L"lz_drp_hill_E0000";
 			this->lz_drp_hill_E0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_hill_E0000->TabIndex = 66;
@@ -1140,7 +1139,7 @@ namespace MissionCompanion {
 			// lz_drp_hill_N0000
 			// 
 			this->lz_drp_hill_N0000->AutoSize = true;
-			this->lz_drp_hill_N0000->Location = System::Drawing::Point(961, 507);
+			this->lz_drp_hill_N0000->Location = System::Drawing::Point(1003, 480);
 			this->lz_drp_hill_N0000->Name = L"lz_drp_hill_N0000";
 			this->lz_drp_hill_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_hill_N0000->TabIndex = 67;
@@ -1149,7 +1148,7 @@ namespace MissionCompanion {
 			// lz_drp_factoryWest_S0000
 			// 
 			this->lz_drp_factoryWest_S0000->AutoSize = true;
-			this->lz_drp_factoryWest_S0000->Location = System::Drawing::Point(1050, 480);
+			this->lz_drp_factoryWest_S0000->Location = System::Drawing::Point(1081, 471);
 			this->lz_drp_factoryWest_S0000->Name = L"lz_drp_factoryWest_S0000";
 			this->lz_drp_factoryWest_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_factoryWest_S0000->TabIndex = 68;
@@ -1158,7 +1157,7 @@ namespace MissionCompanion {
 			// lz_drp_factory_N0000
 			// 
 			this->lz_drp_factory_N0000->AutoSize = true;
-			this->lz_drp_factory_N0000->Location = System::Drawing::Point(1142, 420);
+			this->lz_drp_factory_N0000->Location = System::Drawing::Point(1152, 418);
 			this->lz_drp_factory_N0000->Name = L"lz_drp_factory_N0000";
 			this->lz_drp_factory_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_factory_N0000->TabIndex = 69;
@@ -1167,7 +1166,7 @@ namespace MissionCompanion {
 			// lz_drp_lab_S0000
 			// 
 			this->lz_drp_lab_S0000->AutoSize = true;
-			this->lz_drp_lab_S0000->Location = System::Drawing::Point(1215, 365);
+			this->lz_drp_lab_S0000->Location = System::Drawing::Point(1206, 376);
 			this->lz_drp_lab_S0000->Name = L"lz_drp_lab_S0000";
 			this->lz_drp_lab_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_lab_S0000->TabIndex = 70;
@@ -1176,7 +1175,7 @@ namespace MissionCompanion {
 			// lz_drp_lab_W0000
 			// 
 			this->lz_drp_lab_W0000->AutoSize = true;
-			this->lz_drp_lab_W0000->Location = System::Drawing::Point(1264, 279);
+			this->lz_drp_lab_W0000->Location = System::Drawing::Point(1250, 300);
 			this->lz_drp_lab_W0000->Name = L"lz_drp_lab_W0000";
 			this->lz_drp_lab_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_lab_W0000->TabIndex = 71;
@@ -1185,7 +1184,7 @@ namespace MissionCompanion {
 			// lz_drp_labWest_W0000
 			// 
 			this->lz_drp_labWest_W0000->AutoSize = true;
-			this->lz_drp_labWest_W0000->Location = System::Drawing::Point(1183, 252);
+			this->lz_drp_labWest_W0000->Location = System::Drawing::Point(1174, 286);
 			this->lz_drp_labWest_W0000->Name = L"lz_drp_labWest_W0000";
 			this->lz_drp_labWest_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_labWest_W0000->TabIndex = 72;
@@ -1194,7 +1193,7 @@ namespace MissionCompanion {
 			// lz_drp_diamond_N0000
 			// 
 			this->lz_drp_diamond_N0000->AutoSize = true;
-			this->lz_drp_diamond_N0000->Location = System::Drawing::Point(1050, 220);
+			this->lz_drp_diamond_N0000->Location = System::Drawing::Point(1081, 262);
 			this->lz_drp_diamond_N0000->Name = L"lz_drp_diamond_N0000";
 			this->lz_drp_diamond_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_diamond_N0000->TabIndex = 73;
@@ -1203,7 +1202,7 @@ namespace MissionCompanion {
 			// lz_drp_diamond_I0000
 			// 
 			this->lz_drp_diamond_I0000->AutoSize = true;
-			this->lz_drp_diamond_I0000->Location = System::Drawing::Point(1071, 279);
+			this->lz_drp_diamond_I0000->Location = System::Drawing::Point(1091, 300);
 			this->lz_drp_diamond_I0000->Name = L"lz_drp_diamond_I0000";
 			this->lz_drp_diamond_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_diamond_I0000->TabIndex = 74;
@@ -1212,7 +1211,7 @@ namespace MissionCompanion {
 			// lz_drp_diamondWest_S0000
 			// 
 			this->lz_drp_diamondWest_S0000->AutoSize = true;
-			this->lz_drp_diamondWest_S0000->Location = System::Drawing::Point(961, 286);
+			this->lz_drp_diamondWest_S0000->Location = System::Drawing::Point(1003, 317);
 			this->lz_drp_diamondWest_S0000->Name = L"lz_drp_diamondWest_S0000";
 			this->lz_drp_diamondWest_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_diamondWest_S0000->TabIndex = 75;
@@ -1221,7 +1220,7 @@ namespace MissionCompanion {
 			// lz_drp_diamondSouth_W0000
 			// 
 			this->lz_drp_diamondSouth_W0000->AutoSize = true;
-			this->lz_drp_diamondSouth_W0000->Location = System::Drawing::Point(979, 327);
+			this->lz_drp_diamondSouth_W0000->Location = System::Drawing::Point(1019, 351);
 			this->lz_drp_diamondSouth_W0000->Name = L"lz_drp_diamondSouth_W0000";
 			this->lz_drp_diamondSouth_W0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_diamondSouth_W0000->TabIndex = 76;
@@ -1230,7 +1229,7 @@ namespace MissionCompanion {
 			// lz_drp_diamondSouth_S0000
 			// 
 			this->lz_drp_diamondSouth_S0000->AutoSize = true;
-			this->lz_drp_diamondSouth_S0000->Location = System::Drawing::Point(1003, 409);
+			this->lz_drp_diamondSouth_S0000->Location = System::Drawing::Point(1031, 409);
 			this->lz_drp_diamondSouth_S0000->Name = L"lz_drp_diamondSouth_S0000";
 			this->lz_drp_diamondSouth_S0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_diamondSouth_S0000->TabIndex = 77;
@@ -1239,7 +1238,7 @@ namespace MissionCompanion {
 			// lz_drp_banana_I0000
 			// 
 			this->lz_drp_banana_I0000->AutoSize = true;
-			this->lz_drp_banana_I0000->Location = System::Drawing::Point(923, 190);
+			this->lz_drp_banana_I0000->Location = System::Drawing::Point(978, 232);
 			this->lz_drp_banana_I0000->Name = L"lz_drp_banana_I0000";
 			this->lz_drp_banana_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_banana_I0000->TabIndex = 78;
@@ -1248,7 +1247,7 @@ namespace MissionCompanion {
 			// lz_drp_savannahWest_N0000
 			// 
 			this->lz_drp_savannahWest_N0000->AutoSize = true;
-			this->lz_drp_savannahWest_N0000->Location = System::Drawing::Point(901, 262);
+			this->lz_drp_savannahWest_N0000->Location = System::Drawing::Point(960, 291);
 			this->lz_drp_savannahWest_N0000->Name = L"lz_drp_savannahWest_N0000";
 			this->lz_drp_savannahWest_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_savannahWest_N0000->TabIndex = 79;
@@ -1257,7 +1256,7 @@ namespace MissionCompanion {
 			// lz_drp_bananaSouth_N0000
 			// 
 			this->lz_drp_bananaSouth_N0000->AutoSize = true;
-			this->lz_drp_bananaSouth_N0000->Location = System::Drawing::Point(844, 220);
+			this->lz_drp_bananaSouth_N0000->Location = System::Drawing::Point(920, 262);
 			this->lz_drp_bananaSouth_N0000->Name = L"lz_drp_bananaSouth_N0000";
 			this->lz_drp_bananaSouth_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_bananaSouth_N0000->TabIndex = 80;
@@ -1266,7 +1265,7 @@ namespace MissionCompanion {
 			// lz_drp_savannah_I0000
 			// 
 			this->lz_drp_savannah_I0000->AutoSize = true;
-			this->lz_drp_savannah_I0000->Location = System::Drawing::Point(901, 365);
+			this->lz_drp_savannah_I0000->Location = System::Drawing::Point(951, 376);
 			this->lz_drp_savannah_I0000->Name = L"lz_drp_savannah_I0000";
 			this->lz_drp_savannah_I0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_savannah_I0000->TabIndex = 81;
@@ -1275,7 +1274,7 @@ namespace MissionCompanion {
 			// lz_drp_savannahEast_N0000
 			// 
 			this->lz_drp_savannahEast_N0000->AutoSize = true;
-			this->lz_drp_savannahEast_N0000->Location = System::Drawing::Point(911, 400);
+			this->lz_drp_savannahEast_N0000->Location = System::Drawing::Point(969, 409);
 			this->lz_drp_savannahEast_N0000->Name = L"lz_drp_savannahEast_N0000";
 			this->lz_drp_savannahEast_N0000->Size = System::Drawing::Size(15, 14);
 			this->lz_drp_savannahEast_N0000->TabIndex = 82;
@@ -1286,6 +1285,7 @@ namespace MissionCompanion {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1349, 898);
+			this->Controls->Add(this->lz_drp_citadelSouth_S0000);
 			this->Controls->Add(this->lz_drp_cliffTownWest_S0000);
 			this->Controls->Add(this->lz_drp_cliffTown_S0000);
 			this->Controls->Add(this->lz_drp_cliffTown_I0000);
@@ -1325,7 +1325,6 @@ namespace MissionCompanion {
 			this->Controls->Add(this->lz_drp_sovietBase_S0000);
 			this->Controls->Add(this->lz_drp_sovietBase_E0000);
 			this->Controls->Add(this->lz_drp_sovietBase_N0000);
-			this->Controls->Add(this->lz_drp_citadelSouth_S0000);
 			this->Controls->Add(this->lz_drp_savannahEast_N0000);
 			this->Controls->Add(this->lz_drp_savannah_I0000);
 			this->Controls->Add(this->lz_drp_bananaSouth_N0000);
@@ -1830,5 +1829,5 @@ namespace MissionCompanion {
 
 		List<String^>^ stringList = gcnew List<String^>();
 	}
-	};
+};
 }
