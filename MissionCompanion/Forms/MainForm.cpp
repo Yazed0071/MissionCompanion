@@ -5,9 +5,9 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 void main(array<String^>^ args) {
-    #ifdef _DEBUG
     // Enable console only in Debug mode
-    ConsoleManager::InitializeConsole();
+    #ifdef _DEBUG 
+       ConsoleManager::InitializeConsole();
     #endif
 
     // Windows Forms application initialization
@@ -16,7 +16,6 @@ void main(array<String^>^ args) {
     Application::Run(gcnew MissionCompanion::MainForm());
 
     #ifdef _DEBUG
-    // Close console only in Debug mode
-    ConsoleManager::CloseConsole();
+        ConsoleManager::CloseConsole();
     #endif
 }

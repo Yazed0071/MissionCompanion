@@ -8,10 +8,6 @@
 #include <msclr/marshal_cppstd.h>
 
 
-#include "ExternalLua.h"
-#include "LandingZones.h"
-
-
 
 #ifndef LOG_MACRO
 #define LOG_MACRO
@@ -32,10 +28,6 @@ namespace MissionCompanion {
 	using namespace System::Drawing;
 	using namespace std;
 	using namespace System::Text;
-
-	/// <summary>
-	/// Summary for MainForm
-	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -360,7 +352,6 @@ namespace MissionCompanion {
 			this->textBoxFPKFileName->Size = System::Drawing::Size(173, 26);
 			this->textBoxFPKFileName->TabIndex = 2;
 			this->textBoxFPKFileName->Text = L"FPK_Name_Example";
-			this->textBoxFPKFileName->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxFPKFileName_TextChanged);
 			// 
 			// textBoxMissionCode
 			// 
@@ -374,7 +365,6 @@ namespace MissionCompanion {
 			this->textBoxMissionCode->Size = System::Drawing::Size(66, 26);
 			this->textBoxMissionCode->TabIndex = 3;
 			this->textBoxMissionCode->Text = L"13000";
-			this->textBoxMissionCode->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxMissionCode_TextChanged);
 			// 
 			// buttonNextTo
 			// 
@@ -388,7 +378,6 @@ namespace MissionCompanion {
 			this->buttonNextTo->TabIndex = 4;
 			this->buttonNextTo->Text = L"Next";
 			this->buttonNextTo->UseVisualStyleBackColor = true;
-			this->buttonNextTo->Click += gcnew System::EventHandler(this, &MainForm::buttonNextTo_Click);
 			// 
 			// labelErrorFPKFileName
 			// 
@@ -428,7 +417,6 @@ namespace MissionCompanion {
 			this->labelMapLocation->Size = System::Drawing::Size(86, 24);
 			this->labelMapLocation->TabIndex = 7;
 			this->labelMapLocation->Text = L"Location:";
-			this->labelMapLocation->Click += gcnew System::EventHandler(this, &MainForm::label1_Click);
 			// 
 			// labelErrorMapLocation
 			// 
@@ -1475,359 +1463,121 @@ namespace MissionCompanion {
 			landingZoneCheckBoxes->Add(this->lz_drp_swamp_N0000);
 			landingZoneCheckBoxes->Add(this->lz_drp_pfCampNorth_S0000);
 		}
-
-		//Add checked Landing Zones to a list
-
-	private:List<String^>^ GetCheckedLandingZones()
-	{
-		List<String^>^ checkedLZs = gcnew List<String^>();
-
-		for each (CheckBox ^ lz in landingZoneCheckBoxes)
+		void HideAllLandingZoneCheckBox()
 		{
-			if (lz->Checked)
+
+			for each (CheckBox ^ lz in landingZoneCheckBoxes)
 			{
-				checkedLZs->Add(lz->Name);
+				lz->Checked = false;
+			}
+			for each (CheckBox ^ lz in landingZoneCheckBoxes)
+			{
+				lz->Visible = false;
 			}
 		}
-
-		return checkedLZs;
-	}
-
-		   //Hide all landing zones checkboxes 
-		   void HideAllLandingZoneCheckBox()
-		   {
-			   for each (CheckBox ^ lz in landingZoneCheckBoxes)
-			   {
-				   lz->Checked = false;
-			   }
-			   for each (CheckBox ^ lz in landingZoneCheckBoxes)
-			   {
-				   lz->Visible = false;
-			   }
-		   }
-
-	public:bool IsMissionHidden()
-	{
-		if (this->MissionOptionList->GetItemChecked(0)) {
-			return true;
+		//when the form is loaded
+		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+			InitializeLandingZones(); // Initialize the list of CheckBoxes
+			HideAllLandingZoneCheckBox(); // Optionally hide all initially
 		}
-		return false;
-	}
-		  bool IsEnableOOB()
-		  {
-			  if (this->MissionOptionList->GetItemChecked(1)) {
-				  return true;
-			  }
-			  return false;
-		  }
-		  bool SkipMissionPreparetion()
-		  {
-			  if (this->MissionOptionList->GetItemChecked(2)) {
-				  return true;
-			  }
-			  return false;
-		  }
-		  bool NoBuddyMenuFromMissionPreparetion()
-		  {
-			  if (this->MissionOptionList->GetItemChecked(3)) {
-				  return true;
-			  }
-			  return false;
-		  }
-		  bool NoVehicleMenuFromMissionPreparetion()
-		  {
-			  if (this->MissionOptionList->GetItemChecked(4)) {
-				  return true;
-			  }
-			  return false;
-		  }
-		  bool DisableSelectSortieTimeFromMissionPreparetion()
-		  {
-			  if (this->MissionOptionList->GetItemChecked(5)) {
-				  return true;
-			  }
-			  return false;
-		  }
-	private:
-		bool ValidateFPKFileName()
-		{
-			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
-			{
-				this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
-				return false;
-			}
-			if (this->textBoxFPKFileName->Text->Contains(" "))
-			{
-				this->labelErrorFPKFileName->Text = L"Cannot contain spaces";
-				return false;
-			}
-			if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
-			{
-				this->labelErrorFPKFileName->Text = L"16 Characters is the max";
-				this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
-				this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
-				return false;
-			}
-			if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
-			{
-				this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
-				return false;
-			}
 
-			this->labelErrorFPKFileName->Text = L"";
-			return true;
-		}
-		bool ValidatetextBoxMissionCode()
+		private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
-			{
-				this->labelErrorMissionCode->Text =
-					System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
-					? L"MissionCode cannot be empty"
-					: L"Only numericals are allowed";
-				return false;
+
+			if (this->comboBoxLocation->Text == "Afghanistan"){
+			
+				Log("Afghanistan!");
+				HideAllLandingZoneCheckBox();
+
+				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG");
+				this->lz_drp_citadelSouth_S0000->Visible = true;
+				this->lz_drp_sovietBase_E0000->Visible = true;
+				this->lz_drp_sovietBase_N0000->Visible = true;
+				this->lz_drp_sovietBase_S0000->Visible = true;
+				this->lz_drp_sovietSouth_S0000->Visible = true;
+				this->lz_drp_powerPlant_E0000->Visible = true;
+				this->lz_drp_powerPlant_S0000->Visible = true;
+				this->lz_drp_waterway_I0000->Visible = true;
+				this->lz_drp_tent_N0000->Visible = true;
+				this->lz_drp_tent_I0000->Visible = true;
+				this->lz_drp_tent_E0000->Visible = true;
+				this->lz_drp_remnantsNorth_S0000->Visible = true;
+				this->lz_drp_remnantsNorth_N0000->Visible = true;
+				this->lz_drp_remnants_I0000->Visible = true;
+				this->lz_drp_field_W0000->Visible = true;
+				this->lz_drp_remnants_S0000->Visible = true;
+				this->lz_drp_fieldWest_S0000->Visible = true;
+				this->lz_drp_field_I0000->Visible = true;
+				this->lz_drp_ruins_S0000->Visible = true;
+				this->lz_drp_field_N0000->Visible = true;
+				this->lz_drp_ruinsNorth_S0000->Visible = true;
+				this->lz_drp_commFacility_S0000->Visible = true;
+				this->lz_drp_commFacility_I0000->Visible = true;
+				this->lz_drp_commFacility_W0000->Visible = true;
+				this->lz_drp_village_N0000->Visible = true;
+				this->lz_drp_slopedTown_E0000->Visible = true;
+				this->lz_drp_slopedTown_I0000->Visible = true;
+				this->lz_drp_slopedTown_W0000->Visible = true;
+				this->lz_drp_enemyBase_N0000->Visible = true;
+				this->lz_drp_enemyBase_I0000->Visible = true;
+				this->lz_drp_enemyBase_S0000->Visible = true;
+				this->lz_drp_village_W0000->Visible = true;
+				this->lz_drp_slopedTownEast_E0000->Visible = true;
+				this->lz_drp_bridge_S0000->Visible = true;
+				this->lz_drp_fort_E0000->Visible = true;
+				this->lz_drp_fort_I0000->Visible = true;
+				this->lz_drp_fort_W0000->Visible = true;
+				this->lz_drp_cliffTown_N0000->Visible = true;
+				this->lz_drp_cliffTown_I0000->Visible = true;
+				this->lz_drp_cliffTown_S0000->Visible = true;
+				this->lz_drp_cliffTownWest_S0000->Visible = true;
 			}
-			if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
-			{
-				this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
-				return false;
+			else if (this->comboBoxLocation->Text == "Africa") {
+			
+				Log("Africa!");
+				HideAllLandingZoneCheckBox();
+				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\MafrMap.PNG");
+				this->lz_drp_flowStation_I0000->Visible = true;
+				this->lz_drp_flowStation_E0000->Visible = true;
+				this->lz_drp_swamp_W0000->Visible = true;
+				this->lz_drp_outland_S0000->Visible = true;
+				this->lz_drp_swamp_N0000->Visible = true;
+				this->lz_drp_swampEast_N0000->Visible = true;
+				this->lz_drp_swamp_S0000->Visible = true;
+				this->lz_drp_pfCampNorth_S0000->Visible = true;
+				this->lz_drp_savannahEast_S0000->Visible = true;
+				this->lz_drp_pfCamp_N0000->Visible = true;
+				this->lz_drp_pfCamp_I0000->Visible = true;
+				this->lz_drp_hillSouth_W0000->Visible = true;
+				this->lz_drp_hillWest_S0000->Visible = true;
+				this->lz_drp_hill_I0000->Visible = true;
+				this->lz_drp_hill_E0000->Visible = true;
+				this->lz_drp_hill_N0000->Visible = true;
+				this->lz_drp_factoryWest_S0000->Visible = true;
+				this->lz_drp_factory_N0000->Visible = true;
+				this->lz_drp_lab_S0000->Visible = true;
+				this->lz_drp_lab_W0000->Visible = true;
+				this->lz_drp_labWest_W0000->Visible = true;
+				this->lz_drp_diamond_N0000->Visible = true;
+				this->lz_drp_diamond_I0000->Visible = true;
+				this->lz_drp_diamondWest_S0000->Visible = true;
+				this->lz_drp_diamondSouth_W0000->Visible = true;
+				this->lz_drp_diamondSouth_S0000->Visible = true;
+				this->lz_drp_banana_I0000->Visible = true;
+				this->lz_drp_savannahWest_N0000->Visible = true;
+				this->lz_drp_bananaSouth_N0000->Visible = true;
+				this->lz_drp_savannah_I0000->Visible = true;
+				this->lz_drp_savannahEast_N0000->Visible = true;
+				this->lz_drp_pfCamp_S0000->Visible = true;
 			}
-			if (this->textBoxMissionCode->Text->Contains(" "))
-			{
-				this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
-				return false;
-			}
-			this->labelErrorMissionCode->Text = L"";
-			return true;
-		}
-		bool ValidatecomboBoxLocation()
-		{
 			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
 			{
 				this->labelErrorMapLocation->Text = L"This field cannot be empty";
-				return false;
-			}
-			this->labelErrorMapLocation->Text = L"";
-			return true;
-		}
-
-		System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e)
-		{
-			this->labelErrorFPKFileName->Text = L"";
-			this->labelErrorMissionCode->Text = L"";
-			this->labelErrorMapLocation->Text = L"";
-
-			bool isFPKValid = ValidateFPKFileName();
-			bool isMissionCode = ValidatetextBoxMissionCode();
-			bool isMapLocation = ValidatecomboBoxLocation();
-			void deploymentLocation(System::String ^ missionStartPointget);
-			void missionMapParams(System::String ^ trig_innerZone, System::String ^ trig_outerZone, System::String ^ trig_hotZone);
-			void missionOptionsFlags(bool IsMissionHidden, bool IsEnableOOB, bool SkipMissionPreparationCheck, bool NoBuddyMenuCheck, bool NoVehicleMenuCheck, bool DisableSortieTimeCheck);
-			void generateMission(System::String ^ FPKFileName, System::String ^ MissionCode, System::String ^ MissionMapLocation, System::String ^ landingZones);
-			if (isFPKValid && isMissionCode && isMapLocation)
-			{
-
-
-
-				deploymentLocation(this->textBoxMissionStartPoint->Text);
-				missionOptionsFlags(IsMissionHidden(), IsEnableOOB(), SkipMissionPreparetion(), NoBuddyMenuFromMissionPreparetion(), NoVehicleMenuFromMissionPreparetion(), DisableSelectSortieTimeFromMissionPreparetion());
-				missionMapParams(this->textBoxTrig_innerZone->Text, this->textBoxTrig_outerZone->Text, this->textBoxTrig_hotZone->Text);
-				generateMission(this->textBoxFPKFileName->Text, this->textBoxMissionCode->Text, this->comboBoxLocation->Text, gcnew System::String(TurnLandingZonesToString().c_str()));
-
 			}
 			else
 			{
-				System::Windows::Forms::MessageBox::Show(L"Please address all errors!", L"Error");
+				this->labelErrorMapLocation->Text = L"";
 			}
 		}
-		std::string TurnLandingZonesToString()
-		{
-			List<String^>^ checkedLZs = GetCheckedLandingZones();
-			#ifdef _DEBUG
-			for each (String ^ lz in checkedLZs) {
-				Log("Checked LZ: " + lz);
-			}
-			#endif
-			StringBuilder^ sb = gcnew StringBuilder();
-
-			for each (String ^ lz in checkedLZs)
-			{
-				sb->Append(lz)->Append("\n");
-			}
-
-			if (sb->Length > 0)
-			{
-				//sb->Remove(sb->Length - 2, 2);
-			}
-
-			System::String^ managedString = sb->ToString();
-			std::string landingZonesStr = msclr::interop::marshal_as<std::string>(managedString);
-			std::string formattedLandingZones = landingZonesStr;
-
-			return formattedLandingZones;
-		}
-		//when the form is loaded
-	private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-		InitializeLandingZones();
-		this->MissionOptionList->SetItemChecked(1, true); // enables the out of bound system by default
-		HideAllLandingZoneCheckBox();
-	}
-
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
-	private: System::Void treeView1_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e) {}
-
-	private: System::Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-		this->textBoxFPKFileName->ForeColor = System::Drawing::Color::Black;
-		if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
-		{
-			this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
-		}
-		else if (this->textBoxFPKFileName->Text->Contains(" "))
-		{
-			this->labelErrorFPKFileName->Text = L"cannot contain spaces";
-		}
-		else if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
-		{
-			this->labelErrorFPKFileName->Text = L"cannot exceed 16 characters";
-			this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
-			this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
-		}
-		else if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
-		{
-			this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
-		}
-		else
-		{
-			// Clear the error message if the input is valid
-			this->labelErrorFPKFileName->Text = L"";
-		}
-	}
-	private: System::Void textBoxMissionCode_TextChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-		this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
-		if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text) || !System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
-		{
-			this->labelErrorMissionCode->Text =
-				System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text)
-				? L"MissionCode cannot be empty"
-				: L"Only numericals are allowed";
-
-		}
-		else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
-		{
-			this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
-		}
-		else if (this->textBoxMissionCode->Text->Contains(" "))
-		{
-			this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
-		}
-		else
-		{
-			this->labelErrorMissionCode->Text = L"";
-		}
-	}
-	private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
-	{
-
-		if (this->comboBoxLocation->Text == "Afghanistan")
-		{
-			Log("Afghanistan!");
-			HideAllLandingZoneCheckBox();
-
-			this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG");
-			this->lz_drp_citadelSouth_S0000->Visible = true;
-			this->lz_drp_sovietBase_E0000->Visible = true;
-			this->lz_drp_sovietBase_N0000->Visible = true;
-			this->lz_drp_sovietBase_S0000->Visible = true;
-			this->lz_drp_sovietSouth_S0000->Visible = true;
-			this->lz_drp_powerPlant_E0000->Visible = true;
-			this->lz_drp_powerPlant_S0000->Visible = true;
-			this->lz_drp_waterway_I0000->Visible = true;
-			this->lz_drp_tent_N0000->Visible = true;
-			this->lz_drp_tent_I0000->Visible = true;
-			this->lz_drp_tent_E0000->Visible = true;
-			this->lz_drp_remnantsNorth_S0000->Visible = true;
-			this->lz_drp_remnantsNorth_N0000->Visible = true;
-			this->lz_drp_remnants_I0000->Visible = true;
-			this->lz_drp_field_W0000->Visible = true;
-			this->lz_drp_remnants_S0000->Visible = true;
-			this->lz_drp_fieldWest_S0000->Visible = true;
-			this->lz_drp_field_I0000->Visible = true;
-			this->lz_drp_ruins_S0000->Visible = true;
-			this->lz_drp_field_N0000->Visible = true;
-			this->lz_drp_ruinsNorth_S0000->Visible = true;
-			this->lz_drp_commFacility_S0000->Visible = true;
-			this->lz_drp_commFacility_I0000->Visible = true;
-			this->lz_drp_commFacility_W0000->Visible = true;
-			this->lz_drp_village_N0000->Visible = true;
-			this->lz_drp_slopedTown_E0000->Visible = true;
-			this->lz_drp_slopedTown_I0000->Visible = true;
-			this->lz_drp_slopedTown_W0000->Visible = true;
-			this->lz_drp_enemyBase_N0000->Visible = true;
-			this->lz_drp_enemyBase_I0000->Visible = true;
-			this->lz_drp_enemyBase_S0000->Visible = true;
-			this->lz_drp_village_W0000->Visible = true;
-			this->lz_drp_slopedTownEast_E0000->Visible = true;
-			this->lz_drp_bridge_S0000->Visible = true;
-			this->lz_drp_fort_E0000->Visible = true;
-			this->lz_drp_fort_I0000->Visible = true;
-			this->lz_drp_fort_W0000->Visible = true;
-			this->lz_drp_cliffTown_N0000->Visible = true;
-			this->lz_drp_cliffTown_I0000->Visible = true;
-			this->lz_drp_cliffTown_S0000->Visible = true;
-			this->lz_drp_cliffTownWest_S0000->Visible = true;
-		}
-		else if (this->comboBoxLocation->Text == "Africa")
-		{
-			Log("Africa!");
-			HideAllLandingZoneCheckBox();
-			this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\MafrMap.PNG");
-			this->lz_drp_flowStation_I0000->Visible = true;
-			this->lz_drp_flowStation_E0000->Visible = true;
-			this->lz_drp_swamp_W0000->Visible = true;
-			this->lz_drp_outland_S0000->Visible = true;
-			this->lz_drp_swamp_N0000->Visible = true;
-			this->lz_drp_swampEast_N0000->Visible = true;
-			this->lz_drp_swamp_S0000->Visible = true;
-			this->lz_drp_pfCampNorth_S0000->Visible = true;
-			this->lz_drp_savannahEast_S0000->Visible = true;
-			this->lz_drp_pfCamp_N0000->Visible = true;
-			this->lz_drp_pfCamp_I0000->Visible = true;
-			this->lz_drp_hillSouth_W0000->Visible = true;
-			this->lz_drp_hillWest_S0000->Visible = true;
-			this->lz_drp_hill_I0000->Visible = true;
-			this->lz_drp_hill_E0000->Visible = true;
-			this->lz_drp_hill_N0000->Visible = true;
-			this->lz_drp_factoryWest_S0000->Visible = true;
-			this->lz_drp_factory_N0000->Visible = true;
-			this->lz_drp_lab_S0000->Visible = true;
-			this->lz_drp_lab_W0000->Visible = true;
-			this->lz_drp_labWest_W0000->Visible = true;
-			this->lz_drp_diamond_N0000->Visible = true;
-			this->lz_drp_diamond_I0000->Visible = true;
-			this->lz_drp_diamondWest_S0000->Visible = true;
-			this->lz_drp_diamondSouth_W0000->Visible = true;
-			this->lz_drp_diamondSouth_S0000->Visible = true;
-			this->lz_drp_banana_I0000->Visible = true;
-			this->lz_drp_savannahWest_N0000->Visible = true;
-			this->lz_drp_bananaSouth_N0000->Visible = true;
-			this->lz_drp_savannah_I0000->Visible = true;
-			this->lz_drp_savannahEast_N0000->Visible = true;
-			this->lz_drp_pfCamp_S0000->Visible = true;
-		}
-
-
-		if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
-		{
-			this->labelErrorMapLocation->Text = L"This field cannot be empty";
-		}
-		else
-		{
-			this->labelErrorMapLocation->Text = L"";
-		}
-
-		List<String^>^ stringList = gcnew List<String^>();
-	}
-};
+	};
 }

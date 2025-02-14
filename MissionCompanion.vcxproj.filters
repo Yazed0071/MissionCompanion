@@ -18,37 +18,7 @@
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Lua\ExternalLua.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Lua\LandingZones.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Lua\mission_main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\res\ToolsAssets\FilesCompiler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Fox2\Fox2Info.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\tinyxml2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Trap\Trap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\InitFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Lua\SequenceLua.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MissionCompanion\Classes\Route\RouteInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,37 +26,7 @@
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Lua\ExternalLua.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Lua\LandingZones.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Lua\mission_main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\res\ToolsAssets\FilesCompiler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Fox2\Fox2Info.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\tinyxml2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Trap\Trap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\InitFiles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Lua\SequenceLua.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Classes\Route\RouteInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
