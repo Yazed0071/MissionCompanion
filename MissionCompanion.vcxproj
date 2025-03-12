@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -59,7 +59,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\MissionCompanion\MissionCompanion\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
+    <ClCompile Include="MissionCompanion\src\MCLogger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\tinyxml2.h">
@@ -100,6 +101,8 @@
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MissionCompanion\src\MC.h" />
+    <ClInclude Include="MissionCompanion\src\MCLogger.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MissionCompanion\Forms\MainForm.resx">

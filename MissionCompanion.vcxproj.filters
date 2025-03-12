@@ -21,12 +21,24 @@
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\src\MCLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\tinyxml2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\src\MC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\src\MCLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

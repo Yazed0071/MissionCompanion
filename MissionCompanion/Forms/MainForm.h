@@ -1,20 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <cctype>
-#include <string>
-#include <cliext/vector>
-#include <regex>
-#include <msclr/marshal_cppstd.h>
-
-
-
-#ifndef LOG_MACRO
-#define LOG_MACRO
-#define Log(Message) Console::WriteLine(Message);
-#endif
-
-
+#include "MCLogger.h"
 
 
 namespace MissionCompanion {
@@ -352,6 +338,7 @@ namespace MissionCompanion {
 			this->textBoxFPKFileName->Size = System::Drawing::Size(173, 26);
 			this->textBoxFPKFileName->TabIndex = 2;
 			this->textBoxFPKFileName->Text = L"FPK_Name_Example";
+			this->textBoxFPKFileName->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxFPKFileName_TextChanged);
 			// 
 			// textBoxMissionCode
 			// 
@@ -365,6 +352,7 @@ namespace MissionCompanion {
 			this->textBoxMissionCode->Size = System::Drawing::Size(66, 26);
 			this->textBoxMissionCode->TabIndex = 3;
 			this->textBoxMissionCode->Text = L"13000";
+			this->textBoxMissionCode->TextChanged += gcnew System::EventHandler(this, &MainForm::textBoxMissionCode_TextChanged);
 			// 
 			// buttonNextTo
 			// 
@@ -378,6 +366,7 @@ namespace MissionCompanion {
 			this->buttonNextTo->TabIndex = 4;
 			this->buttonNextTo->Text = L"Next";
 			this->buttonNextTo->UseVisualStyleBackColor = true;
+			this->buttonNextTo->Click += gcnew System::EventHandler(this, &MainForm::buttonNextTo_Click);
 			// 
 			// labelErrorFPKFileName
 			// 
@@ -1369,6 +1358,7 @@ namespace MissionCompanion {
 			this->Controls->Add(this->labelMissionCode);
 			this->Controls->Add(this->labelFPKFileName);
 			this->ForeColor = System::Drawing::Color::Red;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(1365, 937);
 			this->MinimumSize = System::Drawing::Size(16, 930);
@@ -1463,7 +1453,7 @@ namespace MissionCompanion {
 			landingZoneCheckBoxes->Add(this->lz_drp_swamp_N0000);
 			landingZoneCheckBoxes->Add(this->lz_drp_pfCampNorth_S0000);
 		}
-		void HideAllLandingZoneCheckBox()
+		private: void HideAllLandingZoneCheckBox()
 		{
 
 			for each (CheckBox ^ lz in landingZoneCheckBoxes)
@@ -1475,10 +1465,9 @@ namespace MissionCompanion {
 				lz->Visible = false;
 			}
 		}
-		//when the form is loaded
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
-			InitializeLandingZones(); // Initialize the list of CheckBoxes
-			HideAllLandingZoneCheckBox(); // Optionally hide all initially
+			InitializeLandingZones();
+			HideAllLandingZoneCheckBox();
 		}
 
 		private: System::Void comboBoxLocation_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
@@ -1486,7 +1475,6 @@ namespace MissionCompanion {
 
 			if (this->comboBoxLocation->Text == "Afghanistan"){
 			
-				Log("Afghanistan!");
 				HideAllLandingZoneCheckBox();
 
 				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\AfghMap.PNG");
@@ -1534,7 +1522,6 @@ namespace MissionCompanion {
 			}
 			else if (this->comboBoxLocation->Text == "Africa") {
 			
-				Log("Africa!");
 				HideAllLandingZoneCheckBox();
 				this->pictureBoxMap->Image = System::Drawing::Image::FromFile("MissionCompanion\\res\\img\\MafrMap.PNG");
 				this->lz_drp_flowStation_I0000->Visible = true;
@@ -1570,14 +1557,49 @@ namespace MissionCompanion {
 				this->lz_drp_savannahEast_N0000->Visible = true;
 				this->lz_drp_pfCamp_S0000->Visible = true;
 			}
+		}
+		private: bool MainFormValidator()
+		{;
+			bool isValid = true;
+			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
+			{
+				this->labelErrorFPKFileName->Text = L"This field cannot be empty";
+				isValid = false;
+			}
+			else
+			{
+				this->labelErrorFPKFileName->Text = L"";
+			}
+			if (System::String::IsNullOrWhiteSpace(this->textBoxMissionCode->Text))
+			{
+				this->labelErrorMissionCode->Text = L"This field cannot be empty";
+				isValid = false;
+			}
+			else
+			{
+				this->labelErrorMissionCode->Text = L"";
+			}
 			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
 			{
 				this->labelErrorMapLocation->Text = L"This field cannot be empty";
+				isValid = false;
 			}
 			else
 			{
 				this->labelErrorMapLocation->Text = L"";
 			}
+			Logger::Info("Are values Valid: %d", isValid);
+			return isValid;
+		}
+		private: System::Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+			this->textBoxFPKFileName->ForeColor = System::Drawing::Color::Black;
+		}
+		private: System::Void textBoxMissionCode_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
+		}
+		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
+			Logger::set_priority(TracePriority);
+			MainFormValidator();
 		}
 	};
 }
