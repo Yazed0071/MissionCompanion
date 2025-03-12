@@ -1631,13 +1631,22 @@ namespace MissionCompanion {
 			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
 		}
 		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
+			Logger::set_priority(TracePriority);
+
+			// Log messages at different levels
+			Logger::Trace("This is a Trace message.");
+			Logger::Debug("This is a Debug message.");
+			Logger::Info("User logged in: %s", "JohnDoe");
+			Logger::Warn("Low disk space: %d%% remaining", 10);
+			Logger::Error("File not found: %s", "config.txt");
+			Logger::Critical("System crash imminent!");
 			if (MainFormValidator())
 			{
 				Logger::Info("MainForm Valid");
 			}
 			else
 			{
-				Logger::Info("MainForm Unvalid");
+				Logger::Warn("MainForm Unvalid");
 			}
 		}
 	};
