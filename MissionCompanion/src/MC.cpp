@@ -16,4 +16,7 @@ std::string MCTextField::GetText(TextBox^ textBox)
     }
     return "";
 }
+std::string MCTextField::GetText(ComboBox^ comboBox) {
+    return msclr::interop::marshal_as<std::string>(comboBox->Text);
+}
 

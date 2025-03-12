@@ -2,11 +2,12 @@
 
 #include "MCLogger.h"
 #include <MC.h>
-
+#include <regex>
 
 namespace MissionCompanion {
 
 	using namespace System;
+	using namespace System::Text::RegularExpressions;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Collections::Generic;
@@ -561,9 +562,9 @@ namespace MissionCompanion {
 			this->labelMissionStartPoint->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->labelMissionStartPoint->Location = System::Drawing::Point(3, 252);
 			this->labelMissionStartPoint->Name = L"labelMissionStartPoint";
-			this->labelMissionStartPoint->Size = System::Drawing::Size(472, 24);
+			this->labelMissionStartPoint->Size = System::Drawing::Size(467, 24);
 			this->labelMissionStartPoint->TabIndex = 22;
-			this->labelMissionStartPoint->Text = L"missionStartPoint: {pos={X, Y, Z},rotY=Y-Axis Rotation,},";
+			this->labelMissionStartPoint->Text = L"missionStartPoint: {pos={X, Y, Z},rotY=Y-Axis Rotation,}";
 			// 
 			// textBoxMissionStartPoint
 			// 
@@ -1467,6 +1468,7 @@ namespace MissionCompanion {
 			}
 		}
 		private: System::Void MainForm_Load(System::Object^ sender, System::EventArgs^ e) {
+			MissionOptionList->SetItemChecked(1, true);
 			InitializeLandingZones();
 			HideAllLandingZoneCheckBox();
 		}
@@ -1621,21 +1623,89 @@ namespace MissionCompanion {
 			{
 				this->labelErrorMapLocation->Text = L"";
 			}
-			Logger::Trace("Are values Valid");
+			
 			return isValid;
 		}
-		private: System::Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		private: Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			this->textBoxFPKFileName->ForeColor = System::Drawing::Color::Black;
 		}
-		private: System::Void textBoxMissionCode_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		private: Void textBoxMissionCode_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
 		}
-		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
+		private: string GetCheckedLandingZonesAsString()
+		{
+			StringBuilder^ sb = gcnew StringBuilder();
+
+			for each (CheckBox ^ lz in landingZoneCheckBoxes)
+			{
+				if (lz->Checked)
+				{
+					sb->AppendLine(lz->Name);
+				}
+			}
+
+			return msclr::interop::marshal_as<std::string>(sb->ToString());
+		}
+
+		private: Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) 
+		{
 			Logger::set_priority(TracePriority);
 
 			if (MainFormValidator())
 			{
-				Logger::Info("MainForm Valid");
+				string fpkFileName, missionCode, location,
+					trig_innerZone, trig_outerZone, trig_hotZone, missionStartPoint,
+					landingZones = "";
+				fpkFileName = MCTextField::GetText(textBoxFPKFileName);
+				missionCode = MCTextField::GetText(textBoxMissionCode);
+				location	= MCTextField::GetText(comboBoxLocation);
+				Logger::Info("Mission Info: ");
+				Logger::Info("FPK Name: %s", fpkFileName.c_str());
+
+				Logger::Info("Mission Code: %s", missionCode.c_str());
+				Logger::Info("Location: %s", location.c_str());
+
+				if (MissionOptionList->GetItemChecked(1))
+				{
+					trig_innerZone	= MCTextField::GetText(textBoxTrig_innerZone);
+					trig_outerZone	= MCTextField::GetText(textBoxTrig_outerZone);
+					trig_hotZone	= MCTextField::GetText(textBoxTrig_hotZone);
+
+					string pattern = R"(^(\{pos=\{[-\d\.]+,[-\d\.]+,[-\d\.]+\},rotY=[-\d\.]+,\},?\s*)+$)";
+
+					regex regexPattern(pattern);
+
+					if (!std::regex_match(trig_innerZone, regexPattern) ||
+						!std::regex_match(trig_outerZone, regexPattern) ||
+						!std::regex_match(trig_hotZone, regexPattern))
+					{
+						MessageBox::Show(L"Trig zones must be in a correct format!", L"Warning",
+							MessageBoxButtons::OK, MessageBoxIcon::Warning);
+						return;
+					}
+
+					Logger::Info("trig_innerZone:\n%s", trig_innerZone.c_str());
+					Logger::Info("trig_outerZone:\n%s", trig_outerZone.c_str());
+					Logger::Info("trig_hotZone:\n%s", trig_hotZone.c_str());
+				}
+
+				std::string checkedLZs = GetCheckedLandingZonesAsString();
+				if (!checkedLZs.empty()) {
+					Logger::Info("Selected Landing Zones:\n%s", checkedLZs.c_str());
+				}
+				else {
+					missionStartPoint = MCTextField::GetText(textBoxMissionStartPoint);
+					std::string pattern = R"(^\{pos=\{(-?\d+\.\d+),\s*(-?\d+\.\d+),\s*(-?\d+\.\d+)\},rotY=(-?\d+\.\d+),\},?$)";
+					std::regex regexPattern(pattern);
+
+					if (!std::regex_match(missionStartPoint, regexPattern)) {
+						MessageBox::Show(L"MissionStartPoint must be in a correct format!", L"Warning",
+							MessageBoxButtons::OK, MessageBoxIcon::Warning);
+						return;
+					}
+					
+					Logger::Info("Mission Start Point: %s", missionStartPoint.c_str());
+				}
 			}
 			else
 			{

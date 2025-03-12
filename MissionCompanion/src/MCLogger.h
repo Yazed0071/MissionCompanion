@@ -55,7 +55,7 @@ public:
     template<typename... Args>
     static void Info(const char* message, Args... args)
     {
-        if (priority <= InfoPriority) LogMessage("Info", 11, message, args...); // Light Cyan
+        if (priority <= InfoPriority) LogMessage("Info", 2, message, args...);
     }
 
     template<typename... Args>

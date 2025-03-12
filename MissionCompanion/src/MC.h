@@ -12,4 +12,5 @@ class MCTextField
 public:
     static void SetText(TextBox^ textBox, String^ newText);
     static std::string GetText(TextBox^ textBox);
+    static std::string GetText(ComboBox^ comboBox);
 };
