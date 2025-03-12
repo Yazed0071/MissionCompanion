@@ -1588,7 +1588,7 @@ namespace MissionCompanion {
 			{
 				this->labelErrorMapLocation->Text = L"";
 			}
-			Logger::Info("Are values Valid: %d", isValid);
+			Logger::Trace("Are values Valid");
 			return isValid;
 		}
 		private: System::Void textBoxFPKFileName_TextChanged(System::Object^ sender, System::EventArgs^ e) {

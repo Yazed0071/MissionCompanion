@@ -21,7 +21,7 @@
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MissionCompanion\src\MCLogger.cpp">
+    <ClCompile Include="MissionCompanion\src\MC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

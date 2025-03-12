@@ -91,7 +91,7 @@
   <ItemGroup>
     <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp" />
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
-    <ClCompile Include="MissionCompanion\src\MCLogger.cpp" />
+    <ClCompile Include="MissionCompanion\src\MC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\tinyxml2.h">
