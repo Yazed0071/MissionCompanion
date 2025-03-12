@@ -21,6 +21,12 @@
     <ClCompile Include="MissionCompanion\src\MC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MissionCompanion\src\MissionData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MissionCompanion\Lua\ExternalLua.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
@@ -33,6 +39,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissionCompanion\src\MCLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\src\MissionData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissionCompanion\Lua\ExternalLua.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

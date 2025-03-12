@@ -1,8 +1,10 @@
-#pragma once
+﻿#pragma once
+
+#include <regex>
 
 #include "MCLogger.h"
 #include <MC.h>
-#include <regex>
+#include "MissionData.h"
 
 namespace MissionCompanion {
 
@@ -1655,16 +1657,31 @@ namespace MissionCompanion {
 			{
 				string fpkFileName, missionCode, location,
 					trig_innerZone, trig_outerZone, trig_hotZone, missionStartPoint,
-					landingZones = "";
+					landingZones, missionOptions = "";
 				fpkFileName = MCTextField::GetText(textBoxFPKFileName);
 				missionCode = MCTextField::GetText(textBoxMissionCode);
 				location	= MCTextField::GetText(comboBoxLocation);
-				Logger::Info("Mission Info: ");
-				Logger::Info("FPK Name: %s", fpkFileName.c_str());
+				
+				std::vector<std::string> checkedOptions;
+				for (int i = 0; i < MissionOptionList->Items->Count; i++)
+				{
+					if (MissionOptionList->GetItemChecked(i))
+					{
+						std::string option = msclr::interop::marshal_as<std::string>(MissionOptionList->Items[i]->ToString());
+						checkedOptions.push_back(option);
+					}
+				}
 
-				Logger::Info("Mission Code: %s", missionCode.c_str());
-				Logger::Info("Location: %s", location.c_str());
+				// Make the whole thing into a single string for logging
+				if (!checkedOptions.empty()) {
+					missionOptions = "[ " + checkedOptions[0];
+					for (size_t i = 1; i < checkedOptions.size(); ++i) {
+						missionOptions += ", " + checkedOptions[i];
+					}
+					missionOptions += " ]";
+				}
 
+				
 				if (MissionOptionList->GetItemChecked(1))
 				{
 					trig_innerZone	= MCTextField::GetText(textBoxTrig_innerZone);
@@ -1683,14 +1700,11 @@ namespace MissionCompanion {
 							MessageBoxButtons::OK, MessageBoxIcon::Warning);
 						return;
 					}
-
-					Logger::Info("trig_innerZone:\n%s", trig_innerZone.c_str());
-					Logger::Info("trig_outerZone:\n%s", trig_outerZone.c_str());
-					Logger::Info("trig_hotZone:\n%s", trig_hotZone.c_str());
 				}
 
 				std::string checkedLZs = GetCheckedLandingZonesAsString();
 				if (!checkedLZs.empty()) {
+					landingZones = checkedLZs;
 					Logger::Info("Selected Landing Zones:\n%s", checkedLZs.c_str());
 				}
 				else {
@@ -1705,6 +1719,33 @@ namespace MissionCompanion {
 					}
 					
 					Logger::Info("Mission Start Point: %s", missionStartPoint.c_str());
+				}
+
+				//Everything is cool
+				MissionData missionData;
+				missionData.FPKFileName = fpkFileName;
+				missionData.MissionCode = missionCode;
+				missionData.Location = location;
+				missionData.MissionOptions = missionOptions;
+				missionData.LandingZones = landingZones;
+				missionData.MissionStartPoint = missionStartPoint;
+				missionData.Trig_innerZone = trig_innerZone;
+				missionData.Trig_outerZone = trig_outerZone;
+				missionData.Trig_hotZone = trig_hotZone;
+
+				Logger::Info("Mission Data: ");
+				Logger::Info("FPK Name: %s", missionData.FPKFileName.c_str());
+				Logger::Info("Mission Code: %s", missionData.MissionCode.c_str());
+				Logger::Info("Location: %s", missionData.Location.c_str());
+				Logger::Info("Selected Mission Options: %s", missionData.MissionOptions.c_str());
+				Logger::Info("trig_innerZone:\n%s", missionData.Trig_innerZone.c_str());
+				Logger::Info("trig_outerZone:\n%s", missionData.Trig_outerZone.c_str());
+				Logger::Info("trig_hotZone:\n%s", missionData.Trig_hotZone.c_str());
+				if (!checkedLZs.empty()) {
+					Logger::Info("Selected Landing Zones:\n%s", missionData.LandingZones.c_str());
+				}
+				else {
+					Logger::Info("Mission Start Point: %s", missionData.MissionStartPoint.c_str());
 				}
 			}
 			else
