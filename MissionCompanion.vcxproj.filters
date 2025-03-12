@@ -18,18 +18,12 @@
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MissionCompanion\Forms\ConsoleManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MissionCompanion\src\MC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MissionCompanion\Forms\MainForm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissionCompanion\Forms\ConsoleManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\tinyxml2.h">
