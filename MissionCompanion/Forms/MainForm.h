@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MCLogger.h"
+#include <MC.h>
 
 
 namespace MissionCompanion {
@@ -1559,11 +1560,28 @@ namespace MissionCompanion {
 			}
 		}
 		private: bool MainFormValidator()
-		{;
+		{
 			bool isValid = true;
 			if (System::String::IsNullOrWhiteSpace(this->textBoxFPKFileName->Text))
 			{
-				this->labelErrorFPKFileName->Text = L"This field cannot be empty";
+				this->labelErrorFPKFileName->Text = L"FPK name cannot be empty";
+				isValid = false;
+			}
+			else if (this->textBoxFPKFileName->Text->Contains(" "))
+			{
+				this->labelErrorFPKFileName->Text = L"cannot contain spaces";
+				isValid = false;
+			}
+			else if (this->textBoxFPKFileName->Text->Trim()->Length > 16)
+			{
+				this->labelErrorFPKFileName->Text = L"cannot exceed 16 characters";
+				this->textBoxFPKFileName->Text = this->textBoxFPKFileName->Text->Substring(0, 16);
+				this->textBoxFPKFileName->SelectionStart = this->textBoxFPKFileName->Text->Length;
+				isValid = false;
+			}
+			else if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxFPKFileName->Text->Trim(), "^[a-zA-Z-_0-9]+$"))
+			{
+				this->labelErrorFPKFileName->Text = L"Symbols are not allowed";
 				isValid = false;
 			}
 			else
@@ -1575,13 +1593,28 @@ namespace MissionCompanion {
 				this->labelErrorMissionCode->Text = L"This field cannot be empty";
 				isValid = false;
 			}
+			else if (!System::Text::RegularExpressions::Regex::IsMatch(this->textBoxMissionCode->Text->Trim(), "^[0-9]+$"))
+			{
+				this->labelErrorMissionCode->Text = L"Only numericals are allowed";
+				isValid = false;
+			}
+			else if (System::Convert::ToInt32(this->textBoxMissionCode->Text) < 13000 || System::Convert::ToInt32(this->textBoxMissionCode->Text) > 13999)
+			{
+				this->labelErrorMissionCode->Text = L"Mission code can only be between 13000 and 13999";
+				isValid = false;
+			}
+			else if (this->textBoxMissionCode->Text->Contains(" "))
+			{
+				this->labelErrorMissionCode->Text = L"Mission code cannot contain spaces";
+				isValid = false;
+			}
 			else
 			{
 				this->labelErrorMissionCode->Text = L"";
 			}
-			if (System::String::IsNullOrWhiteSpace(this->comboBoxLocation->Text))
+			if (this->comboBoxLocation->SelectedItem == nullptr)
 			{
-				this->labelErrorMapLocation->Text = L"This field cannot be empty";
+				this->labelErrorMapLocation->Text = L"Please select a location";
 				isValid = false;
 			}
 			else
@@ -1598,8 +1631,14 @@ namespace MissionCompanion {
 			this->textBoxMissionCode->ForeColor = System::Drawing::Color::Black;
 		}
 		private: System::Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) {
-			Logger::set_priority(TracePriority);
-			MainFormValidator();
+			if (MainFormValidator())
+			{
+				Logger::Info("MainForm Valid");
+			}
+			else
+			{
+				Logger::Info("MainForm Unvalid");
+			}
 		}
 	};
 }
