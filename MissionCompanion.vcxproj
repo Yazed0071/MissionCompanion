@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
     <ClCompile Include="MissionCompanion\Lua\ExternalLua.cpp" />
+    <ClCompile Include="MissionCompanion\src\MCLogger.cpp" />
     <ClCompile Include="MissionCompanion\src\MissionData.cpp" />
     <ClCompile Include="MissionCompanion\src\MC.cpp" />
   </ItemGroup>
