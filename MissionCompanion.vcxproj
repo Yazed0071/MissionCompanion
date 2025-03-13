@@ -59,7 +59,7 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>C:\dev\MissionCompanion\MissionCompanion\Lua;C:\dev\MissionCompanion\MissionCompanion\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\dev\MissionCompanion\MissionCompanion\Forms;C:\dev\MissionCompanion\MissionCompanion\Lua;C:\dev\MissionCompanion\MissionCompanion\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="MissionCompanion\Forms\MainForm.cpp" />
     <ClCompile Include="MissionCompanion\Lua\ExternalLua.cpp" />
+    <ClCompile Include="MissionCompanion\Lua\LandingZone.cpp" />
     <ClCompile Include="MissionCompanion\src\MCLogger.cpp" />
     <ClCompile Include="MissionCompanion\src\MissionData.cpp" />
     <ClCompile Include="MissionCompanion\src\MC.cpp" />
@@ -103,6 +104,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MissionCompanion\Lua\ExternalLua.h" />
+    <ClInclude Include="MissionCompanion\Lua\LandingZone.h" />
     <ClInclude Include="MissionCompanion\src\MissionData.h" />
     <ClInclude Include="MissionCompanion\src\MC.h" />
     <ClInclude Include="MissionCompanion\src\MCLogger.h" />

@@ -7,6 +7,8 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Text;
 
+#include <fstream>
+
 class MCTextField
 {
 public:
@@ -18,5 +20,7 @@ public:
 class MCFileManager
 {
 public:
-    std::string GetExePath()const;
+    std::string GetExePath();
+    bool CreateFolder(const std::string& folderPath);
+    bool CheckAndDeleteFolder(const std::string& folderPath);
 };

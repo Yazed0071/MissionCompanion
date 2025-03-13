@@ -1,4 +1,6 @@
 #include "MC.h"
+#include <MCLogger.h>
+#include <filesystem>
 using namespace std;
 void MCTextField::SetText(TextBox^ textBox, String^ newText)
 {
@@ -20,20 +22,43 @@ string MCTextField::GetText(ComboBox^ comboBox) {
     return msclr::interop::marshal_as<string>(comboBox->Text);
 }
 
+string MCFileManager::GetExePath() {
+    char buffer[MAX_PATH];
+    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+    std::string path(buffer);
+    size_t pos = path.find_last_of("\\/");
+    return (pos == std::string::npos) ? path : path.substr(0, pos);
+}
 
-string MCFileManager::GetExePath() const {
-    char path[MAX_PATH];
-    GetModuleFileNameA(NULL, path, MAX_PATH);
-    string fullPath(path);
+bool MCFileManager::CreateFolder(const std::string& folderPath) {
+    std::string fullFolderPath = GetExePath() + "\\" + folderPath;
 
-    size_t pos = fullPath.find_last_of("\\/");
-    std::string exeDir;
-    if (pos == std::string::npos) {
-        exeDir = fullPath;
+    if (std::filesystem::exists(fullFolderPath)) {
+        return true;
+    }
+
+    return std::filesystem::create_directories(fullFolderPath);
+}
+
+
+
+bool MCFileManager::CheckAndDeleteFolder(const string& folderPath) {
+    std::string fullFolderPath = GetExePath() + "\\" + folderPath;
+    if (filesystem::exists(fullFolderPath)) {
+        Logger::Info("Folder found: %s. Attempting to delete...", fullFolderPath.c_str());
+
+        try {
+            filesystem::remove_all(fullFolderPath);
+            Logger::Info("Successfully deleted folder: %s", fullFolderPath.c_str());
+            return true;
+        }
+        catch (const filesystem::filesystem_error& e) {
+            Logger::Error("Failed to delete folder: %s. Error: %s", fullFolderPath.c_str(), e.what());
+            return false;
+        }
     }
     else {
-        exeDir = fullPath.substr(0, pos);
+        Logger::Info("Folder does not exist: %s", fullFolderPath.c_str());
+        return false;
     }
-
-    return exeDir;
 }

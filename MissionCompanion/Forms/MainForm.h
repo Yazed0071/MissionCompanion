@@ -1649,6 +1649,49 @@ namespace MissionCompanion {
 
 			return msclr::interop::marshal_as<std::string>(sb->ToString());
 		}
+		public:
+		bool IsMissionHidden()
+		{
+			if (this->MissionOptionList->GetItemChecked(0)) {
+				return true;
+			}
+			return false;
+		}
+		bool IsEnableOOB()
+		{
+		 if (this->MissionOptionList->GetItemChecked(1)) {
+		  return true;
+		 }
+		 return false;
+		}
+		bool SkipMissionPreparetion()
+		{
+		 if (this->MissionOptionList->GetItemChecked(2)) {
+		  return true;
+		 }
+		 return false;
+		}
+		bool NoBuddyMenuFromMissionPreparetion()
+		{
+		 if (this->MissionOptionList->GetItemChecked(3)) {
+		  return true;
+		 }
+		 return false;
+		}
+		bool NoVehicleMenuFromMissionPreparetion()
+		{
+		 if (this->MissionOptionList->GetItemChecked(4)) {
+		  return true;
+		 }
+		 return false;
+		}
+		bool DisableSelectSortieTimeFromMissionPreparetion()
+		{
+		 if (this->MissionOptionList->GetItemChecked(5)) {
+		  return true;
+		 }
+		 return false;
+		}
 
 		private: Void buttonNextTo_Click(System::Object^ sender, System::EventArgs^ e) 
 		{
@@ -1750,6 +1793,7 @@ namespace MissionCompanion {
 
 				MissionData mission;
 				MCFileManager mcfm;
+				mcfm.CheckAndDeleteFolder("\\Mission_Build\\" + mission.GetFPKFileName());
 				WriteExternalLuaFile(mission, mcfm);
 			}
 			else

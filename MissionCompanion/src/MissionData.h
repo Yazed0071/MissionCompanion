@@ -24,7 +24,14 @@ public:
     std::string GetFPKFileName()const;
     std::string GetMissionCode()const;
     std::string GetLocation()const;
+    std::string GetLocationRealName(std::string location)const;
     std::string GetMissionOptions()const;
+    std::string IsMissionHide()const;
+    std::string IsEnableOOB()const;
+    std::string IsNoSortiePrep()const;
+    std::string IsNoBuddySelectInSortie()const;
+    std::string IsNoVehicleSelectInSortie()const;
+    std::string IsOnlyASAPInSortie()const;
     std::string GetTrigInnerZone()const;
     std::string GetTrigOuterZone()const;
     std::string GetTrigHotZone()const;
