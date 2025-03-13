@@ -14,3 +14,9 @@ public:
     static std::string GetText(TextBox^ textBox);
     static std::string GetText(ComboBox^ comboBox);
 };
+
+class MCFileManager
+{
+public:
+    std::string GetExePath()const;
+};

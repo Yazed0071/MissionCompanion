@@ -7,22 +7,29 @@ class MissionData
 {
 public:
     // Mission details
-    std::string FPKFileName;
-    std::string MissionCode;
-    std::string Location;
-    std::string MissionOptions;
+    static std::string FPKFileName;
+    static std::string MissionCode;
+    static std::string Location;
+    static std::string MissionOptions;
 
     // Trig zones
-    std::string Trig_innerZone;
-    std::string Trig_outerZone;
-    std::string Trig_hotZone;
+    static std::string Trig_innerZone;
+    static std::string Trig_outerZone;
+    static std::string Trig_hotZone;
 
     // Mission Start Point & Landing Zones
-    std::string MissionStartPoint;
-    std::string LandingZones;
+    static std::string MissionStartPoint;
+    static std::string LandingZones;
 
-    // Constructor
-    MissionData();
+    std::string GetFPKFileName()const;
+    std::string GetMissionCode()const;
+    std::string GetLocation()const;
+    std::string GetMissionOptions()const;
+    std::string GetTrigInnerZone()const;
+    std::string GetTrigOuterZone()const;
+    std::string GetTrigHotZone()const;
+    std::string GetMissionStartPoint()const;
+    std::string GetLandingZones()const;
 };
 
 #endif // MISSIONDATA_H

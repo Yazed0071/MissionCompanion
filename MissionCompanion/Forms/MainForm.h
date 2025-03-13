@@ -5,6 +5,7 @@
 #include "MCLogger.h"
 #include <MC.h>
 #include "MissionData.h"
+#include <ExternalLua.h>
 
 namespace MissionCompanion {
 
@@ -1722,31 +1723,34 @@ namespace MissionCompanion {
 				}
 
 				//Everything is cool
-				MissionData missionData;
-				missionData.FPKFileName = fpkFileName;
-				missionData.MissionCode = missionCode;
-				missionData.Location = location;
-				missionData.MissionOptions = missionOptions;
-				missionData.LandingZones = landingZones;
-				missionData.MissionStartPoint = missionStartPoint;
-				missionData.Trig_innerZone = trig_innerZone;
-				missionData.Trig_outerZone = trig_outerZone;
-				missionData.Trig_hotZone = trig_hotZone;
+				MissionData::FPKFileName = fpkFileName;
+				MissionData::MissionCode = missionCode;
+				MissionData::Location = location;
+				MissionData::MissionOptions = missionOptions;
+				MissionData::Trig_innerZone = trig_innerZone;
+				MissionData::Trig_outerZone = trig_outerZone;
+				MissionData::Trig_hotZone = trig_hotZone;
+				MissionData::MissionStartPoint = missionStartPoint;
+				MissionData::LandingZones = landingZones;
 
 				Logger::Info("Mission Data: ");
-				Logger::Info("FPK Name: %s", missionData.FPKFileName.c_str());
-				Logger::Info("Mission Code: %s", missionData.MissionCode.c_str());
-				Logger::Info("Location: %s", missionData.Location.c_str());
-				Logger::Info("Selected Mission Options: %s", missionData.MissionOptions.c_str());
-				Logger::Info("trig_innerZone:\n%s", missionData.Trig_innerZone.c_str());
-				Logger::Info("trig_outerZone:\n%s", missionData.Trig_outerZone.c_str());
-				Logger::Info("trig_hotZone:\n%s", missionData.Trig_hotZone.c_str());
+				Logger::Info("FPK Name: %s", fpkFileName.c_str());
+				Logger::Info("Mission Code: %s", missionCode.c_str());
+				Logger::Info("Location: %s", location.c_str());
+				Logger::Info("Selected Mission Options: %s", missionOptions.c_str());
+				Logger::Info("trig_innerZone:\n%s", trig_innerZone.c_str());
+				Logger::Info("trig_outerZone:\n%s", trig_outerZone.c_str());
+				Logger::Info("trig_hotZone:\n%s", trig_hotZone.c_str());
 				if (!checkedLZs.empty()) {
-					Logger::Info("Selected Landing Zones:\n%s", missionData.LandingZones.c_str());
+					Logger::Info("Selected Landing Zones:\n%s", landingZones.c_str());
 				}
 				else {
-					Logger::Info("Mission Start Point: %s", missionData.MissionStartPoint.c_str());
+					Logger::Info("Mission Start Point: %s", missionStartPoint.c_str());
 				}
+
+				MissionData mission;
+				MCFileManager mcfm;
+				WriteExternalLuaFile(mission, mcfm);
 			}
 			else
 			{
